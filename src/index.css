@@ -1,3 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+  font-family: Gilroy;
+  src: url('../public/fonts/Gilroy-Font/Gilroy-Medium.woff2');
+}
+
+@font-face {
+  font-family: GilroyBold;
+  src: url('../public/fonts/Gilroy-Font/Gilroy-Bold.woff2');
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
