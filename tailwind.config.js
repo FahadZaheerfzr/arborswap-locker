@@ -18,6 +18,9 @@ module.exports = {
         "light-text": "#EEF1F8",
         "dim-text": "#A69F9F",
         "dim-text-dark": "#6C717A",
+        "gray": "#807373",
+        "gray-dark": "#BBB6B0",
+
       }
     },
   },

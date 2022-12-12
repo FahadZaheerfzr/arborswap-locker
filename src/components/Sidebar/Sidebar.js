@@ -132,8 +132,7 @@ export default function Sidebar({ fullSidebar, tempfixed, handleTempFixed, activ
                       className={`font-semibold font-gilroy ${location.pathname === subItem.link
                           ? 'text-primary-green'
                           : 'text-dim-text dark:text-dim-text-dark hover:text-primary-green'
-                        }`}
-                    >
+                        }`}>
                       {subItem.name}
                     </span>
                   </Link>

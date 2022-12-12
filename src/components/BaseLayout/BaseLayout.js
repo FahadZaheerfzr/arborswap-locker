@@ -5,8 +5,9 @@ import Styles from './BaseLayout.module.css'
 import { SidebarContext } from '../../context/SidebarContext/GlobalProvider'
 import { useActiveItem } from '../../hooks/setActiveItem'
 import { ThemeContext } from '../../context/ThemeContext/ThemeProvider'
+import Topbar from '../Topbar/Topbar'
 
-export default function BaseLayout({ children, noTopbar, noSidebar }) {
+export default function BaseLayout({ children, noTopbar, noSidebar, title }) {
   const { showSidebar, setShowSidebar } = useContext(SidebarContext)
   const { theme, setTheme } = useContext(ThemeContext)
   const [sideBarMobile, setSideBarMobile] = useState(false)
@@ -26,8 +27,6 @@ export default function BaseLayout({ children, noTopbar, noSidebar }) {
 
   return (
     <div className="w-full pb-5">
-
-
       <div className={`flex w-full ${noTopbar ? '' : ''}`}>
         {noSidebar ? null : (
           <div
@@ -69,6 +68,11 @@ export default function BaseLayout({ children, noTopbar, noSidebar }) {
           className={`w-full md:w-[calc(100%-270px)] md:ml-[270px] ease-in-out duration-300 ${showSidebar ? ' translate-x-0' : '-translate-x-[100px]'
             }`}
         >
+          {noTopbar ? null : (
+            <div className={`${Styles.topBar} w-full bg-white dark:bg-dark-1`}>
+              <Topbar setSideBarMobile={setSideBarMobile} sideBarMobile={sideBarMobile} activeLink={activeItem} title={title} />
+            </div>
+          )}
           {children}
         </div>
       </div>

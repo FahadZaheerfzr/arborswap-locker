@@ -3,7 +3,7 @@ import BaseLayout from '../components/BaseLayout/BaseLayout'
 
 export default function Locker() {
   return (
-    <BaseLayout>
+    <BaseLayout title={"Locker"}>
     Hello
     </BaseLayout>
   )
