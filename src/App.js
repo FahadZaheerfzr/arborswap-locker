@@ -4,7 +4,7 @@ import WebRouter from "./route";
 
 function App() {
   return (
-    <div className="dark:bg-dark">
+    <div className="">
       <SidebarProvider>
         <Router>
           <WebRouter />
