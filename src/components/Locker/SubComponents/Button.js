@@ -14,7 +14,7 @@ export default function Button({ buttonText, dropDownItems, filter, setFilter })
     <ClickAwayListener onClickAway={handleAwayFilter}>
       <div className="flex flex-col">
         <button
-          className="flex justify-center items-center bg-white dark:bg-dark-1  px-5 py-2 font-gilroy font-semibold text-sm"
+          className="flex justify-center h-11 items-center bg-white dark:bg-dark-1  px-5 py-2 font-gilroy font-semibold text-sm"
           onClick={toggleDropDown}
         >
           <span className="text-gray ">{buttonText}</span>
