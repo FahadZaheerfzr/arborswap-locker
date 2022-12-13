@@ -7,7 +7,7 @@ import { useActiveItem } from '../../hooks/setActiveItem'
 import { ThemeContext } from '../../context/ThemeContext/ThemeProvider'
 import Topbar from '../Topbar/Topbar'
 
-export default function BaseLayout({ children, noTopbar, noSidebar, title }) {
+export default function BaseLayout({ children, noTopbar, noSidebar, title, title_img }) {
   const { showSidebar, setShowSidebar } = useContext(SidebarContext)
   const { theme, setTheme } = useContext(ThemeContext)
   const [sideBarMobile, setSideBarMobile] = useState(false)
@@ -17,6 +17,12 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title }) {
   const handleTempFixed = () => {
     setTheme(!tempfixed ? 'light' : 'dark')
     setTempFixed(!tempfixed)
+  }
+
+  const hideSidebar = () => {
+    if (sideBarMobile) {
+      setSideBarMobile(false)
+    }
   }
 
   useEffect(() => {
@@ -31,7 +37,7 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title }) {
         {noSidebar ? null : (
           <div
             className={`${sideBarMobile ? 'block' : 'hidden'
-              } md:hidden w-[240px] bg-white absolute dark:bg-dark-1 z-20`}
+              } md:hidden w-[240px] h-screen bg-white absolute dark:bg-dark-1 z-20`}
           >
             <Sidebar
               fullSidebar={true}
@@ -58,7 +64,7 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title }) {
                 className="h-12 w-12 bg-white dark:bg-dark-1 rounded-full flex justify-center items-center cursor-pointer"
                 onClick={() => setShowSidebar(!showSidebar)}
               >
-                <img src="/images/sidebar/arrow-left.svg" alt="arrow-left" />
+                <img className={`${showSidebar ? "" : "rotate-180"}`} src="/images/sidebar/arrow-left.svg" alt="arrow-left" />
               </div>
             </div>
           </div>
@@ -69,11 +75,13 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title }) {
             }`}
         >
           {noTopbar ? null : (
-            <div className={`${Styles.topBar} w-full bg-white dark:bg-dark-1`}>
-              <Topbar setSideBarMobile={setSideBarMobile} sideBarMobile={sideBarMobile} activeLink={activeItem} title={title} />
+            <div className={`${Styles.topBar} w-full`}>
+              <Topbar setSideBarMobile={setSideBarMobile} sideBarMobile={sideBarMobile} activeLink={activeItem} title={title} title_img={title_img} />
             </div>
           )}
-          {children}
+          <div className='h-full mt-[130px]' onClick={hideSidebar}>
+            {children}
+          </div>
         </div>
       </div>
     </div>

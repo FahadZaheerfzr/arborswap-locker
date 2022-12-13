@@ -60,7 +60,12 @@ export default function Sidebar({ fullSidebar, tempfixed, handleTempFixed, activ
     return (
       <div className="w-full flex justify-end">
         <div className="w-[35%] flex flex-col items-center mb-[5%] justify-between">
+        
+
           <div className="nav-items">
+          <div className="logo-div flex mt-10 mb-20">
+        <img src='/images/logo-small.svg' alt='logo' />
+      </div>
             {nav_items.map((nav_item, index) =>
               nav_item.extendable ? (
                 <div key={nav_item.id} className="mt-8" onClick={() => handleSmallSidebar(nav_item.name)}>
@@ -92,7 +97,7 @@ export default function Sidebar({ fullSidebar, tempfixed, handleTempFixed, activ
     )
   }
   return (
-    <div className="w-full  flex flex-col justify-between mb-5">
+    <div className="w-full h-full pb-10  flex flex-col justify-between mb-5">
       <div className="logo-div flex justify-center mt-10">
         <img src='/images/logo.svg' alt='logo' />
       </div>

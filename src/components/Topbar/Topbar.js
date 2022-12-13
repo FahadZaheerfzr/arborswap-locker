@@ -1,7 +1,7 @@
 import React from 'react'
 import NotificationSVG from '../../svgs/notification'
 
-export default function Topbar({ setSideBarMobile, sideBarMobile, title, activeLink }) {
+export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_img, activeLink }) {
   return (
     <div className="h-[110px] flex items-center justify-between pl-[4%] pr-[5%] ">
       <div className="flex items-center">
@@ -23,9 +23,10 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, activeL
           <span className={`${sideBarMobile ? 'block' : 'hidden'} dark:text-light-text`}>&#x2715;</span>
         </div>
 
-        <div className='flex flex-col justify-center'>
+        <div className='flex flex-col justify-center ml-4 md:ml-0'>
           <div className='flex items-center'>
-            <span className='font-gilroy font-bold text-gray dark:text-gray-dark text-3xl'>
+            {title_img}
+            <span className='hidden md:inline-block font-gilroy font-bold text-gray dark:text-gray-dark text-3xl'>
               {title}
             </span>
 
@@ -47,8 +48,7 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, activeL
       </div>
 
       <div className="flex user-div">
-        <div className="w-10 h-10 lg:w-12 lg:h-12 bg-[#F5F6F7] dark:bg-dark rounded-md flex items-center justify-center">
-          <img className="md:hidden" src="/images/topbar/search.svg" alt="search" />
+        <div className="hidden w-10 h-10 lg:w-12 lg:h-12 bg-[#F5F6F7] dark:bg-dark rounded-md md:flex items-center justify-center">
           <NotificationSVG className="hidden md:block fill-slate-700 dark:fill-white" />
         </div>
 
