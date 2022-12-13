@@ -29,7 +29,7 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, activeL
               {title}
             </span>
 
-            <img className='mx-2' src='/images/Topbar/separator.svg' alt='separator' />
+            <img className='mx-2' src='/images/topbar/separator.svg' alt='separator' />
 
             <span className='font-gilroy font-medium text-primary-green text-2xl'>
               {activeLink}
@@ -48,16 +48,16 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, activeL
 
       <div className="flex user-div">
         <div className="w-10 h-10 lg:w-12 lg:h-12 bg-[#F5F6F7] dark:bg-dark rounded-md flex items-center justify-center">
-          <img className="md:hidden" src="/images/Topbar/search.svg" alt="search" />
+          <img className="md:hidden" src="/images/topbar/search.svg" alt="search" />
           <NotificationSVG className="hidden md:block fill-slate-700 dark:fill-white" />
         </div>
 
         <div className="flex md:hidden w-10 h-10 justify-center border-2 rounded-md border-primary-green border-opacity-50 items-center ml-4">
-          <img src="/images/Topbar/mobile/empty-wallet.svg" alt="empty-wallet" />
+          <img src="/images/topbar/mobile/empty-wallet.svg" alt="empty-wallet" />
         </div>
 
         <div className="hidden md:flex border-2 rounded-md border-primary-green border-opacity-50 items-center justify-between ml-8">
-          <img className="ml-5" src="/images/Topbar/metamask.svg" alt="metamask" />
+          <img className="ml-5" src="/images/topbar/metamask.svg" alt="metamask" />
 
           <span className=" font-gilroy font-medium ml-2 dark:text-light">0xdd....ahs4</span>
 
