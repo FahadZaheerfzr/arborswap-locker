@@ -58,7 +58,7 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title }) {
                 className="h-12 w-12 bg-white dark:bg-dark-1 rounded-full flex justify-center items-center cursor-pointer"
                 onClick={() => setShowSidebar(!showSidebar)}
               >
-                <img src="/images/Sidebar/arrow-left.svg" alt="arrow-left" />
+                <img src="/images/sidebar/arrow-left.svg" alt="arrow-left" />
               </div>
             </div>
           </div>
