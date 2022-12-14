@@ -1,7 +1,7 @@
 import React from 'react'
 import NotificationSVG from '../../svgs/notification'
 
-export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_img, activeLink }) {
+export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_img, subpage, activeLink }) {
   return (
     <div className="h-[110px] flex items-center justify-between pl-[4%] pr-[5%] ">
       <div className="flex items-center">
@@ -22,24 +22,37 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
           />
           <span className={`${sideBarMobile ? 'block' : 'hidden'} dark:text-light-text`}>&#x2715;</span>
         </div>
+        {subpage ?
+          <div className='flex items-center'>
+            <span className='font-medium text-dim-text text-xl capitalize'>
+              {activeLink}
+            </span>
 
-        <div className="flex flex-col justify-center ml-4 md:ml-0">
-          <div className="flex items-center">
-            {title_img}
-            <span className="hidden md:inline-block font-gilroy font-bold text-gray dark:text-gray-dark text-3xl">
+            <div className='w-3 h-3 mx-2 -rotate-45 border-b-2 border-r-2 border-dark-text dark:border-light-text rounded' />
+
+            <span className="font-gilroy font-medium text-dark-text text-xl">
               {title}
             </span>
 
-            <img className="mx-2" src="/images/topbar/separator.svg" alt="separator" />
+          </div>
+          :
+          <div className="flex flex-col justify-center ml-4 md:ml-0">
+            <div className="flex items-center">
+              {title_img}
+              <span className="hidden md:inline-block font-gilroy font-bold text-gray dark:text-gray-dark text-3xl">
+                {title}
+              </span>
 
-            <span className="font-gilroy font-medium text-primary-green text-2xl">{activeLink}</span>
-          </div>
-          <div className="flex items-center">
-            <span className="font-gilroy font-medium text-dark dark:text-light">
-              Lock your assets for proof of lock.
-            </span>
-          </div>
-        </div>
+              <img className="mx-2" src="/images/topbar/separator.svg" alt="separator" />
+
+              <span className="font-gilroy font-medium text-primary-green text-2xl">{activeLink}</span>
+            </div>
+            <div className="flex items-center">
+              <span className="font-gilroy font-medium text-dark dark:text-light">
+                Lock your assets for proof of lock.
+              </span>
+            </div>
+          </div>}
       </div>
 
       <div className="flex user-div">

@@ -25,7 +25,7 @@ export default function Card({ id, name1, name2, icon1, icon2, amount, amountUSD
               <span className="text-xs font-medium text-dim-text dark:text-dim-text-dark">{token}</span>
             </div>
           </div>
-          <Link to={`locked-asset/${id}`}>
+          <Link to={`locked-assets/${id}`}>
             <div className="flex items-center">
               <span className="flex items-center font-medium text-sm font-gilroy text-primary-green ">View</span>
               <img className="rotate-180" src="/images/sidebar/arrow-left.svg" alt="arrow-right" />

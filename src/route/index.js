@@ -7,7 +7,7 @@ import Locker from '../pages/Locker'
 export default function WebRouter() {
   let routes = useRoutes([
     { path: '/', element: <Locker /> },
-    { path: '/locked-asset/:id', element: <LockedAsset />},
+    { path: '/locked-assets/:id', element: <LockedAsset />},
     { path: '*', element: <Error /> },
   ])
   return routes

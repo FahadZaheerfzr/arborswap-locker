@@ -1,21 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
-import { Cards } from '../../data/cards';
+import React from 'react'
 import Amount from './Amount';
 import Preview from './Preview/Preview'
 
 
-export default function LockedAssetBase() {
-    const { id } = useParams();
-    const [asset, setAsset] = useState(null);
-
-    useEffect(() => {
-        const temp = Cards.find(card => card.id === parseInt(id));
-        console.log(temp);
-        setAsset(temp);
-    }, [id]);
-
-
+export default function LockedAssetBase({asset}) {
 
     return (
         <div className='w-full flex justify-center bg-tree-pattern-mobile md:bg-tree-pattern bg-center bg-no-repeat'>

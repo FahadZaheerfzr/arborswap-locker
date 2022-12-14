@@ -7,13 +7,13 @@ import { useActiveItem } from '../../hooks/setActiveItem'
 import { ThemeContext } from '../../context/ThemeContext/ThemeProvider'
 import Topbar from '../Topbar/Topbar'
 
-export default function BaseLayout({ children, noTopbar, noSidebar, title, title_img }) {
+export default function BaseLayout({ children, noTopbar, noSidebar, title, subpage, title_img }) {
   const { showSidebar, setShowSidebar } = useContext(SidebarContext)
   const { theme, setTheme } = useContext(ThemeContext)
   const [sideBarMobile, setSideBarMobile] = useState(false)
   const [tempfixed, setTempFixed] = useState(true)
   const [activeItem] = useActiveItem()
-
+  
   const handleTempFixed = () => {
     setTheme(!tempfixed ? 'light' : 'dark')
     setTempFixed(!tempfixed)
@@ -89,6 +89,7 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, title
                 activeLink={activeItem}
                 title={title}
                 title_img={title_img}
+                subpage={subpage}
               />
             </div>
           )}
