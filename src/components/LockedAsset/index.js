@@ -6,7 +6,7 @@ import Preview from './Preview/Preview'
 export default function LockedAssetBase({asset}) {
 
     return (
-        <div className='w-full flex justify-center bg-tree-pattern-mobile md:bg-tree-pattern bg-center bg-no-repeat'>
+        <div className='w-full flex justify-center'>
             <div className='w-full px-4 md:px-0 md:flex md:w-10/12 md:gap-7'>
                 <div className="w-full md:w-[60%] bg-white rounded-[10px]">
                     {asset &&

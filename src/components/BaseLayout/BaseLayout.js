@@ -7,7 +7,7 @@ import { useActiveItem } from '../../hooks/setActiveItem'
 import { ThemeContext } from '../../context/ThemeContext/ThemeProvider'
 import Topbar from '../Topbar/Topbar'
 
-export default function BaseLayout({ children, noTopbar, noSidebar, title, subpage, title_img }) {
+export default function BaseLayout({ children, noTopbar, noSidebar, title, subpage, title_img, page_name }) {
   const { showSidebar, setShowSidebar } = useContext(SidebarContext)
   const { theme, setTheme } = useContext(ThemeContext)
   const [sideBarMobile, setSideBarMobile] = useState(false)
@@ -90,10 +90,11 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, subpa
                 title={title}
                 title_img={title_img}
                 subpage={subpage}
+                page_name={page_name}
               />
             </div>
           )}
-          <div className="pb-10 mt-[130px] font-gilroy" onClick={hideSidebar}>
+          <div className="pb-10 mt-[130px] h-[calc(100vh-130px)] font-gilroy bg-tree-pattern-mobile md:bg-tree-pattern bg-center bg-no-repeat bg-contain" onClick={hideSidebar}>
             {children}
           </div>
         </div>

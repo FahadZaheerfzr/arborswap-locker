@@ -21,7 +21,7 @@ export default function LockerBase() {
   }
 
   return (
-    <div className="w-full flex flex-col items-center bg-tree-pattern-mobile md:bg-tree-pattern bg-center bg-no-repeat">
+    <div className="w-full flex flex-col items-center ">
       <div className="w-full px-2 md:px-0 md:w-10/12">
         <div className="md:hidden">
           <Carousel mobileView />

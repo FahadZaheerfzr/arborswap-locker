@@ -1,7 +1,7 @@
 import React from 'react'
 import NotificationSVG from '../../svgs/notification'
 
-export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_img, subpage, activeLink }) {
+export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_img, subpage, page_name }) {
   return (
     <div className="h-[110px] flex items-center justify-between pl-[4%] pr-[5%] ">
       <div className="flex items-center">
@@ -25,7 +25,7 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
         {subpage ?
           <div className='flex items-center'>
             <span className='font-medium text-dim-text text-xl capitalize'>
-              {activeLink}
+              {page_name}
             </span>
 
             <div className='w-3 h-3 mx-2 -rotate-45 border-b-2 border-r-2 border-dark-text dark:border-light-text rounded' />
@@ -45,7 +45,7 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
 
               <img className="mx-2" src="/images/topbar/separator.svg" alt="separator" />
 
-              <span className="font-gilroy font-medium text-primary-green text-2xl">{activeLink}</span>
+              <span className="font-gilroy font-medium text-primary-green text-2xl">{page_name}</span>
             </div>
             <div className="flex items-center">
               <span className="font-gilroy font-medium text-dark dark:text-light">

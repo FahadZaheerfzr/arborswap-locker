@@ -10,7 +10,6 @@ const useActiveItem = (pathname) => {
     sitemap.map((nav_item) => {
       if (nav_item.link === location.pathname) setActiveItem(nav_item.name)
       else if (nav_item.sublinks.includes(location.pathname)) setActiveItem(nav_item.name)
-      else setActiveItem(location.pathname.split('/')[1].split('-').join(' '))
       return [activeItem, setActiveItem]
     })
   })
