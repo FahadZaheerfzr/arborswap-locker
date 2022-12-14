@@ -7,7 +7,7 @@ export default function TokenLocker() {
     return (
         <BaseLayout title={"Locker"} page_name={"Token Locker"}>
             <div className='w-full flex justify-center'>
-                <div className='w-1/2'>
+                <div className='w-full px-4 md:px-0 md:w-1/2'>
                     <Landing />
                 </div>
             </div>

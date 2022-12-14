@@ -10,7 +10,7 @@ export default function Landing() {
         Choose Token Lock Type
       </span>
 
-      <div className='flex gap-4 mt-6'>
+      <div className='flex flex-col md:flex-row gap-4 mt-6'>
         <LockOptions name={"Standard"} lock={lock} setLock={setLock} selected={lock === "standard"} />
         <LockOptions name={"Reward"} lock={lock} setLock={setLock} selected={lock === "reward"} />
       </div>
