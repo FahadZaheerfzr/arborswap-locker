@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 
 const Timer = ({date}) => {
-
-    const [time, setTime] = useState(10);
     const [months, setMonths] = useState(0);
     const [days, setDays] = useState(0);
 
@@ -19,9 +17,12 @@ const Timer = ({date}) => {
             var newMonths = Math.floor(difference / (1000 * 60 * 60 * 24 * 30));
             var newDays = Math.floor(difference / (1000 * 60 * 60 * 24));
 
+            if (newMonths > 0) {
+                newDays = newDays % 30;
+            }
+
             setMonths(newMonths);
             setDays(newDays);
-
 
             if (difference <= 0) {
                 clearInterval(updateTime);
@@ -34,7 +35,7 @@ const Timer = ({date}) => {
             clearInterval(updateTime);
         }
 
-    }, [time]);
+    });
 
 
 
