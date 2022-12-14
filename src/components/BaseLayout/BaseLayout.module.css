@@ -1,11 +1,16 @@
 .topBar{
     position: fixed;
     top: 0;
-    z-index: 80;
 }
 
 .sideBar{
     position: fixed;
-    z-index: 50;
     height: 100vh;
 }
+
+@media screen and (max-width: 768px) {
+    .sideBar{
+        position: sticky;
+    }
+}
+    

@@ -1,7 +1,7 @@
 import React from 'react'
+import PreviewDetails from '../../Common/PreviewDetails'
+import PreviewHeader from '../../Common/PreviewHeader'
 import Options from './Subcomponents/Options'
-import PreviewDetails from './Subcomponents/PreviewDetails'
-import PreviewHeader from './Subcomponents/PreviewHeader'
 
 
 export default function Preview({ name1, name2, icon1, icon2, description, amount, amountUSD, unlock_date, locked_by, lp_supply, dex_listed }) {

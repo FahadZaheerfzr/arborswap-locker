@@ -32,7 +32,7 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, subpa
   }, [theme])
 
   return (
-    <div className="w-full bg-dark">
+    <div className="w-full dark:bg-dark">
       <div className={`flex w-full ${noTopbar ? '' : ''}`}>
         {noSidebar ? null : (
           <div
