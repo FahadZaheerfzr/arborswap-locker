@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Cards, Tokens } from '../../data/cards';
+import { useDocumentTitle } from '../../hooks/setDocumentTitle';
+import SearchSVG from '../../svgs/search';
 import Card from './CardView/Card';
 import List from './ListView/List';
 import Carousel from './Slider/Slider'
@@ -8,6 +10,7 @@ import ItemSwitch from './Switches/ItemSwitch';
 import ViewSwitch from './Switches/ViewSwitch'
 
 export default function LockerBase() {
+    useDocumentTitle("Locker");
     const [cardFormat, setCardFormat] = useState('grid');
     const [itemSelected, setItemSelected] = useState('liquidity');
     const [sortFilter, setSortFilter] = useState('');
@@ -32,8 +35,8 @@ export default function LockerBase() {
 
                     <ItemSwitch itemSelected={itemSelected} setItemSelected={setItemSelected} />
 
-                    <div className='px-5 py-3 rounded-md bg-white flex justify-center items-center'>
-                        <span className='text-gray font-gilroy font-semibold text-sm'>
+                    <div className='px-5 py-3 rounded-md bg-white dark:bg-dark-1 flex justify-center items-center'>
+                        <span className='text-gray dark:text-gray-dark font-gilroy font-semibold text-sm'>
                             My Locks
                         </span>
 
@@ -46,17 +49,17 @@ export default function LockerBase() {
                                 className="sr-only peer"
                                 onChange={handleToggle}
                             />
-                            <div className="w-7 h-4 bg-dim-text bg-opacity-20  peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[0.8px] after:bg-dim-text  after:rounded-full after:h-[13.5px] after:w-[13.5px] after:transition-all border-[#F5F1EB] " />
+                            <div className="w-7 h-4 bg-dim-text  bg-opacity-20  peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[0.8px] after:bg-dim-text after:dark:bg-dim-text-dark  after:rounded-full after:h-[13.5px] after:w-[13.5px] after:transition-all border-[#F5F1EB] " />
                         </label>
                     </div>
                     <div className='hidden md:block relative z-10'>
                         <Button buttonText={"Sort By"} dropDownItems={['Floor Price', 'Items', 'Name (A-Z)', 'Name (Z-A)']}
                             filter={sortFilter} setFilter={setSortFilter} />
                     </div>
-                    <div className='hidden md:flex items-center justify-between border-2 border-white bg-[#F5F1EB] rounded-md px-5 py-3'>
-                        <input className='bg-transparent placeholder:text-dim-text focus:outline-none w-60' placeholder='Search token or liquidity pair' />
+                    <div className='hidden md:flex items-center justify-between border-2 border-white dark:border-dark-1 bg-[#F5F1EB] dark:bg-dark-3 rounded-md px-5 py-3'>
+                        <input className='bg-transparent placeholder:text-dim-text dark:placeholder:text-dim-text-dark focus:outline-none w-60' placeholder='Search token or liquidity pair' />
 
-                        <img src='/images/topbar/search.svg' alt='search' />
+                        <SearchSVG className="fill-dark-text dark:fill-light-text" />
                     </div>
                 </div>
 
@@ -64,10 +67,10 @@ export default function LockerBase() {
                     <Button buttonText={"Sort By"} dropDownItems={['Floor Price', 'Items', 'Name (A-Z)', 'Name (Z-A)']}
                         filter={sortFilter} setFilter={setSortFilter} />
 
-                    <div className='flex items-center ml-5 justify-between border-2 border-white bg-[#F5F1EB] rounded-md py-3'>
-                        <input className='pl-2 bg-transparent placeholder:text-dim-text focus:outline-none' placeholder='Search farms' />
+                    <div className='flex items-center ml-5 justify-between border-2 border-white dark:border-dark-1 bg-[#F5F1EB] dark:bg-dark-3 rounded-md py-3'>
+                        <input className='pl-2 bg-transparent placeholder:text-dim-text dark:placeholder:text-dim-text-dark focus:outline-none' placeholder='Search farms' />
 
-                        <img className='relative -left-3' src='/images/topbar/search.svg' alt='search' />
+                        <SearchSVG className='relative -left-3 fill-dark-text dark:fill-light-text'  />
                     </div>
                 </div>
 

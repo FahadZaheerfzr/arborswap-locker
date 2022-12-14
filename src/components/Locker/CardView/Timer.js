@@ -41,7 +41,7 @@ const Timer = ({date}) => {
 
     return (
         <div>
-            <div className="flex items-center justify-between text-gray font-bold ">
+            <div className="flex items-center justify-between text-gray dark:text-gray-dark font-bold ">
                 <span>
                     {months.toString().padStart(2, '0')}
                 </span>
@@ -54,10 +54,10 @@ const Timer = ({date}) => {
                 </span>
             </div>
             <div className='flex justify-between gap-5'>
-                <span className='text-dim-text text-[10px] font-medium'>
+                <span className='text-dim-text dark:text-dim-text-dark text-[10px] font-medium'>
                     Months
                 </span>
-                <span className='text-dim-text text-[10px] font-medium'>
+                <span className='text-dim-text dark:text-dim-text-dark text-[10px] font-medium'>
                     Days
                 </span>
             </div>

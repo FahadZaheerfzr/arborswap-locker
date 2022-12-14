@@ -32,7 +32,7 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, title
   }, [theme])
 
   return (
-    <div className="w-full pb-5">
+    <div className="w-full ">
       <div className={`flex w-full ${noTopbar ? '' : ''}`}>
         {noSidebar ? null : (
           <div
@@ -71,7 +71,7 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, title
         )}
 
         <div
-          className={`w-full md:w-[calc(100%-270px)] md:ml-[270px] ease-in-out duration-300 ${showSidebar ? ' translate-x-0' : '-translate-x-[100px]'
+          className={`w-full dark:bg-dark md:w-[calc(100%-270px)] md:ml-[270px] ease-in-out duration-300 ${showSidebar ? ' translate-x-0' : '-translate-x-[100px]'
             }`}
         >
           {noTopbar ? null : (
@@ -79,7 +79,7 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, title
               <Topbar setSideBarMobile={setSideBarMobile} sideBarMobile={sideBarMobile} activeLink={activeItem} title={title} title_img={title_img} />
             </div>
           )}
-          <div className='h-full mt-[130px] font-gilroy' onClick={hideSidebar}>
+          <div className='pb-10 mt-[130px] font-gilroy' onClick={hideSidebar}>
             {children}
           </div>
         </div>

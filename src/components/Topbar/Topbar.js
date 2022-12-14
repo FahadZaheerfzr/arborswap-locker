@@ -6,7 +6,7 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
     <div className="h-[110px] flex items-center justify-between pl-[4%] pr-[5%] ">
       <div className="flex items-center">
         <div
-          className="flex md:hidden flex-col h-10 w-10 bg-[#F5F6F7] dark:bg-dark hamburger justify-center items-center"
+          className="flex md:hidden flex-col h-10 w-10 bg-[#F5F6F7] dark:bg-dark-1 hamburger justify-center items-center"
           onClick={() => setSideBarMobile(!sideBarMobile)}>
           <div
             className={`${sideBarMobile ? 'hidden' : 'block'
@@ -48,7 +48,7 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
       </div>
 
       <div className="flex user-div">
-        <div className="hidden w-10 h-10 lg:w-12 lg:h-12 bg-[#F5F6F7] dark:bg-dark rounded-md md:flex items-center justify-center">
+        <div className="hidden w-10 h-10 lg:w-12 lg:h-12 bg-[#F5F6F7] dark:bg-dark-1 rounded-md md:flex items-center justify-center">
           <NotificationSVG className="hidden md:block fill-slate-700 dark:fill-white" />
         </div>
 
@@ -56,7 +56,7 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
           <img src="/images/topbar/mobile/empty-wallet.svg" alt="empty-wallet" />
         </div>
 
-        <div className="hidden md:flex border-2 rounded-md border-primary-green border-opacity-50 items-center justify-between ml-8">
+        <div className="hidden md:flex border-2 rounded-md border-primary-green border-opacity-50 items-center justify-between dark:bg-dark-1 ml-8">
           <img className="ml-5" src="/images/topbar/metamask.svg" alt="metamask" />
 
           <span className=" font-gilroy font-medium ml-2 dark:text-light">0xdd....ahs4</span>

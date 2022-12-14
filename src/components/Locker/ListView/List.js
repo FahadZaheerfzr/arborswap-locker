@@ -3,7 +3,7 @@ import ListInfo from './ListInfo'
 
 export default function List({ icon1, icon2, name1, name2, token, amount, unlock_date }) {
     return (
-        <div className='w-full flex items-center justify-between bg-white rounded-[10px] py-5 px-6'>
+        <div className='w-full flex items-center justify-between bg-white dark:bg-dark-1 rounded-[10px] py-5 px-6'>
             <div className='flex items-center'>
                 <img className='w-6 h-6' src={icon1} alt={name1} />
                 {!token &&
@@ -11,11 +11,11 @@ export default function List({ icon1, icon2, name1, name2, token, amount, unlock
                 }
             </div>
 
-            <div className={`flex flex-col justify-center font-bold font-gilroy text-dark-text ${token ? "ml-[10px]" : "ml-0"}`}>
+            <div className={`flex flex-col justify-center font-bold font-gilroy text-dark-text dark:text-light-text ${token ? "ml-[10px]" : "ml-0"}`}>
                 <span>
                     {name1}{!token && `/${name2}`}
                 </span>
-                <span className='text-xs font-medium text-dim-text'>
+                <span className='text-xs font-medium text-dim-text dark:text-dim-text-dark'>
                     {token}
                 </span>
             </div>

@@ -17,7 +17,7 @@ export default function Button({ buttonText, dropDownItems, filter, setFilter })
           className="flex justify-center h-11 items-center bg-white dark:bg-dark-1  px-5 py-2 font-gilroy font-semibold text-sm"
           onClick={toggleDropDown}
         >
-          <span className="text-gray ">{buttonText}</span>
+          <span className="text-gray dark:text-gray-dark ">{buttonText}</span>
           <img className="ml-2" src="./images/arrows/arrow-down.svg" alt="arrow-down" />
         </button>
 
