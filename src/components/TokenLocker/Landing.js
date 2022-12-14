@@ -5,7 +5,7 @@ import Note from './Subcomponents/Note';
 export default function Landing() {
   const [lock, setLock] = useState("reward");
   return (
-    <div className='bg-white flex flex-col rounded-[10px] p-9'>
+    <div className='bg-white dark:bg-dark-1 flex flex-col rounded-[10px] p-9'>
       <span className='font-semibold text-dark-text'>
         Choose Token Lock Type
       </span>
@@ -15,7 +15,7 @@ export default function Landing() {
         <LockOptions name={"Reward"} lock={lock} setLock={setLock} selected={lock === "reward"} />
       </div>
 
-      <div className='mt-10 bg-[#FAF8F5] rounded-md p-5 text-sm font-semibold text-gray dark:text-gray-dark'>
+      <div className='mt-10 bg-[#FAF8F5] dark:bg-dark-2 rounded-md p-5 text-sm font-semibold text-gray dark:text-gray-dark'>
           <Note standard={lock === "standard"} />
       </div>
 

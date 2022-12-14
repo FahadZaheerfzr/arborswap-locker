@@ -4,15 +4,15 @@ export default function LockOptions({ setLock, selected, name }) {
     return (
         <div
             className={`w-full rounded-[10px] px-5 py-5 ${selected
-                ? ' border-2 border-[#C89211] border-opacity-50 '
-                : 'border-dim-text border-opacity-50 border-[1.5px]'
+                ? ' border-[1.5px] border-[#C89211] '
+                : 'border-dim-text border-[1.5px] border-opacity-50'
                 }`}
         >
             <div className="flex flex-row items-center justify-between">
                 <div className="flex flex-row items-center">
                     <div className="flex flex-col ml-4">
                         <div className="flex items-center gap-2">
-                            <span className={`font-gilroy font-bold text-dark-text ${selected ? 'dark:text-light-text' : 'dark:text-gray-dark'}`}>
+                            <span className={`font-gilroy font-bold text-dark-text dark:text-light-text`}>
                                 {name}
                             </span>
                         </div>

@@ -15,17 +15,17 @@ export default function Preview({ name1, name2, icon1, icon2, description, amoun
           </div>
 
           <div className='flex flex-col ml-4 font-gilroy'>
-            <span className='text-dark-text  font-bold'>
+            <span className='text-dark-text dark:text-light-text  font-bold'>
               {name1} / {name2}
             </span>
 
-            <span className='text-gray font-medium mt-2 text-xs'>
+            <span className='text-gray dark:text-gray-dark font-medium mt-2 text-xs'>
               {description}
             </span>
           </div>
         </div>
 
-        <Options width={"w-7"} height={"h-7"} color={"[#FAF8F5]"} />
+        <Options width={"w-7"} height={"h-7"} color={"[#FAF8F5]"} dark_color={"dark-2"} />
       </div>
 
       <PreviewHeader heading={"Lock Details"} />

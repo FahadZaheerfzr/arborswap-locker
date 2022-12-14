@@ -94,7 +94,7 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, subpa
               />
             </div>
           )}
-          <div className="pb-10 mt-[130px] h-[calc(100vh-130px)] font-gilroy bg-tree-pattern-mobile md:bg-tree-pattern bg-center bg-no-repeat bg-contain" onClick={hideSidebar}>
+          <div className="pb-10 mt-[130px] min-h-[calc(100vh-130px)] font-gilroy bg-tree-pattern-mobile md:bg-tree-pattern bg-center bg-no-repeat bg-contain" onClick={hideSidebar}>
             {children}
           </div>
         </div>

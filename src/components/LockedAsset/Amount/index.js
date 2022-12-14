@@ -3,7 +3,7 @@ import Timer from './Timer/Timer'
 
 export default function Amount({ icon1, icon2, amount, unlock_date }) {
     return (
-        <div className='flex flex-col p-9 font-gilroy bg-white rounded-[20px]'>
+        <div className='flex flex-col p-9 font-gilroy bg-white dark:bg-dark-1 rounded-[20px]'>
             <span className='text-sm font-medium text-gray dark:text-gray-dark'>
                 Amount
             </span>
@@ -18,7 +18,7 @@ export default function Amount({ icon1, icon2, amount, unlock_date }) {
             </div>
 
             <div className='flex mt-10'>
-                <button className='w-full bg-primary-green bg-opacity-50 rounded-md text-white font-bold py-4'>
+                <button className='w-full bg-primary-green bg-opacity-50 rounded-md text-white dark:text-dim-text-dark font-bold py-4'>
                     Claim
                 </button>
             </div>
