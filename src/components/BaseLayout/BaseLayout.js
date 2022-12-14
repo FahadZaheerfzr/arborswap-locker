@@ -36,8 +36,9 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, title
       <div className={`flex w-full ${noTopbar ? '' : ''}`}>
         {noSidebar ? null : (
           <div
-            className={`${sideBarMobile ? 'block' : 'hidden'
-              } md:hidden w-[240px] h-screen bg-white absolute dark:bg-dark-1 z-20`}
+            className={`${
+              sideBarMobile ? 'block' : 'hidden'
+            } md:hidden w-[240px] h-screen bg-white absolute dark:bg-dark-1 z-20`}
           >
             <Sidebar
               fullSidebar={true}
@@ -49,8 +50,9 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, title
         )}
         {noSidebar ? null : (
           <div
-            className={`hidden md:flex w-[270px] bg-white dark:bg-dark-1 ${Styles.sideBar
-              } ease-in-out duration-300 ${showSidebar ? 'translate-x-0' : '-translate-x-[170px]'}`}
+            className={`hidden md:flex w-[270px] bg-white dark:bg-dark-1 ${Styles.sideBar} ease-in-out duration-300 ${
+              showSidebar ? 'translate-x-0' : '-translate-x-[170px]'
+            }`}
           >
             <Sidebar
               fullSidebar={showSidebar}
@@ -64,22 +66,33 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, title
                 className="h-12 w-12 bg-white dark:bg-dark-1 rounded-full flex justify-center items-center cursor-pointer"
                 onClick={() => setShowSidebar(!showSidebar)}
               >
-                <img className={`${showSidebar ? "" : "rotate-180"}`} src="/images/sidebar/arrow-left.svg" alt="arrow-left" />
+                <img
+                  className={`${showSidebar ? '' : 'rotate-180'}`}
+                  src="/images/sidebar/arrow-left.svg"
+                  alt="arrow-left"
+                />
               </div>
             </div>
           </div>
         )}
 
         <div
-          className={`w-full dark:bg-dark md:w-[calc(100%-270px)] md:ml-[270px] ease-in-out duration-300 ${showSidebar ? ' translate-x-0' : '-translate-x-[100px]'
-            }`}
+          className={`w-full dark:bg-dark md:w-[calc(100%-270px)] md:ml-[270px] ease-in-out duration-300 ${
+            showSidebar ? ' translate-x-0' : '-translate-x-[100px]'
+          }`}
         >
           {noTopbar ? null : (
             <div className={`${Styles.topBar} w-full`}>
-              <Topbar setSideBarMobile={setSideBarMobile} sideBarMobile={sideBarMobile} activeLink={activeItem} title={title} title_img={title_img} />
+              <Topbar
+                setSideBarMobile={setSideBarMobile}
+                sideBarMobile={sideBarMobile}
+                activeLink={activeItem}
+                title={title}
+                title_img={title_img}
+              />
             </div>
           )}
-          <div className='pb-10 mt-[130px] font-gilroy' onClick={hideSidebar}>
+          <div className="pb-10 mt-[130px] font-gilroy" onClick={hideSidebar}>
             {children}
           </div>
         </div>

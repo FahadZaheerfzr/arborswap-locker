@@ -60,12 +60,10 @@ export default function Sidebar({ fullSidebar, tempfixed, handleTempFixed, activ
     return (
       <div className="w-full flex justify-end">
         <div className="w-[35%] flex flex-col items-center mb-[5%] justify-between">
-        
-
           <div className="nav-items">
-          <div className="logo-div flex mt-10 mb-20">
-        <img src='/images/logo-small.svg' alt='logo' />
-      </div>
+            <div className="logo-div flex mt-10 mb-20">
+              <img src="/images/logo-small.svg" alt="logo" />
+            </div>
             {nav_items.map((nav_item, index) =>
               nav_item.extendable ? (
                 <div key={nav_item.id} className="mt-8" onClick={() => handleSmallSidebar(nav_item.name)}>
@@ -99,7 +97,7 @@ export default function Sidebar({ fullSidebar, tempfixed, handleTempFixed, activ
   return (
     <div className="w-full h-full pb-10  flex flex-col justify-between mb-5">
       <div className="logo-div flex justify-center mt-10">
-        <img src='/images/logo.svg' alt='logo' />
+        <img src="/images/logo.svg" alt="logo" />
       </div>
       <div className="nav-items">
         {activeItem === 'null' && <div className="bg-white dark:bg-dark-1 pt-[20%]"></div>}
@@ -113,10 +111,11 @@ export default function Sidebar({ fullSidebar, tempfixed, handleTempFixed, activ
                 <div className="flex ml-[20%]">
                   {nav_item.name === activeLink ? nav_item.activeIcon : nav_item.icon}
                   <span
-                    className={`font-gilroy font-semibold ml-5 ${nav_item.name === activeLink
+                    className={`font-gilroy font-semibold ml-5 ${
+                      nav_item.name === activeLink
                         ? 'text-primary-green'
                         : 'text-dim-text dark:text-dim-text-dark hover:text-primary-green'
-                      }`}
+                    }`}
                   >
                     {nav_item.name}
                   </span>
@@ -134,10 +133,12 @@ export default function Sidebar({ fullSidebar, tempfixed, handleTempFixed, activ
                 {nav_item.subitems.map((subItem, index) => (
                   <Link key={index} to={subItem.link} className="mt-5">
                     <span
-                      className={`font-semibold font-gilroy ${location.pathname === subItem.link
+                      className={`font-semibold font-gilroy ${
+                        location.pathname === subItem.link
                           ? 'text-primary-green'
                           : 'text-dim-text dark:text-dim-text-dark hover:text-primary-green'
-                        }`}>
+                      }`}
+                    >
                       {subItem.name}
                     </span>
                   </Link>

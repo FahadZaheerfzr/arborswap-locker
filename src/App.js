@@ -1,6 +1,6 @@
-import { BrowserRouter as Router } from "react-router-dom";
-import {SidebarProvider} from "./context/SidebarContext/GlobalProvider";
-import WebRouter from "./route";
+import { BrowserRouter as Router } from 'react-router-dom'
+import { SidebarProvider } from './context/SidebarContext/GlobalProvider'
+import WebRouter from './route'
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         </Router>
       </SidebarProvider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -21,6 +21,10 @@ module.exports = {
         "gray": "#807373",
         "gray-dark": "#BBB6B0",
 
+      },
+      backgroundImage: {
+        'tree-pattern': "url('../public/images/tree-logo-desktop.svg')",
+        'tree-pattern-mobile': "url('../public/images/tree-logo.svg')",
       }
     },
   },

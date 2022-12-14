@@ -7,7 +7,8 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
       <div className="flex items-center">
         <div
           className="flex md:hidden flex-col h-10 w-10 bg-[#F5F6F7] dark:bg-dark-1 hamburger justify-center items-center"
-          onClick={() => setSideBarMobile(!sideBarMobile)}>
+          onClick={() => setSideBarMobile(!sideBarMobile)}
+        >
           <div
             className={`${sideBarMobile ? 'hidden' : 'block'
               } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
@@ -17,34 +18,28 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
               } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
           />
           <div
-            className={`${sideBarMobile ? 'hidden' : 'block'
-              } h-0 w-5 border border-dark-text dark:border-light-text`}
+            className={`${sideBarMobile ? 'hidden' : 'block'} h-0 w-5 border border-dark-text dark:border-light-text`}
           />
           <span className={`${sideBarMobile ? 'block' : 'hidden'} dark:text-light-text`}>&#x2715;</span>
         </div>
 
-        <div className='flex flex-col justify-center ml-4 md:ml-0'>
-          <div className='flex items-center'>
+        <div className="flex flex-col justify-center ml-4 md:ml-0">
+          <div className="flex items-center">
             {title_img}
-            <span className='hidden md:inline-block font-gilroy font-bold text-gray dark:text-gray-dark text-3xl'>
+            <span className="hidden md:inline-block font-gilroy font-bold text-gray dark:text-gray-dark text-3xl">
               {title}
             </span>
 
-            <img className='mx-2' src='/images/topbar/separator.svg' alt='separator' />
+            <img className="mx-2" src="/images/topbar/separator.svg" alt="separator" />
 
-            <span className='font-gilroy font-medium text-primary-green text-2xl'>
-              {activeLink}
-            </span>
+            <span className="font-gilroy font-medium text-primary-green text-2xl">{activeLink}</span>
           </div>
-          <div className='flex items-center'>
-            <span className='font-gilroy font-medium text-dark dark:text-light'>
+          <div className="flex items-center">
+            <span className="font-gilroy font-medium text-dark dark:text-light">
               Lock your assets for proof of lock.
             </span>
           </div>
         </div>
-
-
-
       </div>
 
       <div className="flex user-div">
@@ -56,7 +51,7 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
           <img src="/images/topbar/mobile/empty-wallet.svg" alt="empty-wallet" />
         </div>
 
-        <div className="hidden md:flex border-2 rounded-md border-primary-green border-opacity-50 items-center justify-between dark:bg-dark-1 ml-8">
+        <div className="hidden md:flex border-2 rounded-md border-primary-green border-opacity-50 items-center justify-between bg-white dark:bg-dark-1 ml-8">
           <img className="ml-5" src="/images/topbar/metamask.svg" alt="metamask" />
 
           <span className=" font-gilroy font-medium ml-2 dark:text-light">0xdd....ahs4</span>

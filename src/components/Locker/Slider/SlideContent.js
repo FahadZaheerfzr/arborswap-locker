@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function SlideContent({ img1, img2, img3, mobile }) {
   if (mobile) {
-    return(
+    return (
       <div className="w-full px-2">
         <img className="w-full" src={img1} alt="banner-1" />
       </div>
