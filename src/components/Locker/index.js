@@ -49,7 +49,7 @@ export default function LockerBase() {
                             <div className="w-7 h-4 bg-dim-text bg-opacity-20  peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[0.8px] after:bg-dim-text  after:rounded-full after:h-[13.5px] after:w-[13.5px] after:transition-all border-[#F5F1EB] " />
                         </label>
                     </div>
-                    <div className='hidden md:block'>
+                    <div className='hidden md:block relative z-10'>
                         <Button buttonText={"Sort By"} dropDownItems={['Floor Price', 'Items', 'Name (A-Z)', 'Name (Z-A)']}
                             filter={sortFilter} setFilter={setSortFilter} />
                     </div>
@@ -60,7 +60,7 @@ export default function LockerBase() {
                     </div>
                 </div>
 
-                <div className="flex justify-between md:hidden mt-5 h-11">
+                <div className="flex justify-between md:hidden mt-5 h-11 relative z-10">
                     <Button buttonText={"Sort By"} dropDownItems={['Floor Price', 'Items', 'Name (A-Z)', 'Name (Z-A)']}
                         filter={sortFilter} setFilter={setSortFilter} />
 

@@ -79,7 +79,7 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, title
               <Topbar setSideBarMobile={setSideBarMobile} sideBarMobile={sideBarMobile} activeLink={activeItem} title={title} title_img={title_img} />
             </div>
           )}
-          <div className='h-full md:mt-[130px] font-gilroy' onClick={hideSidebar}>
+          <div className='h-full mt-[130px] font-gilroy' onClick={hideSidebar}>
             {children}
           </div>
         </div>

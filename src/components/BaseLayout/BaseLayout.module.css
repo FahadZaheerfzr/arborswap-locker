@@ -9,9 +9,3 @@
     z-index: 50;
     height: 100vh;
 }
-
-@media screen and (max-width:760px) {
-    .topBar{
-        position: sticky;
-    }
-}

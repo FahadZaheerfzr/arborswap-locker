@@ -41,7 +41,7 @@ export default function Card({ name1, name2, icon1, icon2, amount, amountUSD, un
 
             </div>
 
-            <div className='bg-[#FAF8F5] p-7 '>
+            <div className='bg-[#FAF8F5] py-5 px-7 mt-5 '>
                 <div className='flex justify-between items-center'>
                     <span className='font-medium text-xs text-gray'>
                         Unlocks In
