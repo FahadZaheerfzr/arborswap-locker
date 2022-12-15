@@ -28,6 +28,34 @@ code {
     monospace;
 }
 
+input{
+  background: transparent;
+}
+
+
 input:focus{
   outline: none;
+}
+
+.dark-calendar div{
+  background-color: #242322!important;
+}
+
+.dark-calendar div table tbody tr td:hover{
+  color: #242322!important;
+}
+
+.dark-calendar div table tfoot tr td:hover{
+  color: #242322!important;
+}
+
+.dark-calendar .rdtTime:hover{
+  color: white!important;
+}
+.dark-calendar .rdtTime table tbody tr td:hover{
+  color: white!important;
+}
+
+.dark-calendar .rdtBtn:hover{
+  color: #242322!important;
 }
