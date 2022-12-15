@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import BaseLayout from '../components/BaseLayout/BaseLayout'
-import Landing from '../components/TokenLocker/Landing'
-import Lock from '../components/TokenLocker/Lock'
-import { useDocumentTitle } from '../hooks/setDocumentTitle'
-import SheildSecuritySVG from '../svgs/Sidebar/shield_security'
+import BaseLayout from '../../components/BaseLayout/BaseLayout'
+import Landing from '../../components/TokenLocker/Landing'
+import Lock from '../../components/TokenLocker/Lock'
+import { useDocumentTitle } from '../../hooks/setDocumentTitle'
+import SheildSecuritySVG from '../../svgs/Sidebar/shield_security'
+
 
 export default function TokenLocker() {
   useDocumentTitle('Token Locker')

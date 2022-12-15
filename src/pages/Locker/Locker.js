@@ -1,7 +1,7 @@
 import React from 'react'
-import BaseLayout from '../components/BaseLayout/BaseLayout'
-import LockerBase from '../components/Locker'
-import SheildSecuritySVG from '../svgs/Sidebar/shield_security'
+import BaseLayout from '../../components/BaseLayout/BaseLayout'
+import LockerBase from '../../components/Locker'
+import SheildSecuritySVG from '../../svgs/Sidebar/shield_security'
 
 export default function Locker() {
   return (

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import BaseLayout from '../components/BaseLayout/BaseLayout'
-import LockedAssetBase from '../components/LockedAsset'
-import { Cards } from '../data/cards'
+import BaseLayout from '../../components/BaseLayout/BaseLayout'
+import LockedAssetBase from '../../components/LockedAsset'
+import { Cards } from '../../data/cards'
+
 
 export default function LockedAsset() {
   const { id } = useParams()
