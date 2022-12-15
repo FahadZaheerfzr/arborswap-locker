@@ -4,7 +4,7 @@ import Timer from './Subcomponents/Timer'
 
 export default function PoolsBase({ activeStatus }) {
     return (
-        <div className='grid grid-cols-3 gap-5 mt-8'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mt-8'>
             {Pools.map((pool) => (
                 pool.status === activeStatus &&
                 <div key={pool.id} className='flex flex-col'>
@@ -16,7 +16,7 @@ export default function PoolsBase({ activeStatus }) {
                                 <div className='flex items-center'>
                                     <h3 className=' font-bold dark:text-light-text'>{pool.name}</h3>
                                     {pool.private &&
-                                        <span className='ml-2 text-[10px] font-bold bg-[#E56060] py-[2px] px-2 text-white rounded-[10px]'>
+                                        <span className='ml-2 text-[10px] font-bold bg-[#E56060] dark:bg-[#B86363] py-[2px] px-2 text-white rounded-[10px]'>
                                             Private
                                         </span>
                                     }
@@ -24,7 +24,7 @@ export default function PoolsBase({ activeStatus }) {
 
                                 <div className='flex items-center mt-2'>
                                     {pool.tags.map((tag) => (
-                                        <div key={tag.id} className='bg-[#F5F1EB] mr-[6px] py-[2px] px-[10px] rounded text-xs text-gray dark:text-gray-dark font-medium'>
+                                        <div key={tag.id} className='bg-[#F5F1EB] dark:bg-dark-3 mr-[6px] py-[2px] px-[10px] rounded text-xs text-gray dark:text-gray-dark font-medium'>
                                             {tag.name}
                                         </div>
                                     ))}
@@ -65,12 +65,12 @@ export default function PoolsBase({ activeStatus }) {
                                 {(pool.hard_cap * (pool.filled_percent / 100)).toLocaleString()} {pool.symbol}
                             </span>
 
-                            <span className='text-xs  text-gray dark:text-gray-dark'>
+                            <span className='text-xs  text-gray dark:text-dim-text-dark'>
                                 {pool.hard_cap} {pool.symbol}
                             </span>
                         </div>
 
-                        <div className='w-full bg-[#F5F1EB] rounded-[5px] h-[18px] mt-[6px]'>
+                        <div className='w-full bg-[#F5F1EB] dark:bg-dark-3 rounded-[5px] h-[18px] mt-[6px]'>
                             <div className={`h-18px filled rounded-[5px] pr-2 flex justify-end items-center text-xs text-white`}
                                 style={{ width: `${pool.filled_percent}%` }}>
                                 {pool.filled_percent}%
@@ -88,7 +88,7 @@ export default function PoolsBase({ activeStatus }) {
                                 </span>
                             </div>
 
-                            <div className='flex flex-col justify-between'>
+                            <div className='flex flex-col justify-between items-center'>
                                 <span className='text-xs font-medium text-gray dark:text-gray-dark'>
                                     Lockup Period
                                 </span>
