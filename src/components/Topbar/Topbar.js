@@ -1,7 +1,7 @@
 import React from 'react'
 import NotificationSVG from '../../svgs/notification'
 
-export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_img, subpage, page_name }) {
+export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_img, subpage, page_name, page_description }) {
   return (
     <div className="h-[110px] flex items-center justify-between pl-[4%] pr-[5%] ">
       <div className="flex items-center">
@@ -46,7 +46,7 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
             </div>
             <div className="flex items-center">
               <span className="font-gilroy font-medium text-dark dark:text-light">
-                Lock your assets for proof of lock.
+                {page_description || "Lock your assets for proof of lock."}
               </span>
             </div>
           </div>

@@ -7,7 +7,7 @@ import { useActiveItem } from '../../hooks/setActiveItem'
 import { ThemeContext } from '../../context/ThemeContext/ThemeProvider'
 import Topbar from '../Topbar/Topbar'
 
-export default function BaseLayout({ children, noTopbar, noSidebar, title, subpage, title_img, page_name }) {
+export default function BaseLayout({ children, noTopbar, noSidebar, title, subpage, title_img, page_name, page_description }) {
   const { showSidebar, setShowSidebar } = useContext(SidebarContext)
   const { theme, setTheme } = useContext(ThemeContext)
   const [sideBarMobile, setSideBarMobile] = useState(false)
@@ -85,6 +85,7 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, subpa
             <div className={`${Styles.topBar} w-full`}>
               <Topbar
                 setSideBarMobile={setSideBarMobile}
+                page_description={page_description}
                 sideBarMobile={sideBarMobile}
                 activeLink={activeItem}
                 title={title}

@@ -20,7 +20,7 @@ module.exports = {
         "dim-text-dark": "#6C717A",
         "gray": "#807373",
         "gray-dark": "#BBB6B0",
-
+        
       },
       backgroundImage: {
         'tree-pattern': "url('../public/images/tree-logo-desktop.svg')",

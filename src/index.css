@@ -28,34 +28,39 @@ code {
     monospace;
 }
 
-input{
+input {
   background: transparent;
 }
 
 
-input:focus{
+input:focus {
   outline: none;
 }
 
-.dark-calendar div{
-  background-color: #242322!important;
+.dark-calendar div {
+  background-color: #242322 !important;
 }
 
-.dark-calendar div table tbody tr td:hover{
-  color: #242322!important;
+.dark-calendar div table tbody tr td:hover {
+  color: #242322 !important;
 }
 
-.dark-calendar div table tfoot tr td:hover{
-  color: #242322!important;
+.dark-calendar div table tfoot tr td:hover {
+  color: #242322 !important;
 }
 
-.dark-calendar .rdtTime:hover{
-  color: white!important;
-}
-.dark-calendar .rdtTime table tbody tr td:hover{
-  color: white!important;
+.dark-calendar .rdtTime:hover {
+  color: white !important;
 }
 
-.dark-calendar .rdtBtn:hover{
-  color: #242322!important;
+.dark-calendar .rdtTime table tbody tr td:hover {
+  color: white !important;
+}
+
+.dark-calendar .rdtBtn:hover {
+  color: #242322 !important;
+}
+
+.filled {
+  background: linear-gradient(270.01deg, #C89C34 8.72%, #FFBB1C 78.42%);
 }

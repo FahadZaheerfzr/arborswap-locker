@@ -3,9 +3,10 @@ import SearchSVG from '../../svgs/search'
 import Carousel from './Slider/Slider'
 import Button from './SubComponents/Button'
 import ItemSwitch from './Switches/ItemSwitch'
+import Tab from './Switches/Tab'
 import ViewSwitch from './Switches/ViewSwitch'
 
-export default function HomeLayout({ children, cardFormat, setCardFormat, itemSelected, setItemSelected }) {
+export default function HomeLayout({ children, cardFormat, setCardFormat, itemSelected, setItemSelected, tabs, activeTab, setActiveTab }) {
     const [sortFilter, setSortFilter] = useState('')
     const [on, setOn] = useState(true)
 
@@ -24,10 +25,27 @@ export default function HomeLayout({ children, cardFormat, setCardFormat, itemSe
                 </div>
 
                 <div className="w-full flex h-11 justify-between">
-                    <ViewSwitch cardFormat={cardFormat} setCardFormat={setCardFormat} />
 
-                    <ItemSwitch itemSelected={itemSelected} setItemSelected={setItemSelected} />
+                    {tabs &&
+                        <div className="flex items-center p-1 bg-[#F5F1EB] dark:bg-dark-3">
+                            {tabs.map((tab) => (
+                                <Tab
+                                    key={tab.id}
+                                    tabName={tab.tabName}
+                                    active={tab.id === activeTab}
+                                    setActiveTab={setActiveTab}
+                                    id={tab.id}
+                                />
+                            ))}
+                        </div>
+                    }
 
+                    {!tabs &&
+                        <ViewSwitch cardFormat={cardFormat} setCardFormat={setCardFormat} />
+                    }
+                    {!tabs &&
+                        <ItemSwitch itemSelected={itemSelected} setItemSelected={setItemSelected} />
+                    }
                     <div className="px-5 py-3 rounded-md bg-white dark:bg-dark-1 flex justify-center items-center">
                         <span className="text-gray dark:text-gray-dark font-gilroy font-semibold text-sm">My Locks</span>
 
