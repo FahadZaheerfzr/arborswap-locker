@@ -92,20 +92,15 @@ export default function Preview({ locker, setActive, amount, datetime }) {
                 ))}
             </div>
 
-            {
-                locker ? <PreviewHeader heading={"Lock Details"} />
-                    :
-                    <PreviewHeader heading={"LP Details"} />
-            }
+            <PreviewHeader heading={"Lock Details"} />
 
-            {
-                locker &&
-                <div className="flex flex-col">
-                    <PreviewDetails name={"Amount to be Locked"} value={amount} />
-                    <PreviewDetails name={"Lock Period (Days)"} value={days} />
-                    <PreviewDetails name={"Unlock Date"} value={date} />
-                </div>
-            }
+
+            <div className="flex flex-col">
+                <PreviewDetails name={"Amount to be Locked"} value={amount} />
+                <PreviewDetails name={"Lock Period (Days)"} value={days} />
+                <PreviewDetails name={"Unlock Date"} value={date} />
+            </div>
+
 
 
             <div className="mt-10">

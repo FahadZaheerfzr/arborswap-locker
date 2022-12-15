@@ -16,7 +16,7 @@ const panel_items = [
 ]
 
 
-export default function Lock({ setPage }) {
+export default function Lock({ setPage, lp_locker }) {
     const [active, setActive] = useState('Lock details');
     const [amount, setAmount] = useState(amount_val);
     const [date, setDate] = useState('');
@@ -39,10 +39,10 @@ export default function Lock({ setPage }) {
                 {active === 'Lock details' && (
                     <LockDetails setActive={setActive} setPage={setPage}
                         setAmount={setAmount} amount_val={amount_val} amount={amount}
-                        locker date={date} setDate={setDate} />
+                        locker={!lp_locker} date={date} setDate={setDate} />
                 )}
                 {active === 'Preview' && (
-                    <Preview setActive={setActive} amount={amount} datetime={date} locker />
+                    <Preview setActive={setActive} amount={amount} datetime={date} locker={!lp_locker} />
                 )}
             </div>
         </div>

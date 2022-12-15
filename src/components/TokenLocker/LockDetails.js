@@ -165,7 +165,7 @@ export default function LockDetails({ setActive, setPage, locker, amount_val, am
                     <CalendarSVG className='ml-5 fill-gray dark:fill-gray-dark' />
                     <Datetime className={`ml-5 font-gilroy font-semibold text-dark-text dark:text-light-text ${theme === "dark" ? "dark-calendar" : ""}`} 
                         isValidDate={valid}
-                        onChange={handleChange} value={date} />
+                        onChange={handleChange}  />
                         
                 </div>
 
@@ -173,6 +173,7 @@ export default function LockDetails({ setActive, setPage, locker, amount_val, am
 
                 <div className="mt-10">
                     <div className="flex justify-end items-center mb-10">
+                        {locker &&
                         <button
                             className="bg-white dark:bg-transparent mr-5 flex items-center gap-2 py-[10px] px-5"
                             onClick={() => setPage(1)}
@@ -180,7 +181,7 @@ export default function LockDetails({ setActive, setPage, locker, amount_val, am
                             <BackArrowSVG className="fill-dark-text dark:fill-light-text" />
                             <span className="font-gilroy font-medium text-sm text-dark-text dark:text-light-text">Go Back</span>
                         </button>
-
+                        }
                         <button className="bg-primary-green disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
                             disabled={date==='' || address.length < 5}
                             onClick={() => setActive('Preview')}>
