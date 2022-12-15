@@ -9,9 +9,9 @@ import TokenLocker from '../pages/TokenLocker'
 export default function WebRouter() {
   let routes = useRoutes([
     { path: '/', element: <Locker /> },
-    { path: '/locked-assets/:id', element: <LockedAsset />},
-    { path: '/locker/token-locker', element: <TokenLocker />},
-    { path: '/locker/lp-locker', element: <LpLocker />},
+    { path: '/locked-assets/:id', element: <LockedAsset /> },
+    { path: '/locker/token-locker', element: <TokenLocker /> },
+    { path: '/locker/lp-locker', element: <LpLocker /> },
     { path: '*', element: <Error /> },
   ])
   return routes

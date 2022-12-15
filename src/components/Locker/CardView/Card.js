@@ -15,8 +15,9 @@ export default function Card({ id, name1, name2, icon1, icon2, amount, amountUSD
             </div>
 
             <div
-              className={`flex flex-col justify-center font-bold font-gilroy text-dark-text dark:text-light-text ${token ? 'ml-[10px]' : 'ml-0'
-                }`}
+              className={`flex flex-col justify-center font-bold font-gilroy text-dark-text dark:text-light-text ${
+                token ? 'ml-[10px]' : 'ml-0'
+              }`}
             >
               <span>
                 {name1}

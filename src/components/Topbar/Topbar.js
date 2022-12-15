@@ -10,32 +10,29 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
           onClick={() => setSideBarMobile(!sideBarMobile)}
         >
           <div
-            className={`${sideBarMobile ? 'hidden' : 'block'
-              } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
+            className={`${
+              sideBarMobile ? 'hidden' : 'block'
+            } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
           />
           <div
-            className={`${sideBarMobile ? 'hidden' : 'block'
-              } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
+            className={`${
+              sideBarMobile ? 'hidden' : 'block'
+            } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
           />
           <div
             className={`${sideBarMobile ? 'hidden' : 'block'} h-0 w-5 border border-dark-text dark:border-light-text`}
           />
           <span className={`${sideBarMobile ? 'block' : 'hidden'} dark:text-light-text`}>&#x2715;</span>
         </div>
-        {subpage ?
-          <div className='flex items-center'>
-            <span className='font-medium text-dim-text text-xl capitalize'>
-              {page_name}
-            </span>
+        {subpage ? (
+          <div className="flex items-center">
+            <span className="font-medium text-dim-text text-xl capitalize">{page_name}</span>
 
-            <div className='w-3 h-3 mx-2 -rotate-45 border-b-2 border-r-2 border-dark-text dark:border-light-text rounded' />
+            <div className="w-3 h-3 mx-2 -rotate-45 border-b-2 border-r-2 border-dark-text dark:border-light-text rounded" />
 
-            <span className="font-gilroy font-medium text-dark-text text-xl">
-              {title}
-            </span>
-
+            <span className="font-gilroy font-medium text-dark-text text-xl">{title}</span>
           </div>
-          :
+        ) : (
           <div className="flex flex-col justify-center ml-4 md:ml-0">
             <div className="flex items-center">
               {title_img}
@@ -52,7 +49,8 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
                 Lock your assets for proof of lock.
               </span>
             </div>
-          </div>}
+          </div>
+        )}
       </div>
 
       <div className="flex user-div">

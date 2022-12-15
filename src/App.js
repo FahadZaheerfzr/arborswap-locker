@@ -1,7 +1,7 @@
 import { BrowserRouter as Router } from 'react-router-dom'
 import { SidebarProvider } from './context/SidebarContext/GlobalProvider'
 import WebRouter from './route'
-import "react-datetime/css/react-datetime.css";
+import 'react-datetime/css/react-datetime.css'
 
 function App() {
   return (

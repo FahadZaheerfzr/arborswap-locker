@@ -5,7 +5,11 @@ import SheildSecuritySVG from '../svgs/Sidebar/shield_security'
 
 export default function Locker() {
   return (
-    <BaseLayout title={'Locker'} page_name={"Locked Assets"} title_img={<SheildSecuritySVG className="md:hidden fill-dim-text" />}>
+    <BaseLayout
+      title={'Locker'}
+      page_name={'Locked Assets'}
+      title_img={<SheildSecuritySVG className="md:hidden fill-dim-text" />}
+    >
       <LockerBase />
     </BaseLayout>
   )

@@ -10,8 +10,8 @@ export const Cards = [
     unlock_date: '2022-12-28',
     locked_by: '0xc197......42hode',
     lp_supply: 79014470,
-    dex_listed: "Arborswap",
-    details: "WBNB / Swipe",
+    dex_listed: 'Arborswap',
+    details: 'WBNB / Swipe',
   },
   {
     id: 2,
@@ -24,8 +24,8 @@ export const Cards = [
     unlock_date: '2022-12-27',
     locked_by: '0xc197......42hode',
     lp_supply: 79014470,
-    details: "WBNB / Swipe",
-    dex_listed: "Arborswap"
+    details: 'WBNB / Swipe',
+    dex_listed: 'Arborswap',
   },
   {
     id: 3,
@@ -38,8 +38,8 @@ export const Cards = [
     unlock_date: '2022-12-27',
     locked_by: '0xc197......42hode',
     lp_supply: 79014470,
-    details: "WBNB / Swipe",
-    dex_listed: "Arborswap"
+    details: 'WBNB / Swipe',
+    dex_listed: 'Arborswap',
   },
   {
     id: 4,
@@ -52,8 +52,8 @@ export const Cards = [
     unlock_date: '2022-12-27',
     locked_by: '0xc197......42hode',
     lp_supply: 79014470,
-    details: "WBNB / Swipe",
-    dex_listed: "Arborswap"
+    details: 'WBNB / Swipe',
+    dex_listed: 'Arborswap',
   },
   {
     id: 5,
@@ -66,8 +66,8 @@ export const Cards = [
     unlock_date: '2022-12-27',
     locked_by: '0xc197......42hode',
     lp_supply: 79014470,
-    details: "WBNB / Swipe",
-    dex_listed: "Arborswap"
+    details: 'WBNB / Swipe',
+    dex_listed: 'Arborswap',
   },
   {
     id: 6,
@@ -80,8 +80,8 @@ export const Cards = [
     unlock_date: '2022-12-29',
     locked_by: '0xc197......42hode',
     lp_supply: 79014470,
-    details: "WBNB / Swipe",
-    dex_listed: "Arborswap"
+    details: 'WBNB / Swipe',
+    dex_listed: 'Arborswap',
   },
 ]
 
