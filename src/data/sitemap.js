@@ -24,21 +24,16 @@ export const sitemap = [
     subitems: [
       {
         id: 1,
-        name: 'Locked Assets',
-        link: '/launchpad',
+        name: 'Pools',
+        link: '/launchpad/pools',
       },
       {
         id: 2,
-        name: 'Token Locker',
-        link: '/launchpad/token-locker',
-      },
-      {
-        id: 3,
-        name: 'LP Locker',
-        link: '/launchpad/lp-locker',
+        name: 'Create Sale',
+        link: '/launchpad/create-sale',
       },
     ],
-    sublinks: ['', '/launchpad/token-locker', '/launchpad/lp-locker'],
+    sublinks: ['/launchpad/pools', '/launchpad/create-sale'],
   },
   {
     id: 3,

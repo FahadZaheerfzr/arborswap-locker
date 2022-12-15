@@ -41,7 +41,7 @@ export default function AmountModal({ amount, showPopup, setAmount }) {
   }
 
   return (
-    <div className="w-screen h-screen backdrop-blur-md flex flex-col justify-center items-center">
+    <div className="w-[calc(100vw-270px)] h-screen backdrop-blur-md flex flex-col justify-center items-center">
       <div className="max-w-[400px] w-full rounded-[10px] px-5 py-7 bg-white dark:bg-dark-1">
         <div className="flex justify-between items-center  ">
           <span className="text-dark-text dark:text-light-text font-gilroy font-semibold text-lg">Add to Locker</span>

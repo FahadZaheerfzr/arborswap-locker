@@ -88,7 +88,7 @@ export default function LockDetails({ setActive, setPage, locker, amount_val, am
   return (
     <div className={`w-full `}>
       {popup && (
-        <div className="fixed z-50 md:-ml-[270px]   top-0 left-0">
+        <div className="fixed z-50  top-0 left-0">
           <AmountModal amount={amount_val} showPopup={showPopup} setAmount={setAmount} />
         </div>
       )}

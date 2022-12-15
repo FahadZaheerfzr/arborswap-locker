@@ -18,7 +18,7 @@ export default function Button({ buttonText, dropDownItems, filter, setFilter })
           onClick={toggleDropDown}
         >
           <span className="text-gray dark:text-gray-dark ">{buttonText}</span>
-          <img className="ml-2" src="./images/arrows/arrow-down.svg" alt="arrow-down" />
+          <img className="ml-2" src="/images/arrows/arrow-down.svg" alt="arrow-down" />
         </button>
 
         {dropDownToggle && (
