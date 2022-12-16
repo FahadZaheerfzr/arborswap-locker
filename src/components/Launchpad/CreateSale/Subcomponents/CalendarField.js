@@ -11,7 +11,8 @@ export default function CalendarField({ heading, setFunction }) {
     }
 
     const handleChange = (e) => {
-        setFunction(e.toString())
+        console.log(e.toLocaleString())
+        setFunction(e.toLocaleString('en-GB', { timeZone: 'UTC' }))
     }
 
     return (
@@ -27,6 +28,8 @@ export default function CalendarField({ heading, setFunction }) {
                         }`}
                     isValidDate={valid}
                     onChange={handleChange}
+                    dateFormat="DD/MM/YYYY"
+                    timeFormat="HH:mm:ss"
                     utc={true}
                 />
             </div>

@@ -38,17 +38,17 @@ const currencies = [
 ]
 
 const dexes = [
-    { 
+    {
         name: "Arborswap",
         icon: '/images/cards/arb.svg',
-    }, 
-    { 
+    },
+    {
         name: "Pancakeswap",
         icon: '/images/cards/pancake.svg',
     }
 ]
 
-export default function Presale({ setActive, saleType, setSaleObject }) {
+export default function Presale({ setActive, saleType, setSaleObject, token }) {
     const [currencySelected, setCurrencySelected] = useState(2);
     const [tempfixed, setTempFixed] = useState(true)
     const [dex, setDex] = useState(1);
@@ -89,7 +89,6 @@ export default function Presale({ setActive, saleType, setSaleObject }) {
             unsoldToken: unsoldToken,
             lockup: lockup,
         }
-        console.log(presaleObject)
         setSaleObject(presaleObject)
         setActive("Project Details")
     }
@@ -114,8 +113,13 @@ export default function Presale({ setActive, saleType, setSaleObject }) {
 
             <PreviewHeader heading={"Presale Details"} />
 
-            <Input heading={'Presale Price'} currencies={currencies} currencySelected={currencySelected} changeState={setPresalePrice} />
-
+            {saleType === "standard" &&
+                <Input heading={'Presale Price'} currencies={currencies} currencySelected={currencySelected} changeState={setPresalePrice} />
+            }
+            {
+                saleType === "fairlaunch" &&
+                <Input heading={'Amount to be sold'} text={token.symbol} changeState={setPresalePrice} />
+            }
             <div className="flex items-center gap-5 mt-10">
                 <div className="w-full">
                     <Input heading={'Soft Cap'} currencies={currencies} currencySelected={currencySelected} changeState={setSoftCap} />
@@ -168,30 +172,34 @@ export default function Presale({ setActive, saleType, setSaleObject }) {
                 </div>
             }
 
-            <PreviewHeader heading={"Listing Details"} />
-            <div className='mt-10'>
-                <HeadingTags name={'Choose DEX to be listed on'} required />
-            </div>
-
-            <div className="flex items-center gap-5 mt-10 md:mr-[10%]">
-                <DexOptions selected={dex === 1} id={1} setDex={setDex} name={'Arborswap'} icon={'/images/cards/arb.svg'} />
-                <DexOptions selected={dex === 2} id={2} setDex={setDex} name={'Pancake'} icon={'/images/cards/pancake.svg'} />
-            </div>
-
-            <div className="flex items-center gap-5 mt-10">
-                <div className="w-full">
-                    <div className='hidden md:block'>
-                        <Input heading={'Amount for Liquidity'} changeState={setAmountLiquidity} />
+            {saleType !== "private" &&
+                <div>
+                    <PreviewHeader heading={"Listing Details"} />
+                    <div className='mt-10'>
+                        <HeadingTags name={'Choose DEX to be listed on'} required />
                     </div>
-                    <div className='md:hidden'>
-                        <Input heading={'Liquidity'} changeState={setAmountLiquidity} />
+
+                    <div className="flex items-center gap-5 mt-10 md:mr-[10%]">
+                        <DexOptions selected={dex === 1} id={1} setDex={setDex} name={'Arborswap'} icon={'/images/cards/arb.svg'} />
+                        <DexOptions selected={dex === 2} id={2} setDex={setDex} name={'Pancake'} icon={'/images/cards/pancake.svg'} />
+                    </div>
+
+                    <div className="flex items-center gap-5 mt-10">
+                        <div className="w-full">
+                            <div className='hidden md:block'>
+                                <Input heading={'Amount for Liquidity'} changeState={setAmountLiquidity} />
+                            </div>
+                            <div className='md:hidden'>
+                                <Input heading={'Liquidity'} changeState={setAmountLiquidity} />
+                            </div>
+                        </div>
+                        {saleType !== "fairlaunch" &&
+                            <div className="w-full">
+                                <Input heading={'Listing Price'} currencies={currencies} currencySelected={currencySelected} changeState={setListing} />
+                            </div>}
                     </div>
                 </div>
-                {saleType !== "fairlaunch" &&
-                    <div className="w-full">
-                        <Input heading={'Listing Price'} currencies={currencies} currencySelected={currencySelected} changeState={setListing} />
-                    </div>}
-            </div>
+            }
 
             <PreviewHeader heading={"Time Details"} />
 

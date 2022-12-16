@@ -5,7 +5,6 @@ import ProjectDetails from './ProjectDetails';
 import TokenInfo from './TokenInfo'
 import PreviewSale from './PreviewSale';
 
-
 const panel_items = [
   {
     id: 1,
@@ -24,6 +23,24 @@ const panel_items = [
     name: 'Preview',
   }
 ]
+
+const token = {
+  name: "Swipe Token",
+  symbol: "SXP",
+  tags: [
+    {
+      id: 1,
+      name: "Payment",
+    },
+    {
+      id: 2,
+      name: "Web3",
+    },
+  ],
+  icon: "/images/cards/rip.svg",
+  decimals: 18,
+  total_supply: 2000000000,
+}
 
 
 export default function Panel() {
@@ -80,7 +97,7 @@ export default function Panel() {
               }
               {
                 active === 'Presale' && (
-                  <Presale setActive={setActive} saleType={saleType} setSaleObject={setSaleObject} />
+                  <Presale setActive={setActive} saleType={saleType} setSaleObject={setSaleObject} token={token} />
                 )
               }
               {
@@ -90,7 +107,7 @@ export default function Panel() {
               }
               {
                 active === 'Preview' && (
-                  <PreviewSale setActive={setActive} saleObject={saleObject} saleType={saleType} />
+                  <PreviewSale setActive={setActive} saleObject={saleObject} saleType={saleType} token={token} />
                 )
               }
             </div>

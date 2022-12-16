@@ -3,25 +3,9 @@ import PreviewHeader from '../../Common/PreviewHeader'
 import BackArrowSVG from '../../../svgs/back_arrow';
 import PreviewDetails from '../../Common/PreviewDetails';
 
-const token = {
-  name: "Swipe Token",
-  symbol: "SXP",
-  tags: [
-    {
-      id: 1,
-      name: "Payment",
-    },
-    {
-      id: 2,
-      name: "Web3",
-    },
-  ],
-  icon: "/images/cards/rip.svg",
-  decimals: 18,
-  total_supply: 2000000000,
-}
 
-export default function PreviewSale({ setActive, saleObject, saleType }) {
+
+export default function PreviewSale({ token, setActive, saleObject, saleType }) {
 
   const handleSubmit = () => {
     console.log("Submitted");
@@ -48,41 +32,76 @@ export default function PreviewSale({ setActive, saleObject, saleType }) {
       </div>
 
       <PreviewHeader heading={"Token address Details"} />
-      
+
       <PreviewDetails name={"Name"} value={token.name} />
       <PreviewDetails name={"Symbol"} value={token.symbol} />
       <PreviewDetails name={"Decimals"} value={token.decimals} />
-      <PreviewDetails name={"Total Supply"} value={token.total_supply.toLocaleString() + " " +token.symbol} />
-      
+      <PreviewDetails name={"Total Supply"} value={token.total_supply.toLocaleString() + " " + token.symbol} />
+
       <PreviewHeader heading={"Presale Details"} />
-      
-      <PreviewDetails name={"Presale Rate"} value={saleObject.presalePrice + " " + token.symbol + " = 1 "  + saleObject.currency.symbol } />
+
+      {saleType === "fairlaunch" &&
+        <PreviewDetails name={"Amount to be sold"} value={"100,000,000 SXP"} />
+
+      }
+
+      {saleType === "standard" &&
+        <PreviewDetails name={"Presale Rate"} value={saleObject.presalePrice + " " + token.symbol + " = 1 " + saleObject.currency.symbol} />
+      }
       <PreviewDetails name={"Soft Cap"} value={saleObject.softCap.toLocaleString()} />
-      <PreviewDetails name={"Hard Cap"} value={saleObject.hardCap.toLocaleString()} />
-      <PreviewDetails name={"Minimum Allocation"} value={saleObject.minAllocation.toLocaleString() + " " + saleObject.currency.symbol} />
-      <PreviewDetails name={"Maximum Allocation"} value={saleObject.maxAllocation.toLocaleString() + " " + saleObject.currency.symbol} />
-      <PreviewDetails name={"Amount to be sold"} value={"100,000,000 SXP"} />
-      <PreviewDetails name={"Sale Type"} value={saleObject.whiteisting? "Whitelist Enabled": "Whitelist Disabled"} />
+      {saleType !== "fairlaunch" &&
+        <div>
+          <PreviewDetails name={"Hard Cap"} value={saleObject.hardCap.toLocaleString()} />
+          <PreviewDetails name={"Minimum Allocation"} value={saleObject.minAllocation.toLocaleString() + " " + saleObject.currency.symbol} />
+          <PreviewDetails name={"Maximum Allocation"} value={saleObject.maxAllocation.toLocaleString() + " " + saleObject.currency.symbol} />
+          <PreviewDetails name={"Amount to be sold"} value={"100,000,000 SXP"} />
+        </div>
+      }
+      {saleType === "fairlaunch" &&
+        <PreviewDetails name={"Sale Type"} value={"Fairlaunch"} />
+      }
+      {saleType === "standard" &&
+        <PreviewDetails name={"Sale Type"} value={saleObject.whiteisting ? "Whitelist Enabled" : "Whitelist Disabled"} />
+      }
+      {saleType === "private" &&
+        <PreviewDetails name={"Sale Type"} value={saleObject.whiteisting ? "Private Sale, Whitelist Enabled" : "Private Sale, Whitelist Disabled"} />
+      }
 
-      <PreviewHeader heading={"Listing Details"} />
-      
-      <PreviewDetails name={"To be listed on"} value={saleObject.dex.name} icon={saleObject.dex.icon} />
-      <PreviewDetails name={"Amount to be used for liquidity"} value={saleObject.amountLiquidity + "%"} />
-      
-      
-      <PreviewDetails name={"Listing rate"} value={saleObject.listing + " " + token.symbol + " = 1 "  + saleObject.currency.symbol } />
+      {saleType !== "private" &&
+        <div>
+          <PreviewHeader heading={"Listing Details"} />
 
+          <PreviewDetails name={"To be listed on"} value={saleObject.dex.name} icon={saleObject.dex.icon} />
+          <PreviewDetails name={"Amount to be used for liquidity"} value={saleObject.amountLiquidity + "%"} />
+        </div>
+      }
+      {saleType === "standard" &&
+        <PreviewDetails name={"Listing rate"} value={saleObject.listing + " " + token.symbol + " = 1 " + saleObject.currency.symbol} />
+      }
 
       <PreviewHeader heading={"Time Details"} />
 
       <PreviewDetails name={"Presale Start Date"} value={saleObject.startDate} />
       <PreviewDetails name={"Presale End Date"} value={saleObject.endDate} />
 
+      {saleType !== "private" &&
+      <div>
       <PreviewHeader heading={"More Details"} />
 
       <PreviewDetails name={"Unsold Tokens"} value={saleObject.unsoldToken} />
       <PreviewDetails name={"Liquidity Lockup"} value={saleObject.lockup + " Days"} />
+      </div>
+      }
 
+      {saleType === "private" &&
+        <div>
+            <PreviewHeader heading={"Token Vesting Details"} />
+
+            <PreviewDetails name={"First Release On Sale"} value={saleObject.firstRelease+"%"} />
+            <PreviewDetails name={"Vesting Period each Cycle"} value={saleObject.vestingPeriod + " Days"} />
+            <PreviewDetails name={"Vesting Release each Cycles"} value={saleObject.vestingRelease + "%"} />
+        </div>
+      }
       <div className="mt-10">
         <div className="flex justify-end items-center mb-10">
 

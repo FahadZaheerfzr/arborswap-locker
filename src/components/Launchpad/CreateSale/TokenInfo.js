@@ -26,7 +26,7 @@ export default function TokenInfo({ setActive, setSaleType }) {
             />
 
             <PreviewHeader heading={'Token address Details'} />
-            {address.length > 5 && (
+            {address.length > 4 && (
             <div className='mt-5'>
                 {Token_details.map((item) => (
                     <PreviewDetails key={item.id} name={item.name} value={item.value} icon={item.icon} />
