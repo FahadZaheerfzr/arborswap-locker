@@ -160,6 +160,7 @@ export default function LockDetails({ setActive, setPage, locker, amount_val, am
             }`}
             isValidDate={valid}
             onChange={handleChange}
+            utc={true}
           />
         </div>
 

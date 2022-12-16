@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import LockOptions from '../../TokenLocker/Subcomponents/LockOptions';
+import Presale from './Presale';
 import TokenInfo from './TokenInfo'
 
 
@@ -72,6 +73,11 @@ export default function Panel() {
               {
                 active === 'Token Info' && (
                   <TokenInfo setActive={setActive} setSaleType={setSaleType} />
+                )
+              }
+              {
+                active === 'Presale' && (
+                  <Presale  setActive={setActive} />
                 )
               }
             </div>
