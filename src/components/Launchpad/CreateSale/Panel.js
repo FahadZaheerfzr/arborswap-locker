@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import LockOptions from '../../TokenLocker/Subcomponents/LockOptions';
 import Presale from './Presale';
+import ProjectDetails from './ProjectDetails';
 import TokenInfo from './TokenInfo'
 
 
@@ -28,6 +29,7 @@ export default function Panel() {
   const [active, setActive] = useState('Token Info');
   const [selectedSale, setSelectedSale] = useState('standard')
   const [saleType, setSaleType] = useState(null);
+  const [saleObject, setSaleObject] = useState(null);
 
   return (
     <div className="w-full flex justify-center">
@@ -77,7 +79,12 @@ export default function Panel() {
               }
               {
                 active === 'Presale' && (
-                  <Presale  setActive={setActive} saleType={saleType} />
+                  <Presale  setActive={setActive} saleType={saleType} setSaleObject={setSaleObject} />
+                )
+              }
+              {
+                active === 'Project Details' && (
+                  <ProjectDetails setActive={setActive} />
                 )
               }
             </div>

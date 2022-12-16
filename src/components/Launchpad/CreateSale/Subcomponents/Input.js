@@ -1,7 +1,7 @@
 import React from 'react'
 import HeadingTags from '../../../TokenLocker/Subcomponents/HeadingTags'
 
-export default function Input({heading, icon, value, disabled, currencies, currencySelected, nothing, text}) {
+export default function Input({heading, icon, value, disabled, currencies, currencySelected, nothing, text, changeState}) {
     return (
         <div className='w-full'>
             <div className="flex items-center">
@@ -15,6 +15,7 @@ export default function Input({heading, icon, value, disabled, currencies, curre
                     type={'text'}
                     value={value}
                     disabled={disabled}
+                    onChange={(e)=>changeState(e.target.value)}
                     placeholder="70"
                 />
                 {currencySelected ?

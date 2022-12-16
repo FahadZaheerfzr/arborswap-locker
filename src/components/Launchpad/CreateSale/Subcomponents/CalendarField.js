@@ -4,10 +4,14 @@ import Datetime from 'react-datetime'
 import { ThemeContext } from '../../../../context/ThemeContext/ThemeProvider'
 import HeadingTags from '../../../TokenLocker/Subcomponents/HeadingTags'
 
-export default function CalendarField({ heading }) {
+export default function CalendarField({ heading, setFunction }) {
     const { theme } = React.useContext(ThemeContext)
     const valid = (current) => {
         return current.isAfter(new Date())
+    }
+
+    const handleChange = (e) => {
+        setFunction(e.toString())
     }
 
     return (
@@ -22,6 +26,7 @@ export default function CalendarField({ heading }) {
                     className={`ml-5 font-gilroy font-semibold text-dark-text dark:text-light-text ${theme === 'dark' ? 'dark-calendar' : ''
                         }`}
                     isValidDate={valid}
+                    onChange={handleChange}
                     utc={true}
                 />
             </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import BackArrowSVG from '../../../svgs/back_arrow';
 import PreviewHeader from '../../Common/PreviewHeader';
 import HeadingTags from '../../TokenLocker/Subcomponents/HeadingTags'
@@ -37,12 +37,58 @@ const currencies = [
     },
 ]
 
-export default function Presale({ setActive, saleType }) {
-    const [currencySelected, setCurrencySelected] = React.useState(2);
-    const [tempfixed, setTempFixed] = React.useState(true)
-    const [dex, setDex] = React.useState(1);
+const dexes = ["Arborswap", "Pancakeswap"]
+
+export default function Presale({ setActive, saleType, setSaleObject }) {
+    const [currencySelected, setCurrencySelected] = useState(2);
+    const [tempfixed, setTempFixed] = useState(true)
+    const [dex, setDex] = useState(1);
+    const [presalePrice, setPresalePrice] = useState();
+    const [softCap, setSoftCap] = useState();
+    const [hardCap, setHardCap] = useState();
+    const [minAllocation, setMinAllocation] = useState();
+    const [maxAllocation, setMaxAllocation] = useState();
+    const [whiteisting, setWhiteisting] = useState(false);
+    const [listing, setListing] = useState();
+    const [amountLiquidity, setAmountLiquidity] = useState();
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
+    const [firstRelease, setFirstRelease] = useState();
+    const [vestingPeriod, setVestingPeriod] = useState();
+    const [vestingRelease, setVestingRelease] = useState();
+    const [unsoldToken, setUnsoldTokens] = useState("Burn");
+    const [lockup, setLockup] = useState();
+
+
+    const handleSubmit = () => {
+        const presaleObject = {
+            currency: currencies[currencySelected - 1],
+            dex: dexes[dex-1],
+            presalePrice: presalePrice,
+            softCap: softCap,
+            hardCap: hardCap,
+            minAllocation: minAllocation,
+            maxAllocation: maxAllocation,
+            whiteisting: whiteisting,
+            listing: listing,
+            vestingPeriod: vestingPeriod,
+            vestingRelease: vestingRelease,
+            firstRelease: firstRelease,
+            amountLiquidity: amountLiquidity,
+            startDate: startDate,
+            endDate: endDate,
+            unsoldToken: unsoldToken,
+            lockup: lockup,
+        }
+        console.log(presaleObject)
+        setSaleObject(presaleObject)
+        setActive("Project Details")
+    }
+
+
 
     const handleTempFixed = () => {
+        setWhiteisting(!whiteisting);
         setTempFixed(!tempfixed)
     }
 
@@ -59,27 +105,28 @@ export default function Presale({ setActive, saleType }) {
 
             <PreviewHeader heading={"Presale Details"} />
 
-            <Input heading={'Presale Price'} currencies={currencies} currencySelected={currencySelected} />
+            <Input heading={'Presale Price'} currencies={currencies} currencySelected={currencySelected} changeState={setPresalePrice} />
 
             <div className="flex items-center gap-5 mt-10">
-                <div className="w-1/2">
-                    <Input heading={'Soft Cap'} currencies={currencies} currencySelected={currencySelected} />
+                <div className="w-full">
+                    <Input heading={'Soft Cap'} currencies={currencies} currencySelected={currencySelected} changeState={setSoftCap} />
                 </div>
-
-                <div className="w-1/2">
-                    <Input heading={'Hard Cap'} currencies={currencies} currencySelected={currencySelected} />
-                </div>
+                {saleType !== "fairlaunch" &&
+                <div className="w-full">
+                    <Input heading={'Hard Cap'} currencies={currencies} currencySelected={currencySelected} changeState={setHardCap} />
+                </div>}
             </div>
-
+            
+            {saleType !== "fairlaunch" &&
             <div className="flex items-center gap-5 mt-10">
-                <div className="w-1/2">
-                    <Input heading={'Min Allocation'} currencies={currencies} currencySelected={currencySelected} />
+                <div className="w-full">
+                    <Input heading={'Min Allocation'} currencies={currencies} currencySelected={currencySelected} changeState={setMinAllocation} />
                 </div>
 
-                <div className="w-1/2">
-                    <Input heading={'Max Allocation'} currencies={currencies} currencySelected={currencySelected} />
+                <div className="w-full">
+                    <Input heading={'Max Allocation'} currencies={currencies} currencySelected={currencySelected} changeState={setMaxAllocation} />
                 </div>
-            </div>
+            </div>}
 
             {saleType !== "fairlaunch" &&
                 <div>
@@ -123,41 +170,41 @@ export default function Presale({ setActive, saleType }) {
             </div>
 
             <div className="flex items-center gap-5 mt-10">
-                <div className="w-1/2">
+                <div className="w-full">
                     <div className='hidden md:block'>
-                        <Input heading={'Amount for Liquidity'} />
+                        <Input heading={'Amount for Liquidity'} changeState={setAmountLiquidity} />
                     </div>
                     <div className='md:hidden'>
-                        <Input heading={'Liquidity'} />
+                        <Input heading={'Liquidity'} changeState={setAmountLiquidity} />
                     </div>
                 </div>
-
-                <div className="w-1/2">
-                    <Input heading={'Listing Price'} currencies={currencies} currencySelected={currencySelected} />
-                </div>
+                {saleType !== "fairlaunch" &&
+                <div className="w-full">
+                    <Input heading={'Listing Price'} currencies={currencies} currencySelected={currencySelected} changeState={setListing} />
+                </div>}
             </div>
 
             <PreviewHeader heading={"Time Details"} />
 
             <div className="flex flex-col md:flex-row items-center gap-5 mt-10">
                 <div className="w-full md:w-1/2">
-                    <CalendarField heading={"Starts On (UTC)"} />
+                    <CalendarField heading={"Starts On (UTC)"} setFunction={setStartDate} />
                 </div>
                 <div className="w-full md:w-1/2">
-                    <CalendarField heading={"Ends On (UTC)"} />
+                    <CalendarField heading={"Ends On (UTC)"} setFunction={setEndDate} />
                 </div>
             </div>
             {saleType !== "private" &&
                 <div>
                     <PreviewHeader heading={"More Details"} />
-                    <PresaleStandard />
+                    <PresaleStandard setUnsoldTokens={setUnsoldTokens} setLockup={setLockup} />
                 </div>
             }
 
             {saleType === "private" &&
                 <div>
                     <PreviewHeader heading={"Token Vesting Details"} />
-                    <PresalePrivate />
+                    <PresalePrivate setFirstRelease={setFirstRelease} setVestingPeriod={setVestingPeriod} setVestingRelease={setVestingRelease} />
                 </div>
             }
             {saleType === "standard" &&
@@ -183,7 +230,7 @@ export default function Presale({ setActive, saleType }) {
                     <button
                         className="bg-primary-green disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
                         // disabled={address.length < 5}
-                        onClick={() => setActive('Project Details')}>
+                        onClick={handleSubmit}>
                         Next
                     </button>
                 </div>
