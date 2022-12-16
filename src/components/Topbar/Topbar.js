@@ -45,7 +45,7 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
               <span className="font-gilroy font-medium text-primary-green text-2xl">{page_name}</span>
             </div>
             <div className="flex items-center">
-              <span className="font-gilroy font-medium text-dark dark:text-light">
+              <span className="font-gilroy font-medium text-dark dark:text-light text-xs md:text-base">
                 {page_description || "Lock your assets for proof of lock."}
               </span>
             </div>

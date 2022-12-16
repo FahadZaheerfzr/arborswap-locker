@@ -8,7 +8,7 @@ const useActiveItem = (pathname) => {
 
   useEffect(() => {
     sitemap.map((nav_item) => {
-      if (nav_item.link === location.pathname) setActiveItem(nav_item.name)
+      if (location.pathname.includes(nav_item.link)) setActiveItem(nav_item.name)
       else if (nav_item.sublinks.includes(location.pathname)) setActiveItem(nav_item.name)
       return [activeItem, setActiveItem]
     })

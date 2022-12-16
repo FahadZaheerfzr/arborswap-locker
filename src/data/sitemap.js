@@ -9,7 +9,6 @@ export const sitemap = [
     id: 1,
     name: 'Dashboard',
     extendable: false,
-    link: '/',
     icon: <DashboardSVG className="fill-dim-text dark:fill-dim-text-dark" />,
     activeIcon: <DashboardSVG className="fill-primary-green" />,
     subitems: [],
