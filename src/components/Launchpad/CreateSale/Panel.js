@@ -60,7 +60,7 @@ export default function Panel() {
                 <div key={item.id} className={`panel-item md:mt-9 flex items-center`}>
                   {item.name === active && <div className={`w-2 h-2 rounded-full bg-primary-green absolute`} />}
                   <span
-                    className={`text-sm font-gilroy font-semibold ml-[18px] ${active === item.name ? 'text-dark-text dark:text-light-text' : 'text-dim-text dark:text-dim-text-dark'
+                    className={`text-xs md:text-sm font-gilroy font-semibold ml-[18px] ${active === item.name ? 'text-dark-text dark:text-light-text' : 'text-dim-text dark:text-dim-text-dark'
                       }`}
                   >
                     {item.name}
@@ -72,12 +72,12 @@ export default function Panel() {
             <div className="panel-content bg-white dark:bg-dark-1 rounded-r-[10px] pt-7 md:pt-9 px-4 md:p-9 md:w-2/3">
               {
                 active === 'Token Info' && (
-                  <TokenInfo setActive={setActive} setSaleType={setSaleType} />
+                  <TokenInfo setActive={setActive} saleType={saleType} setSaleType={setSaleType} />
                 )
               }
               {
                 active === 'Presale' && (
-                  <Presale  setActive={setActive} />
+                  <Presale  setActive={setActive} saleType={saleType} />
                 )
               }
             </div>

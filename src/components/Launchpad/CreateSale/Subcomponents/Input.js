@@ -1,7 +1,7 @@
 import React from 'react'
 import HeadingTags from '../../../TokenLocker/Subcomponents/HeadingTags'
 
-export default function Input({heading, icon, value, disabled, currencies, currencySelected, nothing}) {
+export default function Input({heading, icon, value, disabled, currencies, currencySelected, nothing, text}) {
     return (
         <div className='w-full'>
             <div className="flex items-center">
@@ -21,7 +21,8 @@ export default function Input({heading, icon, value, disabled, currencies, curre
                 <img className='w-5 h-5' src={currencies[currencySelected - 1].icon} alt='currency-icon' />
                 : 
                 icon? <img className='w-5 h-5' src={icon} alt='currency-icon' />
-                : !nothing ? <span>%</span>  : null
+                : !nothing ? 
+                text ? <span className='font-semibold'>{text}</span> :<span>%</span>  : null
                 }
             </div>
         </div>
