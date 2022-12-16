@@ -32,7 +32,7 @@ export default function UploadImageFlex({ image, setImage }) {
           onClick={triggerFile}
         >
           <UploadSVG className="fill-dark-text dark:fill-light-text" />
-          <span className="font-gilroy font-semibold text-sm text-gray dark:text-gray">Upload File</span>
+          <span className="font-gilroy font-semibold text-sm text-gray dark:text-gray-dark">Upload File</span>
           <input
             type={'file'}
             className="hidden"

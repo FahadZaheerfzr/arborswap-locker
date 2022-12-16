@@ -11,8 +11,7 @@ export default function CalendarField({ heading, setFunction }) {
     }
 
     const handleChange = (e) => {
-        console.log(e.toLocaleString())
-        setFunction(e.toLocaleString('en-GB', { timeZone: 'UTC' }))
+        setFunction(e.toString())
     }
 
     return (
