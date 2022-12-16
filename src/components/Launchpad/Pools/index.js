@@ -10,7 +10,7 @@ export default function PoolsBase({ activeStatus }) {
                 pool.status === activeStatus &&
                 <Link to={`/launchpad/pools/${pool.id}`} key={pool.id}>
                     <div className='flex flex-col'>
-                        <div className='bg-white dark:bg-dark-1 rounded-md p-6'>
+                        <div className='bg-white dark:bg-dark-1 rounded-t-md p-6'>
                             <div className='flex items-center'>
                                 <img src={pool.icon} alt={pool.name} className='w-[54px] h-[54px]' />
 
