@@ -3,6 +3,7 @@ import LockOptions from '../../TokenLocker/Subcomponents/LockOptions';
 import Presale from './Presale';
 import ProjectDetails from './ProjectDetails';
 import TokenInfo from './TokenInfo'
+import PreviewSale from './PreviewSale';
 
 
 const panel_items = [
@@ -79,12 +80,17 @@ export default function Panel() {
               }
               {
                 active === 'Presale' && (
-                  <Presale  setActive={setActive} saleType={saleType} setSaleObject={setSaleObject} />
+                  <Presale setActive={setActive} saleType={saleType} setSaleObject={setSaleObject} />
                 )
               }
               {
                 active === 'Project Details' && (
                   <ProjectDetails setActive={setActive} />
+                )
+              }
+              {
+                active === 'Preview' && (
+                  <PreviewSale setActive={setActive} saleObject={saleObject} saleType={saleType} />
                 )
               }
             </div>

@@ -16,7 +16,7 @@ export default function UploadImageFlex({ image, setImage }) {
   }
   return (
     <div className="flex items-center gap-5 mt-5">
-      <div className='w-full md:w-60  '>
+      <div className='w-full md:w-60'>
         <ImagePlaceholder image={image} />
       </div>
       <div className="w-full flex flex-col items-center text-center">

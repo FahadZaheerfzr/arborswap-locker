@@ -37,7 +37,16 @@ const currencies = [
     },
 ]
 
-const dexes = ["Arborswap", "Pancakeswap"]
+const dexes = [
+    { 
+        name: "Arborswap",
+        icon: '/images/cards/arb.svg',
+    }, 
+    { 
+        name: "Pancakeswap",
+        icon: '/images/cards/pancake.svg',
+    }
+]
 
 export default function Presale({ setActive, saleType, setSaleObject }) {
     const [currencySelected, setCurrencySelected] = useState(2);
@@ -63,7 +72,7 @@ export default function Presale({ setActive, saleType, setSaleObject }) {
     const handleSubmit = () => {
         const presaleObject = {
             currency: currencies[currencySelected - 1],
-            dex: dexes[dex-1],
+            dex: dexes[dex - 1],
             presalePrice: presalePrice,
             softCap: softCap,
             hardCap: hardCap,
@@ -112,21 +121,21 @@ export default function Presale({ setActive, saleType, setSaleObject }) {
                     <Input heading={'Soft Cap'} currencies={currencies} currencySelected={currencySelected} changeState={setSoftCap} />
                 </div>
                 {saleType !== "fairlaunch" &&
-                <div className="w-full">
-                    <Input heading={'Hard Cap'} currencies={currencies} currencySelected={currencySelected} changeState={setHardCap} />
-                </div>}
+                    <div className="w-full">
+                        <Input heading={'Hard Cap'} currencies={currencies} currencySelected={currencySelected} changeState={setHardCap} />
+                    </div>}
             </div>
-            
-            {saleType !== "fairlaunch" &&
-            <div className="flex items-center gap-5 mt-10">
-                <div className="w-full">
-                    <Input heading={'Min Allocation'} currencies={currencies} currencySelected={currencySelected} changeState={setMinAllocation} />
-                </div>
 
-                <div className="w-full">
-                    <Input heading={'Max Allocation'} currencies={currencies} currencySelected={currencySelected} changeState={setMaxAllocation} />
-                </div>
-            </div>}
+            {saleType !== "fairlaunch" &&
+                <div className="flex items-center gap-5 mt-10">
+                    <div className="w-full">
+                        <Input heading={'Min Allocation'} currencies={currencies} currencySelected={currencySelected} changeState={setMinAllocation} />
+                    </div>
+
+                    <div className="w-full">
+                        <Input heading={'Max Allocation'} currencies={currencies} currencySelected={currencySelected} changeState={setMaxAllocation} />
+                    </div>
+                </div>}
 
             {saleType !== "fairlaunch" &&
                 <div>
@@ -179,9 +188,9 @@ export default function Presale({ setActive, saleType, setSaleObject }) {
                     </div>
                 </div>
                 {saleType !== "fairlaunch" &&
-                <div className="w-full">
-                    <Input heading={'Listing Price'} currencies={currencies} currencySelected={currencySelected} changeState={setListing} />
-                </div>}
+                    <div className="w-full">
+                        <Input heading={'Listing Price'} currencies={currencies} currencySelected={currencySelected} changeState={setListing} />
+                    </div>}
             </div>
 
             <PreviewHeader heading={"Time Details"} />
