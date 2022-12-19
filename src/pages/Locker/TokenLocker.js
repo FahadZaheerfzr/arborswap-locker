@@ -5,7 +5,6 @@ import Lock from '../../components/TokenLocker/Lock'
 import { useDocumentTitle } from '../../hooks/setDocumentTitle'
 import SheildSecuritySVG from '../../svgs/Sidebar/shield_security'
 
-
 export default function TokenLocker() {
   useDocumentTitle('Token Locker')
   const [page, setPage] = useState(1)

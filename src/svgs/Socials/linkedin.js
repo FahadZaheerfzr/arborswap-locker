@@ -1,13 +1,7 @@
-import * as React from "react"
+import * as React from 'react'
 
 const LinkedinSVG = (props) => (
-  <svg
-    width={20}
-    height={20}
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    {...props}
-  >
+  <svg width={20} height={20} fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
     <rect width={20} height={20} rx={6} fill={props.outer} />
     <g clipPath="url(#a)">
       <path
@@ -17,11 +11,7 @@ const LinkedinSVG = (props) => (
     </g>
     <defs>
       <clipPath id="a">
-        <path
-          fill="#fff"
-          transform="translate(4.166 4.167)"
-          d="M0 0h11.667v11.667H0z"
-        />
+        <path fill="#fff" transform="translate(4.166 4.167)" d="M0 0h11.667v11.667H0z" />
       </clipPath>
     </defs>
   </svg>

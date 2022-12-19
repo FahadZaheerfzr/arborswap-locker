@@ -19,8 +19,6 @@ export default function WebRouter() {
     { path: '/launchpad/pools/:id', element: <PoolPage /> },
     { path: '/launchpad/create-sale', element: <CreateSale /> },
     { path: '*', element: <Error /> },
-
-
   ])
   return routes
 }

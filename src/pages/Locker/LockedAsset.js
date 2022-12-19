@@ -4,7 +4,6 @@ import BaseLayout from '../../components/BaseLayout/BaseLayout'
 import LockedAssetBase from '../../components/LockedAsset'
 import { Cards } from '../../data/cards'
 
-
 export default function LockedAsset() {
   const { id } = useParams()
   const [asset, setAsset] = useState(null)

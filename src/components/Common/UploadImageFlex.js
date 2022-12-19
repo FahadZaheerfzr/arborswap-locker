@@ -16,7 +16,7 @@ export default function UploadImageFlex({ image, setImage }) {
   }
   return (
     <div className="flex items-center gap-5 mt-5">
-      <div className='w-full md:w-60'>
+      <div className="w-full md:w-60">
         <ImagePlaceholder image={image} />
       </div>
       <div className="w-full flex flex-col items-center text-center">
@@ -27,10 +27,7 @@ export default function UploadImageFlex({ image, setImage }) {
           <span className="text-dark-text dark:text-light-text">MAX 5MB</span>
         </span>
 
-        <button
-          className="bg-light dark:bg-dark mt-2 flex gap-2 py-[10px] px-5"
-          onClick={triggerFile}
-        >
+        <button className="bg-light dark:bg-dark mt-2 flex gap-2 py-[10px] px-5" onClick={triggerFile}>
           <UploadSVG className="fill-dark-text dark:fill-light-text" />
           <span className="font-gilroy font-semibold text-sm text-gray dark:text-gray-dark">Upload File</span>
           <input
