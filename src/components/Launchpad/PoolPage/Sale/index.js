@@ -4,7 +4,7 @@ import Timer from '../../../LockedAsset/Amount/Timer/Timer';
 export default function SaleBox({ hard_cap, hard_cap_icon, min_allocation, max_allocation, filled_percent, ends_on }) {
 
     return (
-        <div className="p-9 bg-white rounded-[20px]">
+        <div className="p-9 bg-white dark:bg-dark-1 rounded-[20px]">
             <div className="w-full flex justify-between">
                 <span className="text-gray dark:text-gray-dark text-sm font-medium">Soft/Hard Cap</span>
 
@@ -59,7 +59,7 @@ export default function SaleBox({ hard_cap, hard_cap_icon, min_allocation, max_a
             </div>
 
             <div className="flex mt-10">
-                <button className="w-full bg-primary-green rounded-md text-white dark:text-dim-text-dark font-bold py-4">
+                <button className="w-full bg-primary-green rounded-md text-white font-bold py-4">
                     Join Sale
                 </button>
             </div>

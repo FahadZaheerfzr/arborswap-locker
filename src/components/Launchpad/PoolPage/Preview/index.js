@@ -28,7 +28,7 @@ export default function Preview({
         <span className="font-medium text-sm text-gray dark:text-gray-dark">{description}</span>
       </div>
 
-      <div className="mt-10 w-full flex rounded-[9px] px-[6px] py-[6px] bg-[#F5F1EB] font-medium text-sm text-dim-text dark:text-dim-text-dark">
+      <div className="mt-10 w-full flex rounded-[9px] px-[6px] py-[6px] bg-[#F5F1EB] dark:bg-dark-3 font-medium text-sm text-dim-text dark:text-dim-text-dark">
         <div
           className={`w-full cursor-pointer flex justify-center items-center py-2 ${
             slide === 'Presale' ? 'bg-white text-dark-text dark:text-light-text font-semibold dark:bg-dark-1' : ''
