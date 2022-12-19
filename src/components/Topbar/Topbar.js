@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ConnectionContext } from '../../context/ConnectionContext/GlobalProvider';
 import NotificationSVG from '../../svgs/notification'
 import WalletSVG from '../../svgs/Topbar/empty_wallet';
 
-export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_img, subpage, page_name, page_description }) {
+export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_img, subpage, page_name, page_description, showModal }) {
+  const { connected } = useContext(ConnectionContext);
   return (
     <div className="h-[110px] flex items-center justify-between pl-[4%] pr-[5%] ">
       <div className="flex items-center">
@@ -11,14 +13,12 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
           onClick={() => setSideBarMobile(!sideBarMobile)}
         >
           <div
-            className={`${
-              sideBarMobile ? 'hidden' : 'block'
-            } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
+            className={`${sideBarMobile ? 'hidden' : 'block'
+              } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
           />
           <div
-            className={`${
-              sideBarMobile ? 'hidden' : 'block'
-            } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
+            className={`${sideBarMobile ? 'hidden' : 'block'
+              } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
           />
           <div
             className={`${sideBarMobile ? 'hidden' : 'block'} h-0 w-5 border border-dark-text dark:border-light-text`}
@@ -55,13 +55,16 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
       </div>
 
       <div className="flex user-div">
+        {connected && 
         <div className="hidden w-10 h-10 lg:w-12 lg:h-12 bg-[#F5F6F7] dark:bg-dark-1 rounded-md md:flex items-center justify-center">
           <NotificationSVG className="hidden md:block fill-slate-700 dark:fill-white" />
-        </div>
-
+        </div>}
+        {connected && 
         <div className="flex md:hidden w-10 h-10 justify-center border-2 rounded-md border-primary-green border-opacity-50 items-center ml-4">
           <WalletSVG className="fill-dark-text" />
         </div>
+        }
+        {connected ? (
 
         <div className="hidden md:flex border-2 rounded-md border-primary-green border-opacity-50 items-center justify-between bg-white dark:bg-dark-1 ml-8">
           <img className="ml-5" src="/images/topbar/wallets/metamask.svg" alt="metamask" />
@@ -73,7 +76,17 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
             <div className="w-1 h-1 rounded-full bg-primary-green mr-[2px]" />
             <div className="w-1 h-1 rounded-full bg-primary-green" />
           </div>
-        </div>
+        </div>)
+        : 
+        <button className='py-3 px-5 bg-primary-green rounded-md flex items-center focus:outline-none'
+          onClick={() => showModal(true)}
+        >    
+            <WalletSVG className="fill-white mr-[10px]" />
+            <span className='font-gilroy font-semibold text-[#FAF8F5]'>
+            Connect <span className='hidden md:inline-block'>Wallet</span>
+            </span>
+        </button>
+        }
       </div>
     </div>
   )

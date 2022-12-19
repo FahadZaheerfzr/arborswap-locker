@@ -14,7 +14,7 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, subpa
   const [sideBarMobile, setSideBarMobile] = useState(false)
   const [tempfixed, setTempFixed] = useState(true)
   const [activeItem] = useActiveItem()
-  const [modal, showModal] = useState(true)
+  const [modal, showModal] = useState(false)
 
   const handleTempFixed = () => {
     setTheme(!tempfixed ? 'light' : 'dark')
@@ -100,6 +100,7 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, subpa
                 title_img={title_img}
                 subpage={subpage}
                 page_name={page_name}
+                showModal={showModal}
               />
             </div>
           )}
