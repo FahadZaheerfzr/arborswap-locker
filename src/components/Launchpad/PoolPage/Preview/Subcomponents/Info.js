@@ -33,8 +33,8 @@ export default function Info({ icon, name, is_private, tags }) {
       </div>
 
       <div className="flex items-center gap-5">
-        <TwitterSVG className="fill-dark-text dark:fill-light-text" />
-        <DribbleSVG className="fill-dark-text dark:fill-light-text" />
+        <TwitterSVG className="fill-dark-text dark:fill-light-text hidden md:block" />
+        <DribbleSVG className="fill-dark-text dark:fill-light-text hidden md:block" />
         <Options width={'w-7'} height={'h-7'} color={'[#FAF8F5]'} dark_color={'dark-2'} />
       </div>
     </div>
