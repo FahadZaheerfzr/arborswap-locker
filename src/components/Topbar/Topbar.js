@@ -56,7 +56,7 @@ export default function Topbar({
 
               <img className="mx-2" src="/images/topbar/separator.svg" alt="separator" />
 
-              <span className="font-gilroy font-medium text-primary-green text-2xl">{page_name}</span>
+              <span className="font-gilroy font-medium text-primary-green md:text-2xl">{page_name}</span>
             </div>
             <div className="flex items-center">
               <span className="font-gilroy font-medium text-dark dark:text-light text-xs md:text-base">
@@ -83,7 +83,6 @@ export default function Topbar({
             <img className="ml-5" src="/images/topbar/wallets/metamask.svg" alt="metamask" />
 
             <span className=" font-gilroy font-medium ml-2 dark:text-light">{formatAddress(account)}</span>
-
             <div className="flex ml-3 mr-6">
               <div className="w-1 h-1 rounded-full bg-primary-green mr-[2px]" />
               <div className="w-1 h-1 rounded-full bg-primary-green mr-[2px]" />
@@ -98,6 +97,7 @@ export default function Topbar({
             <WalletSVG className="fill-white mr-[10px]" />
             <span className="font-gilroy font-semibold text-[#FAF8F5]">
               Connect <span className="hidden md:inline-block">Wallet</span>
+
             </span>
           </button>
         )}

@@ -46,16 +46,18 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, subpa
       }
       <div className={`flex w-full ${noTopbar ? '' : ''}`}>
         {noSidebar ? null : (
-          <div
-            className={`${sideBarMobile ? 'block' : 'hidden'
-              } md:hidden w-[240px] h-screen bg-white absolute dark:bg-dark-1 z-20`}
-          >
-            <Sidebar
-              fullSidebar={true}
-              tempfixed={tempfixed}
-              handleTempFixed={handleTempFixed}
-              activeLink={activeItem}
-            />
+          <div className='fixed top-0 z-20'>
+            <div
+              className={`${sideBarMobile ? 'block' : 'hidden'
+                } md:hidden w-[240px] h-screen bg-white absolute dark:bg-dark-1 `}
+            >
+              <Sidebar
+                fullSidebar={true}
+                tempfixed={tempfixed}
+                handleTempFixed={handleTempFixed}
+                activeLink={activeItem}
+              />
+            </div>
           </div>
         )}
         {noSidebar ? null : (
