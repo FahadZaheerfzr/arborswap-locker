@@ -1,5 +1,6 @@
 import React from 'react'
 import NotificationSVG from '../../svgs/notification'
+import WalletSVG from '../../svgs/Topbar/empty_wallet';
 
 export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_img, subpage, page_name, page_description }) {
   return (
@@ -59,11 +60,11 @@ export default function Topbar({ setSideBarMobile, sideBarMobile, title, title_i
         </div>
 
         <div className="flex md:hidden w-10 h-10 justify-center border-2 rounded-md border-primary-green border-opacity-50 items-center ml-4">
-          <img src="/images/topbar/mobile/empty-wallet.svg" alt="empty-wallet" />
+          <WalletSVG className="fill-dark-text" />
         </div>
 
         <div className="hidden md:flex border-2 rounded-md border-primary-green border-opacity-50 items-center justify-between bg-white dark:bg-dark-1 ml-8">
-          <img className="ml-5" src="/images/topbar/metamask.svg" alt="metamask" />
+          <img className="ml-5" src="/images/topbar/wallets/metamask.svg" alt="metamask" />
 
           <span className=" font-gilroy font-medium ml-2 dark:text-light">0xdd....ahs4</span>
 
