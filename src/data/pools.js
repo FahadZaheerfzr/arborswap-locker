@@ -1,8 +1,10 @@
 export const Pools = [
     {
         id: 1,
+        address: "0xc197......42bbde",
         name: "Swipe Coin",
         icon: "/images/cards/rip.svg",
+        presale_starts: "9:30 (UTC)  2022-09-04",
         private: true,
         tags: [
             {
@@ -22,11 +24,15 @@ export const Pools = [
         lockup_period: 140,
         ends_on: "2-45-40",
         status: "Live",
+        sale_type: "Private",
         filled_percent: 25,
         symbol: "RBA",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor.",
     },
     {
         id: 2,
+        address: "0xc197......42bbde",
+        presale_starts: "9:30 (UTC)  2022-09-04",
         name: "Venus",
         icon: "/images/cards/venus.svg",
         private: true,
@@ -37,6 +43,7 @@ export const Pools = [
         liquidity_percent: 70,
         lockup_period: 140,
         ends_on: "2-45-25",
+        sale_type: "Standard",
         tags: [
             {
                 id: 1,
@@ -50,10 +57,13 @@ export const Pools = [
         status: "Live",
         filled_percent: 80,
         symbol: "RBA",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor.",
     },
     {
         id: 3,
+        address: "0xc197......42bbde",
         name: "Voyager Token",
+        presale_starts: "9:30 (UTC)  2022-09-04",
         icon: "/images/cards/voyager.svg",
         private: true,
         soft_cap: 240000,
@@ -63,6 +73,7 @@ export const Pools = [
         liquidity_percent: 70,
         lockup_period: 140,
         ends_on: "2-45-40",
+        sale_type: "Fairlaunch",
         tags: [
             {
                 id: 1,
@@ -76,9 +87,12 @@ export const Pools = [
         status: "Live",
         filled_percent: 70,
         symbol: "BNB",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor.",
     },
     {
         id: 4,
+        address: "0xc197......42bbde",
+        presale_starts: "9:30 (UTC)  2022-09-04",
         name: "XSG Token",
         icon: "/images/cards/xsg.svg",
         private: true,
@@ -100,13 +114,17 @@ export const Pools = [
             }
         ],
         status: "Upcoming",
+        sale_type: "Private",
         filled_percent: 15,
         symbol: "ETH",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor.",
     },
     {
         id: 5,
+        address: "0xc197......42bbde",
         name: "Venus",
         icon: "/images/cards/rip.svg",
+        presale_starts: "9:30 (UTC)  2022-09-04",
         private: true,
         soft_cap: 240000,
         soft_cap_icon: "/images/cards/xsg.svg",
@@ -115,6 +133,7 @@ export const Pools = [
         liquidity_percent: 70,
         lockup_period: 140,
         ends_on: "2-45-25",
+        sale_type: "Fairlaunch",
         tags: [
             {
                 id: 1,
@@ -128,11 +147,14 @@ export const Pools = [
         status: "Ended",
         filled_percent: 85,
         symbol: "RBA",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor.",
     },
     {
         id: 6,
+        address: "0xc197......42bbde",
         name: "Voyager Token",
         icon: "/images/cards/gusd.svg",
+        presale_starts: "9:30 (UTC)  2022-09-04",
         private: true,
         soft_cap: 240000,
         soft_cap_icon: "/images/cards/arb.svg",
@@ -141,6 +163,7 @@ export const Pools = [
         liquidity_percent: 70,
         lockup_period: 140,
         ends_on: "2-45-40",
+        sale_type: "Standard",
         tags: [
             {
                 id: 1,
@@ -154,9 +177,11 @@ export const Pools = [
         status: "Upcoming",
         filled_percent: 45,
         symbol: "RBA",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor.",
     },
     {
         id: 7,
+        address: "0xc197......42bbde",
         name: "Swipe Coin",
         icon: "/images/cards/rip.svg",
         private: true,
@@ -166,7 +191,9 @@ export const Pools = [
         hard_cap_icon: "/images/cards/gusd.svg",
         liquidity_percent: 70,
         lockup_period: 140,
+        sale_type: "Standard",
         ends_on: "2-45-40",
+        presale_starts: "9:30 (UTC)  2022-09-04",
         tags: [
             {
                 id: 1,
@@ -180,9 +207,11 @@ export const Pools = [
         status: "Ended",
         filled_percent: 85,
         symbol: "BNB",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor.",
     },
     {
         id: 8,
+        address: "0xc197......42bbde",presale_starts: "9:30 (UTC)  2022-09-04",
         name: "Venus Token",
         icon: "/images/cards/venus.svg",
         private: true,
@@ -193,6 +222,7 @@ export const Pools = [
         liquidity_percent: 70,
         lockup_period: 140,
         ends_on: "2-45-25",
+        sale_type: "Private",
         tags: [
             {
                 id: 1,
@@ -206,9 +236,11 @@ export const Pools = [
         status: "Upcoming",
         filled_percent: 40,
         symbol: "ETH",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor.",
     },
     {
         id: 9,
+        address: "0xc197......42bbde",presale_starts: "9:30 (UTC)  2022-09-04",
         name: "Voyager Token",
         icon: "/images/cards/voyager.svg",
         private: true,
@@ -219,6 +251,7 @@ export const Pools = [
         liquidity_percent: 70,
         lockup_period: 140,
         ends_on: "2-45-40",
+        sale_type: "Standard",
         tags: [
             {
                 id: 1,
@@ -232,9 +265,11 @@ export const Pools = [
         status: "Ended",
         filled_percent: 90,
         symbol: "BNB",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor.",
     },
     {
         id: 10,
+        address: "0xc197......42bbde",presale_starts: "9:30 (UTC)  2022-09-04",
         name: "XSG Token",
         icon: "/images/cards/xsg.svg",
         private: true,
@@ -245,6 +280,7 @@ export const Pools = [
         liquidity_percent: 70,
         lockup_period: 140,
         ends_on: "2-45-40",
+        sale_type: "Private",
         tags: [
             {
                 id: 1,
@@ -258,9 +294,11 @@ export const Pools = [
         status: "Live",
         filled_percent: 65,
         symbol: "RBA",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor.",
     },
     {
         id: 11,
+        address: "0xc197......42bbde",presale_starts: "9:30 (UTC)  2022-09-04",
         name: "Venus",
         icon: "/images/cards/rip.svg",
         private: true,
@@ -271,6 +309,7 @@ export const Pools = [
         liquidity_percent: 70,
         lockup_period: 140,
         ends_on: "2-45-25",
+        sale_type: "Private",
         tags: [
             {
                 id: 1,
@@ -284,9 +323,11 @@ export const Pools = [
         status: "Live",
         filled_percent: 35,
         symbol: "RBA",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor.",
     },
     {
         id: 12,
+        address: "0xc197......42bbde",presale_starts: "9:30 (UTC)  2022-09-04",
         name: "Voyager Token",
         icon: "/images/cards/gusd.svg",
         private: true,
@@ -297,6 +338,7 @@ export const Pools = [
         liquidity_percent: 70,
         lockup_period: 140,
         ends_on: "2-45-40",
+        sale_type: "Fairlaunch",
         tags: [
             {
                 id: 1,
@@ -310,5 +352,6 @@ export const Pools = [
         status: "Ended",
         filled_percent: 15,
         symbol: "RBA",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor.",
     },
 ]
