@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import BackArrowSVG from '../../svgs/back_arrow'
 import PreviewDetails from '../Common/PreviewDetails'
 import PreviewHeader from '../Common/PreviewHeader'
@@ -7,6 +7,9 @@ import Datetime from 'react-datetime'
 import CalendarSVG from '../../svgs/TokenLocker/calendar'
 import AmountModal from './Subcomponents/AmountModal'
 import { ThemeContext } from '../../context/ThemeContext/ThemeProvider'
+import { isAddress } from 'ethers/lib/utils'
+import { getTokenInfo } from '../../utils/tokenInfo'
+import { formatBigToNum } from '../../utils/numberFormat'
 
 const LP_details = [
   {
@@ -62,23 +65,43 @@ const Token_details = [
   },
 ]
 
-export default function LockDetails({ setActive, setPage, locker, amount_val, amount, setAmount, date, setDate }) {
-  const [visible, setVisible] = useState(false)
+export default function LockDetails({ setActive, setLockData, lockData, locker }) {
+  const [visible, setVisible] = useState(lockData.showDetails)
   const [popup, showPopup] = useState(false)
-  const [address, setAddress] = useState('')
+  const [address, setAddress] = useState(lockData.tokenAddress)
   const { theme } = useContext(ThemeContext)
 
-  const handleAddress = (e) => {
+  console.log(lockData)
+  const handleAddress = async (e) => {
     setAddress(e.target.value)
-    if (e.target.value.length > 5) {
+    if (isAddress(e.target.value)) {
+      const tokenInfo = await getTokenInfo(e.target.value)
+
+      if (tokenInfo.success) {
+        setLockData((prevState) => ({
+          ...prevState,
+          tokenAddress: e.target.value,
+          tokenName: tokenInfo.data.name,
+          tokenSymbol: tokenInfo.data.symbol,
+          tokenDecimals: tokenInfo.data.decimals,
+          tokenSupply: tokenInfo.data.totalSupply,
+          showDetails: true,
+        }))
+      }
+      console.log(tokenInfo)
+
       setVisible(true)
     } else {
       setVisible(false)
+      setLockData((prevState) => ({
+        ...prevState,
+        showDetails: false,
+      }))
     }
   }
 
   const handleChange = (e) => {
-    setDate(e.toString())
+    console.log(e)
   }
 
   const valid = (current) => {
@@ -89,7 +112,7 @@ export default function LockDetails({ setActive, setPage, locker, amount_val, am
     <div className={`w-full `}>
       {popup && (
         <div className="fixed z-50  top-0 left-0">
-          <AmountModal amount={amount_val} showPopup={showPopup} setAmount={setAmount} />
+          <AmountModal amount={lockData.lockAmount} showPopup={showPopup} setLockData={setLockData} />
         </div>
       )}
       <div className={`w-full flex flex-col ${popup ? 'overflow-hidden h-[calc(100vh-210px)]' : ''}`}>
@@ -105,71 +128,87 @@ export default function LockDetails({ setActive, setPage, locker, amount_val, am
           value={address}
         />
 
-        {locker ? <PreviewHeader heading={'Token address Details'} /> : <PreviewHeader heading={'LP Details'} />}
-
         {visible && (
-          <div className="flex flex-col">
-            {locker
-              ? Token_details.map(
-                  (item) =>
-                    item !== Token_details[4] && (
-                      <PreviewDetails key={item.id} name={item.name} value={item.value} icon={item.icon} />
-                    ),
-                )
-              : LP_details.map(
+          <>
+            {locker ? <PreviewHeader heading={'Token address Details'} /> : <PreviewHeader heading={'LP Details'} />}
+
+            <div className="flex flex-col">
+              {locker ? (
+                <>
+                  <PreviewDetails name="Name" value={lockData.tokenName} />
+                  <PreviewDetails name="Symbol" value={lockData.tokenSymbol} />
+                  <PreviewDetails name="Decimals" value={lockData.tokenDecimals} />
+                  <PreviewDetails
+                    name="Total Supply"
+                    value={`${formatBigToNum(lockData.tokenSupply, lockData.tokenDecimals)} ${lockData.tokenSymbol}`}
+                  />
+                </>
+              ) : (
+                LP_details.map(
                   (item) =>
                     item !== LP_details[5] && (
                       <PreviewDetails key={item.id} name={item.name} value={item.value} icon={item.icon} />
                     ),
-                )}
-          </div>
+                )
+              )}
+            </div>
+          </>
         )}
+        {visible && (
+          <>
+            <PreviewHeader heading={'More Details'} />
 
-        <PreviewHeader heading={'More Details'} />
+            <div className="flex items-center mt-9">
+              <HeadingTags name={'Amount to be locked'} required />
+              <img src="/images/lists/question.svg" alt="info" className="ml-2" />
+            </div>
 
-        <div className="flex items-center mt-9">
-          <HeadingTags name={'Amount to be locked'} required />
-          <img src="/images/lists/question.svg" alt="info" className="ml-2" />
-        </div>
+            <div className="mt-5 flex items-center justify-between gap-5 cursor-pointer">
+              <div className="flex items-center justify-between bg-[#FAF8F5] dark:bg-dark-2 px-5 py-4 rounded-md w-[75%]">
+                <span className="font-bold text-dark-text dark:text-light-text">{lockData.lockAmount}</span>
 
-        <div className="mt-5 flex items-center justify-between gap-5 cursor-pointer">
-          <div className="flex items-center justify-between bg-[#FAF8F5] dark:bg-dark-2 px-5 py-4 rounded-md w-[75%]">
-            <span className="font-bold text-dark-text dark:text-light-text">{amount.toLocaleString()}</span>
+                <span className="text-gray dark:text-gray-dark font-bold">{LP_details[2].value}</span>
+              </div>
 
-            <span className="text-gray dark:text-gray-dark font-bold">{LP_details[2].value}</span>
-          </div>
+              <button
+                className="bg-primary-green bg-opacity-[0.08] font-bold text-primary-green py-4 w-[25%] rounded-md"
+                onClick={() => showPopup(true)}
+              >
+                Add
+              </button>
+            </div>
 
-          <button
-            className="bg-primary-green bg-opacity-[0.08] font-bold text-primary-green py-4 w-[25%] rounded-md"
-            onClick={() => showPopup(true)}
-          >
-            Add
-          </button>
-        </div>
+            <div className="flex items-center mt-9">
+              <HeadingTags name={'Unlock Date'} required />
+              <img src="/images/lists/question.svg" alt="info" className="ml-2" />
+            </div>
 
-        <div className="flex items-center mt-9">
-          <HeadingTags name={'Unlock Date'} required />
-          <img src="/images/lists/question.svg" alt="info" className="ml-2" />
-        </div>
-
-        <div className="flex items-center mt-5 border-[1.5px] py-4 border-dim-text dark:border-dim-text-dark border-opacity-50 rounded-lg">
-          <CalendarSVG className="ml-5 fill-gray dark:fill-gray-dark" />
-          <Datetime
-            className={`ml-5 font-gilroy font-semibold text-dark-text dark:text-light-text ${
-              theme === 'dark' ? 'dark-calendar' : ''
-            }`}
-            isValidDate={valid}
-            onChange={handleChange}
-            utc={true}
-          />
-        </div>
+            <div className="flex items-center mt-5 border-[1.5px] py-4 border-dim-text dark:border-dim-text-dark border-opacity-50 rounded-lg">
+              <CalendarSVG className="ml-5 fill-gray dark:fill-gray-dark" />
+              <Datetime
+                className={`ml-5 font-gilroy font-semibold text-dark-text dark:text-light-text ${
+                  theme === 'dark' ? 'dark-calendar' : ''
+                }`}
+                initialValue={lockData.unlockDate}
+                isValidDate={valid}
+                onChange={handleChange}
+                utc={true}
+              />
+            </div>
+          </>
+        )}
 
         <div className="mt-10">
           <div className="flex justify-end items-center mb-10">
             {locker && (
               <button
                 className="bg-white dark:bg-transparent mr-5 flex items-center gap-2 py-[10px] px-5"
-                onClick={() => setPage(1)}
+                onClick={() =>
+                  setLockData((prevState) => ({
+                    ...prevState,
+                    showLanding: true,
+                  }))
+                }
               >
                 <BackArrowSVG className="fill-dark-text dark:fill-light-text" />
                 <span className="font-gilroy font-medium text-sm text-dark-text dark:text-light-text">Go Back</span>
@@ -177,7 +216,7 @@ export default function LockDetails({ setActive, setPage, locker, amount_val, am
             )}
             <button
               className="bg-primary-green disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
-              disabled={date === '' || address.length < 5}
+              disabled={address.length < 5}
               onClick={() => setActive('Preview')}
             >
               Next

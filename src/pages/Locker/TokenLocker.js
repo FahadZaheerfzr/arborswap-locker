@@ -5,10 +5,22 @@ import Lock from '../../components/TokenLocker/Lock'
 import { useDocumentTitle } from '../../hooks/setDocumentTitle'
 import SheildSecuritySVG from '../../svgs/Sidebar/shield_security'
 
-
 export default function TokenLocker() {
   useDocumentTitle('Token Locker')
-  const [page, setPage] = useState(1)
+  const [lockData, setLockData] = useState({
+    showLanding: true,
+    showDetails: false,
+    isValid: false,
+    type: 'standard',
+    tokenAddress: '',
+    tokenName: '',
+    tokenSymbol: '',
+    tokenDecimals: '',
+    tokenSupply: '',
+    lockAmount: 0,
+    unlockDate: 0,
+    image: '',
+  })
 
   return (
     <BaseLayout
@@ -17,14 +29,13 @@ export default function TokenLocker() {
       title_img={<SheildSecuritySVG className="md:hidden fill-dim-text" />}
     >
       <div className="w-full flex justify-center mb-16">
-        {page === 1 && (
+        {lockData.showLanding ? (
           <div className="w-full px-4 md:px-0 md:w-1/2">
-            <Landing setPage={setPage} />
+            <Landing lockData={lockData} setLockData={setLockData} />
           </div>
-        )}
-        {page === 2 && (
+        ) : (
           <div className="w-full px-4 md:px-0 md:w-10/12">
-            <Lock setPage={setPage} />
+            <Lock lockData={lockData} setLockData={setLockData} />
           </div>
         )}
       </div>
