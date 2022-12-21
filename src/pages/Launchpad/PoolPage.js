@@ -10,6 +10,7 @@ export default function PoolPage() {
   const [pool, setPool] = useState(null)
   const [modal, showModal] = useState(false);
   const [admin] = useState(true);
+  const [adminMode, setAdminMode] = useState(false);
 
   useEffect(() => {
     const pool = Pools.find((pool) => pool.id === parseInt(id))
@@ -25,8 +26,8 @@ export default function PoolPage() {
           <Modal showModal={showModal} from_symbol={pool.symbol} from_icon={pool.hard_cap_icon} to_icon={pool.icon} to_symbol={"SXP"} />
         </div>
       }
-      <BaseLayout page_name={'Pools'} title={pool.name} subpage admin={admin}>
-        <PoolPageBase pool={pool} showModal={showModal} />
+      <BaseLayout page_name={'Pools'} title={pool.name} subpage admin={admin} setAdminMode={setAdminMode}>
+        <PoolPageBase pool={pool} showModal={showModal} admin={adminMode} />
       </BaseLayout>
     </div>
   )

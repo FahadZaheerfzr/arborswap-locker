@@ -2,10 +2,9 @@ import React from 'react'
 import Preview from './Preview'
 import SaleBox from './Sale'
 import UserPanel from './UserPanel/UserPanel';
+import AdminPanel from './Admin/AdminPanel';
 
-export default function PoolPageBase({ pool, showModal }) {
-
-
+export default function PoolPageBase({ pool, showModal, admin }) {
   return (
     pool && (
       <div className="w-full flex justify-center">
@@ -30,14 +29,17 @@ export default function PoolPageBase({ pool, showModal }) {
           </div>
 
           <div className="mt-14 md:mt-0 md:w-[35%] ">
-            <SaleBox hard_cap={pool.hard_cap} hard_cap_icon={pool.hard_cap_icon}
-              min_allocation={pool.min_allocation} max_allocation={pool.max_allocation} status={pool.status}
-              filled_percent={pool.filled_percent} ends_on={pool.presale_ends} showModal={showModal} />
 
-            {pool.sale_type !== 'Private' &&
+            {admin ?
+              <AdminPanel icon={pool.hard_cap_icon}/>
+              : <SaleBox hard_cap={pool.hard_cap} hard_cap_icon={pool.hard_cap_icon}
+                min_allocation={pool.min_allocation} max_allocation={pool.max_allocation} status={pool.status}
+                filled_percent={pool.filled_percent} ends_on={pool.presale_ends} showModal={showModal} />
+            }
+            {pool.sale_type !== 'Private' && !admin &&
               <div className='mt-[30px]'>
                 <UserPanel icon={pool.icon} />
-              </div> 
+              </div>
             }
           </div>
         </div>

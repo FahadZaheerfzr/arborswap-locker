@@ -17,7 +17,8 @@ export default function BaseLayout({
   title_img,
   page_name,
   page_description,
-  admin
+  admin,
+  setAdminMode,
 }) {
   const { showSidebar, setShowSidebar } = useContext(SidebarContext)
   const { theme, setTheme } = useContext(ThemeContext)
@@ -117,6 +118,7 @@ export default function BaseLayout({
                 page_name={page_name}
                 showModal={showModal}
                 admin={admin}
+                setAdminMode={setAdminMode}
               />
             </div>
           )}

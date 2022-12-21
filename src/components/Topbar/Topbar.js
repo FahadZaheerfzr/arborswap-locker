@@ -12,14 +12,16 @@ export default function Topbar({
   page_name,
   page_description,
   showModal,
-  admin
+  admin,
+  setAdminMode,
 }) {
   const { connected } = useContext(ConnectionContext)
 
-  const [tempfixed, setTempFixed] = useState(true)
+  const [tempfixed, setTempFixed] = useState(false)
 
   const handleTempFixed = () => {
     setTempFixed(!tempfixed)
+    setAdminMode(!tempfixed)
   }
   return (
     <div className="h-[110px] flex items-center justify-between pl-[4%] pr-[5%] ">
@@ -81,7 +83,7 @@ export default function Topbar({
               <input
                 type="checkbox"
                 value=""
-                checked={tempfixed ? false : true}
+                checked={tempfixed}
                 id="admin-toggle"
                 className="sr-only peer"
                 onChange={handleTempFixed}
