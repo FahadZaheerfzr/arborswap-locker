@@ -4,6 +4,8 @@ import PreviewDetails from '../../../Common/PreviewDetails'
 import TwitterSVG from '../../../../svgs/Socials/twitter';
 import DribbleSVG from '../../../../svgs/Socials/dribble';
 import TabSwitch from './Subcomponents/TabSwitch';
+import DonutChart from './Subcomponents/DonutChart';
+import Labels from './Subcomponents/Labels';
 
 const TokkenDetails = {
     TokenName: "Swipe Coin",
@@ -66,6 +68,18 @@ export default function Preview({
 
                     <div className='mt-10'>
                         <span className="font-semibold text-dark-text dark:text-light-text">Token Metrics</span>
+                        <div className='flex items-center mt-7'>
+                            <div className='w-full '>
+                                <DonutChart />
+                            </div>
+                            <div className='w-full pl-16'>
+                                <Labels color={"#307856"} text={"Presale"} />
+                                <Labels color={"#585B79"} text={"Liquidity"} />
+                                <Labels color={"#C89211"} text={"Locked"} />
+                                <Labels color={"#E56060"} text={"Burned"} />                                
+                                <Labels color={"#239C63"} text={"Unlocked"} />
+                            </div>
+                        </div>
                     </div>
                 </div>
             }
