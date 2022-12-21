@@ -23,17 +23,16 @@ const Tabs = [
 export default function Pools() {
   useDocumentTitle('Pools')
   const [activeTab, setActiveTab] = useState(1)
-
   return (
-    <BaseLayout
-      title={'Launchpad'}
-      title_img={<LaunchpadSVG className="md:hidden fill-dim-text" />}
-      page_name={'Pools'}
-      page_description={'Discover upcoming or live sales.'}
-    >
-      <HomeLayout tabs={Tabs} activeTab={activeTab} setActiveTab={setActiveTab}>
-        <PoolsBase activeStatus={Tabs[activeTab - 1].tabName} />
-      </HomeLayout>
-    </BaseLayout>
+      <BaseLayout
+        title={'Launchpad'}
+        title_img={<LaunchpadSVG className="md:hidden fill-dim-text" />}
+        page_name={'Pools'}
+        page_description={'Discover upcoming or live sales.'}
+      >
+        <HomeLayout tabs={Tabs} activeTab={activeTab} setActiveTab={setActiveTab}>
+          <PoolsBase activeStatus={Tabs[activeTab - 1].tabName} />
+        </HomeLayout>
+      </BaseLayout>
   )
 }

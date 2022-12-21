@@ -1,18 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { Pools } from '../../../data/pools'
+import React from 'react'
 import Preview from './Preview'
 import SaleBox from './Sale'
 
-export default function PoolPageBase() {
-  const { id } = useParams()
-  const [pool, setPool] = useState(null)
+export default function PoolPageBase({ pool, showModal }) {
 
-  useEffect(() => {
-    const fetchPool = Pools.find((pool) => pool.id === parseInt(id))
-    document.title = `${fetchPool.name}`
-    setPool(fetchPool)
-  }, [id])
 
   return (
     pool && (
@@ -40,7 +31,7 @@ export default function PoolPageBase() {
           <div className="mt-14 md:mt-0 md:w-[35%] ">
             <SaleBox hard_cap={pool.hard_cap} hard_cap_icon={pool.hard_cap_icon}
             min_allocation={pool.min_allocation} max_allocation={pool.max_allocation}
-            filled_percent={pool.filled_percent} ends_on={pool.presale_ends} />
+            filled_percent={pool.filled_percent} ends_on={pool.presale_ends} showModal={showModal} />
           </div>
         </div>
       </div>

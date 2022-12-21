@@ -1,7 +1,7 @@
 import React from 'react'
 import Timer from '../../../LockedAsset/Amount/Timer/Timer';
 
-export default function SaleBox({ hard_cap, hard_cap_icon, min_allocation, max_allocation, filled_percent, ends_on }) {
+export default function SaleBox({ hard_cap, hard_cap_icon, min_allocation, max_allocation, filled_percent, ends_on, showModal }) {
 
     return (
         <div className="p-9 bg-white dark:bg-dark-1 rounded-[20px]">
@@ -59,7 +59,8 @@ export default function SaleBox({ hard_cap, hard_cap_icon, min_allocation, max_a
             </div>
 
             <div className="flex mt-10">
-                <button className="w-full bg-primary-green rounded-md text-white font-bold py-4">
+                <button className="w-full bg-primary-green rounded-md text-white font-bold py-4"
+                    onClick={()=>showModal(true)}>
                     Join Sale
                 </button>
             </div>
