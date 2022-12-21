@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import BackArrowSVG from '../../svgs/back_arrow'
 import PreviewDetails from '../Common/PreviewDetails'
 import PreviewHeader from '../Common/PreviewHeader'
+import { formatBigToNum } from '../../utils/numberFormat'
 
 const LP_details = [
   {
@@ -57,17 +58,17 @@ const Token_details = [
   },
 ]
 
-export default function Preview({ locker, setActive, amount, datetime }) {
+export default function Preview({ locker, setActive, lockData }) {
   const [date, setDate] = useState()
   const [days, setDays] = useState(0)
 
   useEffect(() => {
-    if (datetime) {
-      const date = new Date(datetime)
+    if (lockData.unlockDate) {
+      const date = new Date(lockData.unlockDate * 1000)
       setDate(date.toLocaleDateString())
       setDays(Math.ceil((date - new Date()) / (1000 * 60 * 60 * 24)))
     }
-  }, [datetime])
+  }, [lockData.unlockDate])
 
   const lockToken = () => {
     console.log('Token Locked')
@@ -78,25 +79,33 @@ export default function Preview({ locker, setActive, amount, datetime }) {
       {locker ? <PreviewHeader heading={'Token address Details'} /> : <PreviewHeader heading={'LP Details'} />}
 
       <div className="flex flex-col">
-        {locker
-          ? Token_details.map(
-              (item) =>
-                item !== Token_details[4] && (
-                  <PreviewDetails key={item.id} name={item.name} value={item.value} icon={item.icon} />
-                ),
-            )
-          : LP_details.map(
-              (item) =>
-                item !== LP_details[5] && (
-                  <PreviewDetails key={item.id} name={item.name} value={item.value} icon={item.icon} />
-                ),
-            )}
+        {locker ? (
+          <>
+            <PreviewDetails name="Name" value={lockData.tokenName} />
+            <PreviewDetails name="Symbol" value={lockData.tokenSymbol} />
+            <PreviewDetails name="Decimals" value={lockData.tokenDecimals} />
+            <PreviewDetails
+              name="Total Supply"
+              value={`${formatBigToNum(lockData.tokenSupply, lockData.tokenDecimals)} ${lockData.tokenSymbol}`}
+            />
+          </>
+        ) : (
+          LP_details.map(
+            (item) =>
+              item !== LP_details[5] && (
+                <PreviewDetails key={item.id} name={item.name} value={item.value} icon={item.icon} />
+              ),
+          )
+        )}
       </div>
 
       <PreviewHeader heading={'Lock Details'} />
 
       <div className="flex flex-col">
-        <PreviewDetails name={'Amount to be Locked'} value={amount} />
+        <PreviewDetails
+          name={'Amount to be Locked'}
+          value={`${lockData.lockAmount.toLocaleString()} ${lockData.tokenSymbol}`}
+        />
         <PreviewDetails name={'Lock Period (Days)'} value={days} />
         <PreviewDetails name={'Unlock Date'} value={date} />
       </div>

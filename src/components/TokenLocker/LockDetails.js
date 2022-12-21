@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import BackArrowSVG from '../../svgs/back_arrow'
 import PreviewDetails from '../Common/PreviewDetails'
 import PreviewHeader from '../Common/PreviewHeader'
@@ -7,9 +7,12 @@ import Datetime from 'react-datetime'
 import CalendarSVG from '../../svgs/TokenLocker/calendar'
 import AmountModal from './Subcomponents/AmountModal'
 import { ThemeContext } from '../../context/ThemeContext/ThemeProvider'
-import { isAddress } from 'ethers/lib/utils'
+import { formatUnits, isAddress, parseUnits } from 'ethers/lib/utils'
 import { getTokenInfo } from '../../utils/tokenInfo'
 import { formatBigToNum } from '../../utils/numberFormat'
+import { useEthers, useTokenBalance } from '@usedapp/core'
+import { getTokenBalance } from '../../utils/getTokenBalance'
+import { BigNumber } from 'ethers'
 
 const LP_details = [
   {
@@ -70,8 +73,7 @@ export default function LockDetails({ setActive, setLockData, lockData, locker }
   const [popup, showPopup] = useState(false)
   const [address, setAddress] = useState(lockData.tokenAddress)
   const { theme } = useContext(ThemeContext)
-
-  console.log(lockData)
+  const { account } = useEthers()
   const handleAddress = async (e) => {
     setAddress(e.target.value)
     if (isAddress(e.target.value)) {
@@ -101,18 +103,43 @@ export default function LockDetails({ setActive, setLockData, lockData, locker }
   }
 
   const handleChange = (e) => {
-    console.log(e)
+    setLockData((prevState) => ({
+      ...prevState,
+      unlockDate: e.unix(),
+    }))
+  }
+
+  const handleLockAmount = (e) => {
+    setLockData((prevState) => ({
+      ...prevState,
+      lockAmount: e,
+    }))
   }
 
   const valid = (current) => {
     return current.isAfter(new Date())
   }
 
+  useEffect(() => {
+    console.log('effect run')
+    getTokenBalance(account, lockData.tokenAddress).then((value) => {
+      setLockData((prevState) => ({
+        ...prevState,
+        userBalance: value,
+      }))
+    })
+  }, [account, lockData.tokenAddress, setLockData])
+
   return (
     <div className={`w-full `}>
       {popup && (
         <div className="fixed z-50  top-0 left-0">
-          <AmountModal amount={lockData.lockAmount} showPopup={showPopup} setLockData={setLockData} />
+          <AmountModal
+            amount={lockData.lockAmount}
+            balance={formatUnits(BigNumber.from(lockData.userBalance), lockData.tokenDecimals) * 1}
+            showPopup={showPopup}
+            setAmount={handleLockAmount}
+          />
         </div>
       )}
       <div className={`w-full flex flex-col ${popup ? 'overflow-hidden h-[calc(100vh-210px)]' : ''}`}>
@@ -165,9 +192,13 @@ export default function LockDetails({ setActive, setLockData, lockData, locker }
 
             <div className="mt-5 flex items-center justify-between gap-5 cursor-pointer">
               <div className="flex items-center justify-between bg-[#FAF8F5] dark:bg-dark-2 px-5 py-4 rounded-md w-[75%]">
-                <span className="font-bold text-dark-text dark:text-light-text">{lockData.lockAmount}</span>
-
-                <span className="text-gray dark:text-gray-dark font-bold">{LP_details[2].value}</span>
+                <input
+                  type="number"
+                  className="w-[75%] font-bold text-dark-text dark:text-light-text"
+                  value={lockData.lockAmount}
+                  onChange={(e) => handleLockAmount(e.target.value)}
+                />
+                <span className="text-gray dark:text-gray-dark font-bold">{lockData.tokenSymbol}</span>
               </div>
 
               <button
@@ -189,7 +220,7 @@ export default function LockDetails({ setActive, setLockData, lockData, locker }
                 className={`ml-5 font-gilroy font-semibold text-dark-text dark:text-light-text ${
                   theme === 'dark' ? 'dark-calendar' : ''
                 }`}
-                initialValue={lockData.unlockDate}
+                value={lockData.unlockDate * 1000}
                 isValidDate={valid}
                 onChange={handleChange}
                 utc={true}

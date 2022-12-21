@@ -51,3 +51,11 @@ export function formatNumber(x, max = 6) {
 export const formatBigToNum = (val, dec, comma = 0) => {
   return formatNumber(formatUnits(BigNumber.from(val), dec) * 1, comma)
 }
+
+export const bigValuePercent = (val, dec, percent = 100, comma = 0) => {
+  if (BigNumber.from(val).lt(percent)) {
+    return '0'
+  }
+  const value = BigNumber.from(val).mul(100).div(percent)
+  return value
+}

@@ -18,8 +18,10 @@ export default function TokenLocker() {
     tokenDecimals: '',
     tokenSupply: '',
     lockAmount: 0,
-    unlockDate: 0,
+    lockAmountBN: 0,
+    unlockDate: Math.floor(Date.now() / 1000) + 86400,
     image: '',
+    userBalance: '',
   })
 
   return (

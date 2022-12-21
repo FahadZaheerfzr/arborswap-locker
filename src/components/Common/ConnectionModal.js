@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { wallets } from '../../data/wallets'
 import { useEthers } from '@usedapp/core'
 import WalletConnectProvider from '@walletconnect/web3-provider/dist/umd/index.min.js'
@@ -14,10 +14,25 @@ export default function ConnectionModal({ showModal }) {
       })
       await provider.enable()
       await activate(provider)
+      showModal(false)
     } catch (error) {
       console.error(error)
     }
   }
+
+  const onMetamask = async () => {
+    try {
+      activateBrowserWallet()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    if (account) {
+      showModal(false)
+    }
+  }, [account, showModal])
 
   return (
     <div className="p-9 w-[90%] max-w-[520px] bg-white rounded-[10px]">
@@ -37,7 +52,7 @@ export default function ConnectionModal({ showModal }) {
         <button
           className="flex focus:outline outline-primary-green py-4 px-4 flex-col items-center justify-center"
           key={wallets[0].id}
-          onClick={() => activateBrowserWallet()}
+          onClick={onMetamask}
         >
           <img src={wallets[0].image} alt={wallets[0].name} className="w-[50px] h-[50px] mb-4" />
           <span className="font-gilroy font-semibold text-dark-text dark:text-light-text">{wallets[0].name}</span>

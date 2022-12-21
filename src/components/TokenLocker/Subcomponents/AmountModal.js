@@ -23,17 +23,12 @@ const options = [
   },
 ]
 
-export default function AmountModal({ amount, showPopup, setAmount }) {
-  const [selectedAmount, setSelectedAmount] = useState()
-  const [selected, setSelected] = useState(1)
+export default function AmountModal({ amount, balance, showPopup, setAmount }) {
+  const [selectedAmount, setSelectedAmount] = useState('0')
 
   useEffect(() => {
-    setSelectedAmount(amount * 0.5)
+    setSelectedAmount(amount)
   }, [amount])
-
-  useEffect(() => {
-    setSelectedAmount(amount * options[selected - 1].value)
-  }, [selected, amount])
 
   const handleSubmit = () => {
     setAmount(selectedAmount)
@@ -58,14 +53,15 @@ export default function AmountModal({ amount, showPopup, setAmount }) {
           <span className="text-gray dark:text-gray-dark text-sm font-medium dark:font-semibold">Amount</span>
 
           <span className="text-dim-text dark:text-dim-text-dark text-sm font-medium">
-            Total: <span className="text-dark-text font-semibold dark:text-light-text">{amount?.toLocaleString()}</span>
+            Your Balance :{' '}
+            <span className="text-dark-text font-semibold dark:text-light-text">{balance?.toLocaleString()}</span>
           </span>
         </div>
 
         <div className="bg-[#F5F1EB] dark:bg-dark-3 mt-2 px-5 py-5">
           <div className="flex items-center justify-between">
             <span className="text-dark-text dark:text-light-text font-gilroy font-bold text-xl">
-              {selectedAmount?.toLocaleString()}
+              {selectedAmount.toLocaleString()}
             </span>
 
             <span className="text-gray dark:text-gray-dark  font-medium text-sm">~ $---</span>
@@ -81,7 +77,7 @@ export default function AmountModal({ amount, showPopup, setAmount }) {
                                 ? 'text-primary-green bg-primary-green'
                                 : 'text-[#C89211] bg-[#C89211]'
                             }`}
-                onClick={() => setSelected(option.id)}
+                onClick={() => setSelectedAmount(balance * option.value)}
               >
                 {option.name}
               </div>
