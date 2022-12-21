@@ -12,7 +12,14 @@ export const RPC_ADDRESS = {
   159: 'https://preseed-testnet-1.roburna.com/',
 }
 
-// const MULTICALL_ADDRESS = {
-//   [ChainId.BSCTestnet]: "0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576",
-//   159: "0x4e1845Ab1d9D464150777a931Ce8FDaaD1cf8229",
-// }
+export const ADMIN_ADDRESS = {
+  [BSC.chainId]: BSC.multicallAddress,
+  [BSCTestnet.chainId]: BSCTestnet.multicallAddress,
+  [RbaChain.chainId]: '0x00687AD41983f022929E9e5C9a2cd58A291F661f',
+}
+
+export const FACTORY_ADDRESS = {
+  [BSC.chainId]: BSC.multicallAddress,
+  [BSCTestnet.chainId]: BSCTestnet.multicallAddress,
+  [RbaChain.chainId]: '0xB503BA98dF8B35121df3034Bb319A6f71c502D98',
+}

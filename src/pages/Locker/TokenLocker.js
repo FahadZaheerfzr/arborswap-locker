@@ -22,6 +22,7 @@ export default function TokenLocker() {
     unlockDate: Math.floor(Date.now() / 1000) + 86400,
     image: '',
     userBalance: '',
+    userAllowance: '0',
   })
 
   return (

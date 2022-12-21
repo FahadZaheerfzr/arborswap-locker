@@ -35,29 +35,6 @@ const LP_details = [
   },
 ]
 
-const Token_details = [
-  {
-    id: 1,
-    name: 'Name',
-    value: 'Swipe Token',
-  },
-  {
-    id: 2,
-    name: 'Symbol',
-    value: 'SXP',
-  },
-  {
-    id: 3,
-    name: 'Decimals',
-    value: '18',
-  },
-  {
-    id: 4,
-    name: 'Token supply',
-    value: '200,000,000 SXP',
-  },
-]
-
 export default function Preview({ locker, setActive, lockData }) {
   const [date, setDate] = useState()
   const [days, setDays] = useState(0)

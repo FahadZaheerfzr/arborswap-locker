@@ -10,9 +10,11 @@ import { ThemeContext } from '../../context/ThemeContext/ThemeProvider'
 import { formatUnits, isAddress, parseUnits } from 'ethers/lib/utils'
 import { getTokenInfo } from '../../utils/tokenInfo'
 import { formatBigToNum } from '../../utils/numberFormat'
-import { useEthers, useTokenBalance } from '@usedapp/core'
+import { ChainId, useEthers, useTokenBalance } from '@usedapp/core'
 import { getTokenBalance } from '../../utils/getTokenBalance'
 import { BigNumber } from 'ethers'
+import { Contract } from '@ethersproject/contracts'
+import { FACTORY_ADDRESS } from '../../config/constants/address'
 
 const LP_details = [
   {
@@ -71,9 +73,10 @@ const Token_details = [
 export default function LockDetails({ setActive, setLockData, lockData, locker }) {
   const [visible, setVisible] = useState(lockData.showDetails)
   const [popup, showPopup] = useState(false)
+  const [approval, setApproval] = useState(false)
   const [address, setAddress] = useState(lockData.tokenAddress)
   const { theme } = useContext(ThemeContext)
-  const { account } = useEthers()
+  const { account, library } = useEthers()
   const handleAddress = async (e) => {
     setAddress(e.target.value)
     if (isAddress(e.target.value)) {
@@ -107,6 +110,15 @@ export default function LockDetails({ setActive, setLockData, lockData, locker }
       ...prevState,
       unlockDate: e.unix(),
     }))
+  }
+
+  const handleApprove = () => {
+    // const factoryAddress = FACTORY_ADDRESS[chainId]
+    console.log(library.getSigner()._address)
+    library.getNetwork().then((e) => {
+      console.log(e)
+    })
+    // setApproval(!approval)
   }
 
   const handleLockAmount = (e) => {
@@ -245,6 +257,18 @@ export default function LockDetails({ setActive, setLockData, lockData, locker }
                 <span className="font-gilroy font-medium text-sm text-dark-text dark:text-light-text">Go Back</span>
               </button>
             )}
+
+            {!approval ? (
+              <button
+                className="bg-primary-green mr-2 disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
+                onClick={handleApprove}
+              >
+                Approve
+              </button>
+            ) : (
+              <></>
+            )}
+
             <button
               className="bg-primary-green disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
               disabled={address.length < 5}
