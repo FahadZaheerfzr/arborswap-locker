@@ -3,6 +3,7 @@ import Preview from './Preview'
 import SaleBox from './Sale'
 import UserPanel from './UserPanel/UserPanel';
 import AdminPanel from './Admin/AdminPanel';
+import FundRaised from './Admin/FundRaised';
 
 export default function PoolPageBase({ pool, showModal, admin }) {
   return (
@@ -31,10 +32,16 @@ export default function PoolPageBase({ pool, showModal, admin }) {
           <div className="mt-14 md:mt-0 md:w-[35%] ">
 
             {admin ?
-              <AdminPanel icon={pool.hard_cap_icon}/>
+              <AdminPanel icon={pool.hard_cap_icon} status={pool.status} hard_cap={pool.hard_cap} filled_percent={pool.filled_percent}/>
               : <SaleBox hard_cap={pool.hard_cap} hard_cap_icon={pool.hard_cap_icon}
                 min_allocation={pool.min_allocation} max_allocation={pool.max_allocation} status={pool.status}
                 filled_percent={pool.filled_percent} ends_on={pool.presale_ends} showModal={showModal} />
+            }
+            {
+              admin && pool.status === 'Ended' &&
+              <div className='mt-[30px]'>
+                <FundRaised icon={pool.hard_cap_icon} />
+              </div>
             }
             {pool.sale_type !== 'Private' && !admin &&
               <div className='mt-[30px]'>

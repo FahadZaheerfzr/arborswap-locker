@@ -1,7 +1,7 @@
 import React from 'react'
 import PreviewDetails from '../../../Common/PreviewDetails';
 
-export default function AdminPanel({ icon }) {
+export default function AdminPanel({ icon, status, hard_cap, filled_percent }) {
 
     return (
         <div className="hidden md:block px-9 pb-9 bg-white dark:bg-dark-1 rounded-[20px]">
@@ -16,10 +16,17 @@ export default function AdminPanel({ icon }) {
             <div className="w-full flex justify-between mt-7">
                 <span className="text-gray dark:text-gray-dark text-sm font-medium">Soft/Hard Cap</span>
 
-                <div className="bg-[#C89211] bg-opacity-[0.08] px-3 py-[3px] rounded-[10px] border-[0.5px] border-dashed border-[#C89211]">
-                    <span className="rounded-[10px] text-[#C89211]">Upcoming</span>
-                </div>
+                {status !== "Upcoming" ?
+                    <div className="bg-primary-green bg-opacity-[0.08] px-3 py-[0.5px] rounded-[10px] border-[0.5px] border-dashed border-primary-green">
+                        <span className="rounded-[10px] text-primary-green">{status}</span>
+                    </div>
+                    : <div className="bg-[#C89211] bg-opacity-[0.08] px-3 py-[0.5px] rounded-[10px] border-[0.5px] border-dashed border-[#C89211]">
+                        <span className="rounded-[10px] text-[#C89211]">Upcoming</span>
+                    </div>
+                }
             </div>
+
+
 
             <div className="w-full flex mt-3">
                 <img src={icon} alt="pool-icon" className='w-7 h-7 mr-2' />
@@ -28,11 +35,45 @@ export default function AdminPanel({ icon }) {
                 </span>
             </div>
 
-            <PreviewDetails name={"Address Whitelisted"} value={"1,874"} />
+            {status !== "Upcoming" &&
+                <div className='mt-7'>
+                    <div className="flex items-center justify-between">
+                        <span className="text-xs  text-gray dark:text-gray-dark">
+                            {(hard_cap * (filled_percent / 100)).toLocaleString()} RBA
+                        </span>
+
+                        <span className="text-xs  text-dim-text dark:text-dim-text-dark">
+                            {hard_cap} RBA
+                        </span>
+                    </div>
+
+                    <div className="w-full bg-[#F5F1EB] dark:bg-dark-3 rounded-[5px] h-[18px] mt-[6px]">
+                        <div
+                            className={`h-18px filled rounded-[5px] pr-2 flex justify-end items-center text-xs text-white`}
+                            style={{ width: `${filled_percent}%` }}
+                        >
+                            {filled_percent}%
+                        </div>
+                    </div>
+                </div>
+            }
+
+            {status === "Upcoming" &&
+                <div className='mt-7'>
+                    <PreviewDetails name={"Address Whitelisted"} value={"1,874"} />
+                </div>
+            }
+
+            {status !== "Upcoming" &&
+                <div className='mt-7'>
+                    <PreviewDetails name={"Contributors"} value={"1,041"} />
+                </div>
+            }
+
 
             <div className="mt-7">
-                <button className="w-full bg-light dark:bg-dark rounded-md text-dark-text dark:text-light-text font-bold py-4">
-                Manage Address
+                <button className={`w-full ${status === "Upcoming" ? "bg-light dark:bg-dark text-dark-text dark:text-light-text" : "bg-primary-green text-white opacity-50"} rounded-md font-bold py-4`}>
+                    {status === "Upcoming" ? "Manage Address" : "Finalize Sale"}
                 </button>
             </div>
         </div>
