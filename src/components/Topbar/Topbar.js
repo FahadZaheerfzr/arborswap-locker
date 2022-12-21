@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { ConnectionContext } from '../../context/ConnectionContext/GlobalProvider'
 import NotificationSVG from '../../svgs/notification'
 import WalletSVG from '../../svgs/Topbar/empty_wallet'
@@ -15,6 +15,12 @@ export default function Topbar({
   admin
 }) {
   const { connected } = useContext(ConnectionContext)
+
+  const [tempfixed, setTempFixed] = useState(true)
+
+  const handleTempFixed = () => {
+    setTempFixed(!tempfixed)
+  }
   return (
     <div className="h-[110px] flex items-center justify-between pl-[4%] pr-[5%] ">
       <div className="flex items-center">
@@ -23,14 +29,12 @@ export default function Topbar({
           onClick={() => setSideBarMobile(!sideBarMobile)}
         >
           <div
-            className={`${
-              sideBarMobile ? 'hidden' : 'block'
-            } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
+            className={`${sideBarMobile ? 'hidden' : 'block'
+              } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
           />
           <div
-            className={`${
-              sideBarMobile ? 'hidden' : 'block'
-            } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
+            className={`${sideBarMobile ? 'hidden' : 'block'
+              } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
           />
           <div
             className={`${sideBarMobile ? 'hidden' : 'block'} h-0 w-5 border border-dark-text dark:border-light-text`}
@@ -66,7 +70,26 @@ export default function Topbar({
         )}
       </div>
 
-      <div className="flex user-div">
+      <div className="flex items-center user-div">
+        {
+          admin &&
+          <div className="hidden md:flex mr-7 py-4 px-5 rounded-md bg-white dark:bg-dark-1">
+            <span className="font-gilroy mr-[10px] font-medium text-dark-text dark:text-light-text text-base">
+              Admin Mode
+            </span>
+            <label htmlFor="admin-toggle" className="inline-flex relative items-center cursor-pointer">
+              <input
+                type="checkbox"
+                value=""
+                checked={tempfixed ? false : true}
+                id="admin-toggle"
+                className="sr-only peer"
+                onChange={handleTempFixed}
+              />
+              <div className="w-10 h-5 bg-dim-text dark:bg-dim-text-dark dark:bg-opacity-20 bg-opacity-20 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px]  after:left-[3px] after:bg-dim-text after:dark:bg-dim-text-dark  after:rounded-full after:h-4 after:w-4 after:transition-all border-[#F5F1EB] " />
+            </label>
+          </div>
+        }
         {connected && (
           <div className="hidden w-10 h-10 lg:w-12 lg:h-12 bg-[#F5F6F7] dark:bg-dark-1 rounded-md md:flex items-center justify-center">
             <NotificationSVG className="hidden md:block fill-slate-700 dark:fill-white" />
@@ -78,7 +101,7 @@ export default function Topbar({
           </div>
         )}
         {connected ? (
-          <div className="hidden md:flex border-2 rounded-md border-primary-green border-opacity-50 items-center justify-between bg-white dark:bg-dark-1 ml-8">
+          <div className="hidden md:flex h-10 lg:h-12 border-2 rounded-md border-primary-green border-opacity-50 items-center justify-between bg-white dark:bg-dark-1 ml-8">
             <img className="ml-5" src="/images/topbar/wallets/metamask.svg" alt="metamask" />
 
             <span className=" font-gilroy font-medium ml-2 dark:text-light">0xdd....ahs4</span>
