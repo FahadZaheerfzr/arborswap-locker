@@ -151,7 +151,7 @@ export const Pools = [
     presale_starts: '9:30 (UTC)  2022-09-04',
     min_allocation: 100,
     max_allocation: 10000,
-    presale_ends: '10:30 (UTC)  2023-01-14 ',
+    presale_ends: '10:30 (UTC)  2022-12-14 ',
     vesting_release: '30% each 20 Days',
     first_release: '40%',
     private: true,

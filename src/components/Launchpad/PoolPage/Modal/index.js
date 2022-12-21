@@ -10,7 +10,7 @@ export default function Modal({ showModal, from_symbol, from_icon, to_icon, to_s
 
   return (
     <div className={`w-screen h-screen flex flex-col justify-center items-center ${Styles.blurBackground}`}>
-      <div className="max-w-[420px] w-full rounded-[10px] px-9 py-7 bg-white dark:bg-dark-1">
+      <div className="w-[90%] max-w-[420px] rounded-[10px] px-9 py-7 bg-white dark:bg-dark-1">
         <div className="flex justify-between items-center  ">
           <span className="text-dark-text dark:text-light-text font-gilroy font-semibold text-lg">Join Pool</span>
 
@@ -86,7 +86,7 @@ export default function Modal({ showModal, from_symbol, from_icon, to_icon, to_s
         </div>
       </div>
 
-      <div className="max-w-[420px] w-full mt-10">
+      <div className="w-[90%] max-w-[420px] w-full mt-10">
         <button
           className="w-full bg-primary-green text-white py-5 rounded-md font-gilroy font-bold text-xl"
           onClick={handleSubmit}

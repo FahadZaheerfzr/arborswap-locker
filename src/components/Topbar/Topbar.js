@@ -12,6 +12,7 @@ export default function Topbar({
   page_name,
   page_description,
   showModal,
+  admin
 }) {
   const { connected } = useContext(ConnectionContext)
   return (
