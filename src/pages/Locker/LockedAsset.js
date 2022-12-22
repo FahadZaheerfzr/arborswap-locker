@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getLiquidityLockList, getTokenLockList, getTokenLockInfos, getLpLockInfos } from 'utils/getLockList'
 
-import { useParams } from 'react-router-dom'
+import { Navigate, redirect, useNavigate, useParams } from 'react-router-dom'
 import BaseLayout from '../../components/BaseLayout/BaseLayout'
 import LockedAssetBase from '../../components/LockedAsset'
 import { Cards } from '../../data/cards'
@@ -10,6 +10,7 @@ export default function LockedAsset({ type }) {
   const { id } = useParams()
   const [asset, setAsset] = useState(null)
   const [ready, setReady] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     let active = true
@@ -25,6 +26,9 @@ export default function LockedAsset({ type }) {
           }
           if (info.success) {
             setAsset(info.data)
+            return
+          } else {
+            navigate('/locked-assets')
           }
         }
         if (type === 'lp-token') {
@@ -34,6 +38,9 @@ export default function LockedAsset({ type }) {
           }
           if (infoLp.success) {
             setAsset(infoLp.data)
+            return
+          } else {
+            navigate('/locked-assets')
           }
         }
         if (!active) {

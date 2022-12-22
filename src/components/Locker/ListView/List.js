@@ -47,7 +47,7 @@ export default function List({ data, token = false }) {
       <ListInfo heading={'Unlocks on'} value={unlockDate} />
 
       <div className="flex items-center">
-        <Link to={`/locked-assets/${data.address}`}>
+        <Link to={`/locked-assets/${token ? 'token' : 'lp-token'}/${data.address}`}>
           <img className="rotate-180" src="/images/sidebar/arrow-left.svg" alt="arrow-right" />
         </Link>
       </div>

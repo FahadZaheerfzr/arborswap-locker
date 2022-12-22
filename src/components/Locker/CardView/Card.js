@@ -53,7 +53,7 @@ export default function Card({ data, token = false }) {
               </span>
             </div>
           </div>
-          <Link to={`/locked-assets/${data.address}`}>
+          <Link to={`/locked-assets/${token ? 'token' : 'lp-token'}/${data.address}`}>
             <div className="flex items-center">
               <span className="flex items-center font-medium text-sm font-gilroy text-primary-green ">View</span>
               <img className="rotate-180" src="/images/sidebar/arrow-left.svg" alt="arrow-right" />
