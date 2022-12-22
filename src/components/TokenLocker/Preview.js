@@ -1,8 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
+import { useModal } from 'react-simple-modal-provider'
+
 import BackArrowSVG from '../../svgs/back_arrow'
 import PreviewDetails from '../Common/PreviewDetails'
 import PreviewHeader from '../Common/PreviewHeader'
 import { formatBigToNum } from '../../utils/numberFormat'
+import { FACTORY_ADDRESS } from '../../config/constants/address'
+import { BigNumber, ethers } from 'ethers'
+import { useEthers, useTokenAllowance, useTokenBalance } from '@usedapp/core'
+import { parseUnits } from 'ethers/lib/utils'
+import { Contract } from '@ethersproject/contracts'
+import ERCAbi from 'config/abi/ERC20.json'
+import LockFactoryAbi from 'config/abi/LockFactory.json'
 
 const LP_details = [
   {
@@ -39,6 +48,19 @@ export default function Preview({ locker, setActive, lockData }) {
   const [date, setDate] = useState()
   const [days, setDays] = useState(0)
 
+  const { account, library, chainId } = useEthers()
+
+  const { open: openLoadingModal, close: closeLoadingModal } = useModal('LoadingModal')
+
+  const allowance = useTokenAllowance(lockData.tokenAddress, account, FACTORY_ADDRESS[chainId], {
+    refresh: 5,
+  })
+  const balance = useTokenBalance(lockData.tokenAddress, account, {
+    refresh: 5,
+  })
+  const amountLock = parseUnits(lockData.lockAmount, lockData.tokenDecimals)
+  console.log(`amountLock`, amountLock.toString())
+  console.log(`allowance`, allowance.toString())
   useEffect(() => {
     if (lockData.unlockDate) {
       const date = new Date(lockData.unlockDate * 1000)
@@ -47,8 +69,71 @@ export default function Preview({ locker, setActive, lockData }) {
     }
   }, [lockData.unlockDate])
 
+  const needApprove = useMemo(() => {
+    if (typeof allowance === 'undefined') {
+      return true
+    }
+    return amountLock.gt(allowance)
+  }, [amountLock, allowance])
+
+  const isValid = useMemo(() => {
+    if (typeof balance === 'undefined') {
+      return true
+    }
+    return !needApprove && balance.gt(amountLock)
+  }, [amountLock, needApprove, balance])
+
+  console.log(`isValid`, isValid)
+  console.log(`needApprove`, needApprove)
   const lockToken = () => {
     console.log('Token Locked')
+  }
+
+  const handleApprove = async () => {
+    openLoadingModal()
+    const contract = new Contract(lockData.tokenAddress, ERCAbi, library.getSigner())
+    try {
+      const approval = await contract.approve(FACTORY_ADDRESS[chainId], ethers.constants.MaxUint256)
+      await approval.wait()
+    } catch (error) {
+      return false
+    }
+    closeLoadingModal()
+  }
+
+  const handleLockToken = async () => {
+    openLoadingModal()
+    const contract = new Contract(FACTORY_ADDRESS[chainId], LockFactoryAbi, library.getSigner())
+    try {
+      const createLock = await contract.createTokenLock(
+        account,
+        lockData.tokenAddress,
+        amountLock,
+        lockData.unlockDate,
+        '',
+      )
+      await createLock.wait()
+    } catch (error) {
+      return false
+    }
+    closeLoadingModal()
+  }
+  const handleLockLP = async () => {
+    openLoadingModal()
+    const contract = new Contract(FACTORY_ADDRESS[chainId], LockFactoryAbi, library.getSigner())
+    try {
+      const createLock = await contract.createTokenLock(
+        account,
+        lockData.tokenAddress,
+        amountLock,
+        lockData.unlockDate,
+        '',
+      )
+      await createLock.wait()
+    } catch (error) {
+      return false
+    }
+    closeLoadingModal()
   }
 
   return (
@@ -96,13 +181,34 @@ export default function Preview({ locker, setActive, lockData }) {
             <BackArrowSVG className="fill-dark-text dark:fill-light-text" />
             <span className="font-gilroy font-medium text-sm text-dark-text dark:text-light-text">Go Back</span>
           </button>
-
-          <button
-            className="bg-primary-green disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
-            onClick={lockToken}
-          >
-            Lock
-          </button>
+          {needApprove ? (
+            <>
+              <button
+                className="bg-primary-green disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
+                onClick={handleApprove}
+              >
+                Approve Token
+              </button>
+            </>
+          ) : locker ? (
+            <>
+              <button
+                className="bg-primary-green disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
+                onClick={handleLockToken}
+              >
+                Lock Token
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className="bg-primary-green disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
+                onClick={handleLockLP}
+              >
+                Lock LP Token
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

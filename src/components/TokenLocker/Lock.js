@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import { ModalProvider, useModal } from 'react-simple-modal-provider'
 import LockDetails from './LockDetails'
 import Preview from './Preview'
-
+import AmountModal from './Subcomponents/AmountModal'
 const panel_items = [
   {
     id: 1,
@@ -35,7 +36,9 @@ export default function Lock({ lockData, setLockData, lp_locker }) {
 
       <div className="panel-content bg-white dark:bg-dark-1 rounded-r-[10px] pt-7 md:pt-9 px-4 md:p-9 md:w-2/3">
         {active === 'Lock details' && (
-          <LockDetails setActive={setActive} lockData={lockData} setLockData={setLockData} locker={!lp_locker} />
+          <ModalProvider value={[AmountModal]}>
+            <LockDetails setActive={setActive} lockData={lockData} setLockData={setLockData} locker={!lp_locker} />
+          </ModalProvider>
         )}
         {active === 'Preview' && <Preview setActive={setActive} lockData={lockData} locker={!lp_locker} />}
       </div>

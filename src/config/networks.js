@@ -8,4 +8,8 @@ export const networkConfig = {
     // [BSC.chainId]: BSC.rpcUrl,
     // [BSCTestnet.chainId]: BSCTestnet.rpcUrl,
   },
+  networks: [RbaChain],
+  noMetamaskDeactivate: true,
+  refresh: 'never',
+  pollingInterval: 15000,
 }

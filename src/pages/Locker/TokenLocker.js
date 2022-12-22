@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import BaseLayout from '../../components/BaseLayout/BaseLayout'
 import Landing from '../../components/TokenLocker/Landing'
 import Lock from '../../components/TokenLocker/Lock'
 import { useDocumentTitle } from '../../hooks/setDocumentTitle'
 import SheildSecuritySVG from '../../svgs/Sidebar/shield_security'
+import { useConfig, useEthers } from '@usedapp/core'
 
 export default function TokenLocker() {
   useDocumentTitle('Token Locker')
-  const [lockData, setLockData] = useState({
-    showLanding: true,
-    showDetails: false,
+  const initLockState = {
     isValid: false,
     type: 'standard',
     tokenAddress: '',
@@ -23,7 +22,16 @@ export default function TokenLocker() {
     image: '',
     userBalance: '',
     userAllowance: '0',
-  })
+  }
+  const [lockData, setLockData] = useState({ ...initLockState, showLanding: true, showDetails: false })
+  const { account, deactivate, activateBrowserWallet, error, chainId } = useEthers()
+
+  useEffect(() => {
+    if (error && account) {
+      console.log(error.message)
+      return
+    }
+  }, [error, account])
 
   return (
     <BaseLayout
@@ -38,7 +46,7 @@ export default function TokenLocker() {
           </div>
         ) : (
           <div className="w-full px-4 md:px-0 md:w-10/12">
-            <Lock lockData={lockData} setLockData={setLockData} />
+            <Lock lockData={lockData} setLockData={setLockData} initLockState={initLockState} />
           </div>
         )}
       </div>

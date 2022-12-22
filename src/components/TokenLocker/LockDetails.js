@@ -1,20 +1,19 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { useModal } from 'react-simple-modal-provider'
 import BackArrowSVG from '../../svgs/back_arrow'
 import PreviewDetails from '../Common/PreviewDetails'
 import PreviewHeader from '../Common/PreviewHeader'
 import HeadingTags from './Subcomponents/HeadingTags'
 import Datetime from 'react-datetime'
 import CalendarSVG from '../../svgs/TokenLocker/calendar'
-import AmountModal from './Subcomponents/AmountModal'
 import { ThemeContext } from '../../context/ThemeContext/ThemeProvider'
-import { formatUnits, isAddress, parseUnits } from 'ethers/lib/utils'
+import { formatUnits, isAddress } from 'ethers/lib/utils'
 import { getTokenInfo } from '../../utils/tokenInfo'
 import { formatBigToNum } from '../../utils/numberFormat'
-import { ChainId, useEthers, useTokenBalance } from '@usedapp/core'
+import { useEthers } from '@usedapp/core'
 import { getTokenBalance } from '../../utils/getTokenBalance'
 import { BigNumber } from 'ethers'
-import { Contract } from '@ethersproject/contracts'
-import { FACTORY_ADDRESS } from '../../config/constants/address'
+import ErrorTags from './Subcomponents/ErrorTags'
 
 const LP_details = [
   {
@@ -70,18 +69,37 @@ const Token_details = [
   },
 ]
 
-export default function LockDetails({ setActive, setLockData, lockData, locker }) {
+export default function LockDetails({ setActive, setLockData, lockData, locker, initLockState }) {
   const [visible, setVisible] = useState(lockData.showDetails)
-  const [popup, showPopup] = useState(false)
-  const [approval, setApproval] = useState(false)
+  const [formStatus, setFormStatus] = useState({
+    isError: false,
+    message: '',
+  })
+  const [enable, setEnable] = useState(lockData.isValid)
   const [address, setAddress] = useState(lockData.tokenAddress)
   const { theme } = useContext(ThemeContext)
-  const { account, library } = useEthers()
+  const { account } = useEthers()
+
+  const { open: openAmountModal } = useModal('AmountModal')
+  const { open: openLoadingModal, close: closeLoadingModal } = useModal('LoadingModal')
+
   const handleAddress = async (e) => {
+    setLockData((prevState) => ({
+      ...prevState,
+      ...initLockState,
+    }))
+    setFormStatus((prevState) => ({
+      ...prevState,
+      isError: false,
+      message: '',
+    }))
+
+    setEnable(false)
+    setVisible(false)
     setAddress(e.target.value)
     if (isAddress(e.target.value)) {
+      openLoadingModal()
       const tokenInfo = await getTokenInfo(e.target.value)
-
       if (tokenInfo.success) {
         setLockData((prevState) => ({
           ...prevState,
@@ -91,16 +109,23 @@ export default function LockDetails({ setActive, setLockData, lockData, locker }
           tokenDecimals: tokenInfo.data.decimals,
           tokenSupply: tokenInfo.data.totalSupply,
           showDetails: true,
+          isValid: true,
+        }))
+        setVisible(true)
+        setEnable(true)
+      } else {
+        setFormStatus((prevState) => ({
+          ...prevState,
+          isError: true,
+          message: 'Not Valid ERC20 Token',
         }))
       }
-      console.log(tokenInfo)
-
-      setVisible(true)
+      closeLoadingModal()
     } else {
-      setVisible(false)
       setLockData((prevState) => ({
         ...prevState,
         showDetails: false,
+        isValid: false,
       }))
     }
   }
@@ -110,15 +135,6 @@ export default function LockDetails({ setActive, setLockData, lockData, locker }
       ...prevState,
       unlockDate: e.unix(),
     }))
-  }
-
-  const handleApprove = () => {
-    // const factoryAddress = FACTORY_ADDRESS[chainId]
-    console.log(library.getSigner()._address)
-    library.getNetwork().then((e) => {
-      console.log(e)
-    })
-    // setApproval(!approval)
   }
 
   const handleLockAmount = (e) => {
@@ -133,7 +149,6 @@ export default function LockDetails({ setActive, setLockData, lockData, locker }
   }
 
   useEffect(() => {
-    console.log('effect run')
     getTokenBalance(account, lockData.tokenAddress).then((value) => {
       setLockData((prevState) => ({
         ...prevState,
@@ -142,19 +157,10 @@ export default function LockDetails({ setActive, setLockData, lockData, locker }
     })
   }, [account, lockData.tokenAddress, setLockData])
 
+  console.log(lockData)
   return (
-    <div className={`w-full `}>
-      {popup && (
-        <div className="fixed z-50  top-0 left-0">
-          <AmountModal
-            amount={lockData.lockAmount}
-            balance={formatUnits(BigNumber.from(lockData.userBalance), lockData.tokenDecimals) * 1}
-            showPopup={showPopup}
-            setAmount={handleLockAmount}
-          />
-        </div>
-      )}
-      <div className={`w-full flex flex-col ${popup ? 'overflow-hidden h-[calc(100vh-210px)]' : ''}`}>
+    <div className={`w-full`}>
+      <div className={`w-full flex flex-col`}>
         {locker ? <HeadingTags name={'Token Address'} required /> : <HeadingTags name={'LP Address'} required />}
 
         <input
@@ -166,6 +172,7 @@ export default function LockDetails({ setActive, setLockData, lockData, locker }
           }}
           value={address}
         />
+        {formStatus.isError ? <ErrorTags message={formStatus.message} /> : <></>}
 
         {visible && (
           <>
@@ -215,7 +222,13 @@ export default function LockDetails({ setActive, setLockData, lockData, locker }
 
               <button
                 className="bg-primary-green bg-opacity-[0.08] font-bold text-primary-green py-4 w-[25%] rounded-md"
-                onClick={() => showPopup(true)}
+                onClick={() =>
+                  openAmountModal({
+                    amount: `${lockData.lockAmount}`,
+                    balance: `${formatUnits(BigNumber.from(lockData.userBalance), lockData.tokenDecimals) * 1}`,
+                    setAmount: handleLockAmount,
+                  })
+                }
               >
                 Add
               </button>
@@ -258,20 +271,9 @@ export default function LockDetails({ setActive, setLockData, lockData, locker }
               </button>
             )}
 
-            {!approval ? (
-              <button
-                className="bg-primary-green mr-2 disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
-                onClick={handleApprove}
-              >
-                Approve
-              </button>
-            ) : (
-              <></>
-            )}
-
             <button
               className="bg-primary-green disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
-              disabled={address.length < 5}
+              disabled={!enable}
               onClick={() => setActive('Preview')}
             >
               Next

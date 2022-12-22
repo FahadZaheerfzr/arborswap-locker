@@ -6,15 +6,22 @@ import { SidebarContext } from '../../context/SidebarContext/GlobalProvider'
 import { useActiveItem } from '../../hooks/setActiveItem'
 import { ThemeContext } from '../../context/ThemeContext/ThemeProvider'
 import Topbar from '../Topbar/Topbar'
-import ConnectionModal from '../Common/ConnectionModal'
 
-export default function BaseLayout({ children, noTopbar, noSidebar, title, subpage, title_img, page_name, page_description }) {
+export default function BaseLayout({
+  children,
+  noTopbar,
+  noSidebar,
+  title,
+  subpage,
+  title_img,
+  page_name,
+  page_description,
+}) {
   const { showSidebar, setShowSidebar } = useContext(SidebarContext)
   const { theme, setTheme } = useContext(ThemeContext)
   const [sideBarMobile, setSideBarMobile] = useState(false)
   const [tempfixed, setTempFixed] = useState(true)
   const [activeItem] = useActiveItem()
-  const [modal, showModal] = useState(false)
 
   const handleTempFixed = () => {
     setTheme(!tempfixed ? 'light' : 'dark')
@@ -35,21 +42,13 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, subpa
 
   return (
     <div className="w-full dark:bg-dark">
-      {modal &&
-        <div className='sticky top-0 z-20'>
-          <div className='connection-wallet absolute  w-screen h-screen backdrop-blur-lg'>
-            <div className='flex  w-full h-full justify-center items-center'>
-              <ConnectionModal showModal={showModal} />
-            </div>
-          </div>
-        </div>
-      }
       <div className={`flex w-full ${noTopbar ? '' : ''}`}>
         {noSidebar ? null : (
-          <div className='fixed top-0 z-20'>
+          <div className="fixed top-0 z-20">
             <div
-              className={`${sideBarMobile ? 'block' : 'hidden'
-                } md:hidden w-[240px] h-screen bg-white absolute dark:bg-dark-1 `}
+              className={`${
+                sideBarMobile ? 'block' : 'hidden'
+              } md:hidden w-[240px] h-screen bg-white absolute dark:bg-dark-1 `}
             >
               <Sidebar
                 fullSidebar={true}
@@ -62,8 +61,9 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, subpa
         )}
         {noSidebar ? null : (
           <div
-            className={`hidden md:flex w-[270px] bg-white dark:bg-dark-1 ${Styles.sideBar} ease-in-out duration-300 ${showSidebar ? 'translate-x-0' : '-translate-x-[170px]'
-              }`}
+            className={`hidden md:flex w-[270px] bg-white dark:bg-dark-1 ${Styles.sideBar} ease-in-out duration-300 ${
+              showSidebar ? 'translate-x-0' : '-translate-x-[170px]'
+            }`}
           >
             <Sidebar
               fullSidebar={showSidebar}
@@ -88,8 +88,9 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, subpa
         )}
 
         <div
-          className={`w-full dark:bg-dark md:w-[calc(100%-270px)] md:ml-[270px] ease-in-out duration-300 ${showSidebar ? ' translate-x-0' : '-translate-x-[100px]'
-            }`}
+          className={`w-full dark:bg-dark md:w-[calc(100%-270px)] md:ml-[270px] ease-in-out duration-300 ${
+            showSidebar ? ' translate-x-0' : '-translate-x-[100px]'
+          }`}
         >
           {noTopbar ? null : (
             <div className={`${Styles.topBar} w-full`}>
@@ -102,7 +103,6 @@ export default function BaseLayout({ children, noTopbar, noSidebar, title, subpa
                 title_img={title_img}
                 subpage={subpage}
                 page_name={page_name}
-                showModal={showModal}
               />
             </div>
           )}

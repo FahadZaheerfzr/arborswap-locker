@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Modal, { useModalState, useModalProps } from 'react-simple-modal-provider'
 
 const options = [
   {
@@ -23,8 +24,9 @@ const options = [
   },
 ]
 
-export default function AmountModal({ amount, balance, showPopup, setAmount }) {
+const AmountModalBody = ({ setOpen }) => {
   const [selectedAmount, setSelectedAmount] = useState('0')
+  const { amount, balance, setAmount } = useModalProps('AmountModal')
 
   useEffect(() => {
     setSelectedAmount(amount)
@@ -32,16 +34,16 @@ export default function AmountModal({ amount, balance, showPopup, setAmount }) {
 
   const handleSubmit = () => {
     setAmount(selectedAmount)
-    showPopup(false)
+    setOpen(false)
   }
 
   return (
-    <div className="w-[calc(100vw-270px)] h-screen backdrop-blur-md flex flex-col justify-center items-center">
+    <>
       <div className="max-w-[400px] w-full rounded-[10px] px-5 py-7 bg-white dark:bg-dark-1">
         <div className="flex justify-between items-center  ">
           <span className="text-dark-text dark:text-light-text font-gilroy font-semibold text-lg">Add to Locker</span>
 
-          <div className="flex items-center cursor-pointer" onClick={() => showPopup(false)}>
+          <div className="flex items-center cursor-pointer" onClick={() => setOpen(false)}>
             <span className="text-sm font-gilroy font-semibold text-dark-text dark:text-light-text mr-2">Close</span>
             <div className="flex justify-center items-center bg-[#E56060] text-[#E56060] bg-opacity-10 rounded-full w-[15px] h-[15px]">
               &#10005;
@@ -94,6 +96,16 @@ export default function AmountModal({ amount, balance, showPopup, setAmount }) {
           Confirm
         </button>
       </div>
-    </div>
+    </>
+  )
+}
+
+export default function AmountModal({ children }) {
+  const [isOpen, setOpen] = useModalState()
+
+  return (
+    <Modal id={'AmountModal'} consumer={children} isOpen={isOpen} setOpen={setOpen} allowClickOutside={false}>
+      <AmountModalBody setOpen={setOpen} />
+    </Modal>
   )
 }
