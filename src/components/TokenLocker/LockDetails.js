@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { useModal } from 'react-simple-modal-provider'
 import BackArrowSVG from '../../svgs/back_arrow'
 import PreviewDetails from '../Common/PreviewDetails'
@@ -14,60 +14,7 @@ import { useEthers } from '@usedapp/core'
 import { getTokenBalance } from '../../utils/getTokenBalance'
 import { BigNumber } from 'ethers'
 import ErrorTags from './Subcomponents/ErrorTags'
-
-const LP_details = [
-  {
-    id: 1,
-    name: 'Quote Pair',
-    value: 'WBNB',
-    icon: '/images/cards/bnb.svg',
-  },
-  {
-    id: 2,
-    name: 'Base Pair',
-    value: 'SXP',
-    icon: '/images/cards/rip.svg',
-  },
-  {
-    id: 3,
-    name: 'Symbol',
-    value: 'WBNB/SXP',
-  },
-  {
-    id: 4,
-    name: 'LP Supply',
-    value: 9014470,
-  },
-  {
-    id: 5,
-    name: 'Dex Listed',
-    value: 'Arborswap',
-    icon: '/images/logo-small.svg',
-  },
-]
-
-const Token_details = [
-  {
-    id: 1,
-    name: 'Name',
-    value: 'Swipe Token',
-  },
-  {
-    id: 2,
-    name: 'Symbol',
-    value: 'SXP',
-  },
-  {
-    id: 3,
-    name: 'Decimals',
-    value: '18',
-  },
-  {
-    id: 4,
-    name: 'Token supply',
-    value: '200,000,000 SXP',
-  },
-]
+import { getLpInfo } from 'utils/lpInfo'
 
 export default function LockDetails({ setActive, setLockData, lockData, locker, initLockState }) {
   const [visible, setVisible] = useState(lockData.showDetails)
@@ -84,6 +31,13 @@ export default function LockDetails({ setActive, setLockData, lockData, locker, 
   const { open: openLoadingModal, close: closeLoadingModal } = useModal('LoadingModal')
 
   const handleAddress = async (e) => {
+    if (lockData.type === 'lptoken') {
+      return handleLpAddress(e)
+    }
+    return handleTokenAddress(e)
+  }
+
+  const handleTokenAddress = async (e) => {
     setLockData((prevState) => ({
       ...prevState,
       ...initLockState,
@@ -130,6 +84,63 @@ export default function LockDetails({ setActive, setLockData, lockData, locker, 
     }
   }
 
+  const handleLpAddress = async (e) => {
+    setLockData((prevState) => ({
+      ...prevState,
+      ...initLockState,
+    }))
+    setFormStatus((prevState) => ({
+      ...prevState,
+      isError: false,
+      message: '',
+    }))
+
+    setEnable(false)
+    setVisible(false)
+    setAddress(e.target.value)
+    if (isAddress(e.target.value)) {
+      openLoadingModal()
+      const tokenInfo = await getLpInfo(e.target.value)
+      console.log(tokenInfo)
+      if (tokenInfo.success) {
+        setLockData((prevState) => ({
+          ...prevState,
+          tokenAddress: e.target.value,
+          tokenName: tokenInfo.data.name,
+          tokenSymbol: tokenInfo.data.symbol,
+          tokenDecimals: tokenInfo.data.decimals,
+          tokenSupply: tokenInfo.data.totalSupply,
+          factory: tokenInfo.data.factory,
+          token0: {
+            address: tokenInfo.data.token0.address,
+            symbol: tokenInfo.data.token0.symbol,
+          },
+          token1: {
+            address: tokenInfo.data.token1.address,
+            symbol: tokenInfo.data.token1.symbol,
+          },
+          showDetails: true,
+          isValid: true,
+        }))
+        setVisible(true)
+        setEnable(true)
+      } else {
+        setFormStatus((prevState) => ({
+          ...prevState,
+          isError: true,
+          message: 'Not Valid LP-Token Token',
+        }))
+      }
+      closeLoadingModal()
+    } else {
+      setLockData((prevState) => ({
+        ...prevState,
+        showDetails: false,
+        isValid: false,
+      }))
+    }
+  }
+
   const handleChange = (e) => {
     setLockData((prevState) => ({
       ...prevState,
@@ -157,7 +168,10 @@ export default function LockDetails({ setActive, setLockData, lockData, locker, 
     })
   }, [account, lockData.tokenAddress, setLockData])
 
-  console.log(lockData)
+  const tokenSymbol = useMemo(() => {
+    return lockData.type === 'lptoken' ? `${lockData.token0.symbol}/${lockData.token1.symbol}` : lockData.tokenSymbol
+  }, [lockData])
+
   return (
     <div className={`w-full`}>
       <div className={`w-full flex flex-col`}>
@@ -190,12 +204,16 @@ export default function LockDetails({ setActive, setLockData, lockData, locker, 
                   />
                 </>
               ) : (
-                LP_details.map(
-                  (item) =>
-                    item !== LP_details[5] && (
-                      <PreviewDetails key={item.id} name={item.name} value={item.value} icon={item.icon} />
-                    ),
-                )
+                <>
+                  <PreviewDetails name="Quote Pair" value={lockData.token0.symbol} />
+                  <PreviewDetails name="Base Pair" value={lockData.token1.symbol} />
+                  <PreviewDetails name="Symbol" value={tokenSymbol} />
+                  <PreviewDetails
+                    name="LP Supply"
+                    value={`${formatBigToNum(lockData.tokenSupply, lockData.tokenDecimals)} ${tokenSymbol}`}
+                  />
+                  <PreviewDetails name="Dex Listed" value={lockData.factory} />
+                </>
               )}
             </div>
           </>
@@ -217,7 +235,7 @@ export default function LockDetails({ setActive, setLockData, lockData, locker, 
                   value={lockData.lockAmount}
                   onChange={(e) => handleLockAmount(e.target.value)}
                 />
-                <span className="text-gray dark:text-gray-dark font-bold">{lockData.tokenSymbol}</span>
+                <span className="text-gray dark:text-gray-dark font-bold">{tokenSymbol}</span>
               </div>
 
               <button

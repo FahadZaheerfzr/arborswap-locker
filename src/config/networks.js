@@ -1,14 +1,15 @@
 // import { BSC, BSCTestnet } from '@usedapp/core'
+import { BSCTestnet } from '@usedapp/core'
 import { RbaChain } from './constants/chain'
 
 export const networkConfig = {
-  readOnlyChainId: RbaChain.chainId,
+  readOnlyChainId: BSCTestnet.chainId,
   readOnlyUrls: {
-    [RbaChain.chainId]: RbaChain.rpcUrl,
+    [BSCTestnet.chainId]: 'https://rpc.ankr.com/bsc_testnet_chapel',
     // [BSC.chainId]: BSC.rpcUrl,
     // [BSCTestnet.chainId]: BSCTestnet.rpcUrl,
   },
-  networks: [RbaChain],
+  networks: [BSCTestnet],
   noMetamaskDeactivate: true,
   refresh: 'never',
   pollingInterval: 15000,

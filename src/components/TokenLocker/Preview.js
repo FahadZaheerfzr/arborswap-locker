@@ -58,9 +58,13 @@ export default function Preview({ locker, setActive, lockData }) {
   const balance = useTokenBalance(lockData.tokenAddress, account, {
     refresh: 5,
   })
-  const amountLock = parseUnits(lockData.lockAmount, lockData.tokenDecimals)
-  console.log(`amountLock`, amountLock.toString())
-  console.log(`allowance`, allowance.toString())
+  const amountLock = useMemo(() => {
+    if (typeof lockData.lockAmount === 'string') {
+      return parseUnits(lockData.lockAmount, lockData.tokenDecimals)
+    }
+    return parseUnits(lockData.lockAmount.toString(), lockData.tokenDecimals)
+  }, [lockData.lockAmount, lockData.tokenDecimals])
+
   useEffect(() => {
     if (lockData.unlockDate) {
       const date = new Date(lockData.unlockDate * 1000)
@@ -83,21 +87,13 @@ export default function Preview({ locker, setActive, lockData }) {
     return !needApprove && balance.gt(amountLock)
   }, [amountLock, needApprove, balance])
 
-  console.log(`isValid`, isValid)
-  console.log(`needApprove`, needApprove)
-  const lockToken = () => {
-    console.log('Token Locked')
-  }
-
   const handleApprove = async () => {
     openLoadingModal()
     const contract = new Contract(lockData.tokenAddress, ERCAbi, library.getSigner())
     try {
       const approval = await contract.approve(FACTORY_ADDRESS[chainId], ethers.constants.MaxUint256)
       await approval.wait()
-    } catch (error) {
-      return false
-    }
+    } catch (error) {}
     closeLoadingModal()
   }
 
@@ -122,7 +118,7 @@ export default function Preview({ locker, setActive, lockData }) {
     openLoadingModal()
     const contract = new Contract(FACTORY_ADDRESS[chainId], LockFactoryAbi, library.getSigner())
     try {
-      const createLock = await contract.createTokenLock(
+      const createLock = await contract.createLiquidityLock(
         account,
         lockData.tokenAddress,
         amountLock,
@@ -135,6 +131,9 @@ export default function Preview({ locker, setActive, lockData }) {
     }
     closeLoadingModal()
   }
+  const tokenSymbol = useMemo(() => {
+    return lockData.type === 'lptoken' ? `${lockData.token0.symbol}/${lockData.token1.symbol}` : lockData.tokenSymbol
+  }, [lockData])
 
   return (
     <div className="-mt-10">
@@ -152,22 +151,23 @@ export default function Preview({ locker, setActive, lockData }) {
             />
           </>
         ) : (
-          LP_details.map(
-            (item) =>
-              item !== LP_details[5] && (
-                <PreviewDetails key={item.id} name={item.name} value={item.value} icon={item.icon} />
-              ),
-          )
+          <>
+            <PreviewDetails name="Quote Pair" value={lockData.token0.symbol} />
+            <PreviewDetails name="Base Pair" value={lockData.token1.symbol} />
+            <PreviewDetails name="Symbol" value={tokenSymbol} />
+            <PreviewDetails
+              name="LP Supply"
+              value={`${formatBigToNum(lockData.tokenSupply, lockData.tokenDecimals)} ${tokenSymbol}`}
+            />
+            <PreviewDetails name="Dex Listed" value={lockData.factory} />
+          </>
         )}
       </div>
 
       <PreviewHeader heading={'Lock Details'} />
 
       <div className="flex flex-col">
-        <PreviewDetails
-          name={'Amount to be Locked'}
-          value={`${lockData.lockAmount.toLocaleString()} ${lockData.tokenSymbol}`}
-        />
+        <PreviewDetails name={'Amount to be Locked'} value={`${lockData.lockAmount.toLocaleString()} ${tokenSymbol}`} />
         <PreviewDetails name={'Lock Period (Days)'} value={days} />
         <PreviewDetails name={'Unlock Date'} value={date} />
       </div>
