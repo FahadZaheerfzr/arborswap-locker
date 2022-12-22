@@ -44,7 +44,7 @@ export const sitemap = [
       {
         id: 1,
         name: 'Locked Assets',
-        link: '/',
+        link: '/locked-assets',
       },
       {
         id: 2,
@@ -57,7 +57,7 @@ export const sitemap = [
         link: '/locker/lp-locker',
       },
     ],
-    sublinks: ['/', '/locker/token-locker', '/locker/lp-locker'],
+    sublinks: ['/locked-assets', '/locker/token-locker', '/locker/lp-locker'],
   },
   {
     id: 4,

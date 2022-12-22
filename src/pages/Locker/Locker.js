@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { getLiquidityLockList, getTokenLockList, getTokenLockInfos, getLpLockInfos } from 'utils/getLockList'
 import BaseLayout from '../../components/BaseLayout/BaseLayout'
 import HomeLayout from '../../components/HomeLayout'
@@ -28,7 +28,6 @@ export default function Locker() {
           setLiquidityList(infoLp.data)
         }
       }
-      console.log(liquidityList)
       setReady(true)
     } catch (error) {
       console.log(error)

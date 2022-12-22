@@ -12,15 +12,15 @@ import TokenLocker from '../pages/Locker/TokenLocker'
 export default function WebRouter() {
   let routes = useRoutes([
     { path: '/', element: <Locker /> },
-    { path: '/locked-assets/:id', element: <LockedAsset /> },
+    { path: '/locked-assets', element: <Locker /> },
+    { path: '/locked-assets/token/:id', element: <LockedAsset type={'token'} /> },
+    { path: '/locked-assets/lp-token/:id', element: <LockedAsset type={'lp-token'} /> },
     { path: '/locker/token-locker', element: <TokenLocker /> },
     { path: '/locker/lp-locker', element: <LpLocker /> },
     { path: '/launchpad/pools', element: <Pools /> },
     { path: '/launchpad/pools/:id', element: <PoolPage /> },
     { path: '/launchpad/create-sale', element: <CreateSale /> },
     { path: '*', element: <Error /> },
-
-
   ])
   return routes
 }

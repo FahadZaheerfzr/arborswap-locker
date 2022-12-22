@@ -13,45 +13,15 @@ export default function LockerBase({ cardFormat, itemSelected, tokenList, liquid
         liquidityList.map((liquidity, index) => <Card key={index} data={liquidity} token={false} />)}
 
       {itemSelected === 'token' &&
-        Tokens.map((card) => (
-          <Card
-            key={card.id}
-            id={card.id}
-            name1={card.name1}
-            icon1={card.icon1}
-            token={card.token}
-            amount={card.amount}
-            amountUSD={card.amountUSD}
-            unlock_date={card.unlock_date}
-          />
-        ))}
+        tokenList.map((tokenList, index) => <Card key={index} data={tokenList} token={true} />)}
     </div>
   ) : (
     <div className="w-full grid grid-cols-2 gap-5 mt-7">
       {itemSelected === 'liquidity' &&
-        Cards.map((card) => (
-          <List
-            key={card.id}
-            name1={card.name1}
-            name2={card.name2}
-            icon1={card.icon1}
-            icon2={card.icon2}
-            amount={card.amount}
-            unlock_date={card.unlock_date}
-          />
-        ))}
+        liquidityList.map((liquidity, index) => <List key={index} data={liquidity} token={false} />)}
 
       {itemSelected === 'token' &&
-        Tokens.map((card) => (
-          <List
-            key={card.id}
-            name1={card.name1}
-            icon1={card.icon1}
-            token={card.token}
-            amount={card.amount}
-            unlock_date={card.unlock_date}
-          />
-        ))}
+        tokenList.map((tokenList, index) => <List key={index} data={tokenList} token={true} />)}
     </div>
   )
 }
