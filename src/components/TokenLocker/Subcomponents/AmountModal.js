@@ -38,8 +38,8 @@ const AmountModalBody = ({ setOpen }) => {
   }
 
   return (
-    <>
-      <div className="max-w-[400px] w-full rounded-[10px] px-5 py-7 bg-white dark:bg-dark-1">
+    <div className='max-w-[420px] w-full '>
+      <div className="rounded-[10px] px-5  py-7 bg-white dark:bg-dark-1">
         <div className="flex justify-between items-center  ">
           <span className="text-dark-text dark:text-light-text font-gilroy font-semibold text-lg">Add to Locker</span>
 
@@ -88,7 +88,7 @@ const AmountModalBody = ({ setOpen }) => {
         </div>
       </div>
 
-      <div className="max-w-[400px] w-full mt-10">
+      <div className="max-w-[420px] w-full mt-10">
         <button
           className="w-full bg-primary-green hover:opacity-40 text-white py-5 rounded-md font-gilroy font-bold text-xl"
           onClick={handleSubmit}
@@ -96,7 +96,7 @@ const AmountModalBody = ({ setOpen }) => {
           Confirm
         </button>
       </div>
-    </>
+    </div>
   )
 }
 
