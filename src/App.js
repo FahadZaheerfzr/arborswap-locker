@@ -3,18 +3,21 @@ import { SidebarProvider } from './context/SidebarContext/GlobalProvider'
 import WebRouter from './route'
 import 'react-datetime/css/react-datetime.css'
 import { DAppProvider } from '@usedapp/core'
-import WalletConnectProvider from '@walletconnect/web3-provider/dist/umd/index.min.js'
 import { networkConfig } from './config/networks'
+import { ModalProvider } from 'react-simple-modal-provider'
+import modals from 'components/Modal'
 
 function App() {
   return (
     <div className="">
       <DAppProvider config={networkConfig}>
-        <SidebarProvider>
-          <Router>
-            <WebRouter />
-          </Router>
-        </SidebarProvider>
+        <ModalProvider value={modals}>
+          <SidebarProvider>
+            <Router>
+              <WebRouter />
+            </Router>
+          </SidebarProvider>
+        </ModalProvider>
       </DAppProvider>
     </div>
   )

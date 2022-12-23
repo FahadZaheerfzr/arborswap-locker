@@ -1,9 +1,5 @@
 import React from 'react'
-import NotificationSVG from '../../svgs/notification'
-import { useEthers } from '@usedapp/core'
-
-import WalletSVG from '../../svgs/Topbar/empty_wallet'
-import { formatAddress } from '../../utils/formatAddress'
+import ConnectButton from './ConnectButton'
 
 export default function Topbar({
   setSideBarMobile,
@@ -13,9 +9,7 @@ export default function Topbar({
   subpage,
   page_name,
   page_description,
-  showModal,
 }) {
-  const { account } = useEthers()
   return (
     <div className="h-[110px] flex items-center justify-between pl-[4%] pr-[5%] ">
       <div className="flex items-center">
@@ -66,42 +60,7 @@ export default function Topbar({
           </div>
         )}
       </div>
-
-      <div className="flex user-div">
-        {account && (
-          <div className="hidden w-10 h-10 lg:w-12 lg:h-12 bg-[#F5F6F7] dark:bg-dark-1 rounded-md md:flex items-center justify-center">
-            <NotificationSVG className="hidden md:block fill-slate-700 dark:fill-white" />
-          </div>
-        )}
-        {account && (
-          <div className="flex md:hidden w-10 h-10 justify-center border-2 rounded-md border-primary-green border-opacity-50 items-center ml-4">
-            <WalletSVG className="fill-dark-text" />
-          </div>
-        )}
-        {account ? (
-          <button className="hidden md:flex border-2 rounded-md border-primary-green border-opacity-50 items-center justify-between bg-white dark:bg-dark-1 ml-8">
-            <img className="ml-5" src="/images/topbar/wallets/metamask.svg" alt="metamask" />
-
-            <span className=" font-gilroy font-medium ml-2 dark:text-light">{formatAddress(account)}</span>
-            <div className="flex ml-3 mr-6">
-              <div className="w-1 h-1 rounded-full bg-primary-green mr-[2px]" />
-              <div className="w-1 h-1 rounded-full bg-primary-green mr-[2px]" />
-              <div className="w-1 h-1 rounded-full bg-primary-green" />
-            </div>
-          </button>
-        ) : (
-          <button
-            className="py-3 px-5 bg-primary-green rounded-md flex items-center focus:outline-none"
-            onClick={() => showModal(true)}
-          >
-            <WalletSVG className="fill-white mr-[10px]" />
-            <span className="font-gilroy font-semibold text-[#FAF8F5]">
-              Connect <span className="hidden md:inline-block">Wallet</span>
-
-            </span>
-          </button>
-        )}
-      </div>
+      <ConnectButton />
     </div>
   )
 }

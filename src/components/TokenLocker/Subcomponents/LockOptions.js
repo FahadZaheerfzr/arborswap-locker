@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function LockOptions({ setLock, selected, name }) {
+export default function LockOptions({ lockData, setLockData, selected, name }) {
   return (
     <div
       className={`w-full rounded-[10px] px-5 py-5 ${
@@ -19,7 +19,12 @@ export default function LockOptions({ setLock, selected, name }) {
           className={`border-[1.5px] ${
             selected ? 'border-[#C89211]' : 'border-dim-text'
           } h-6 w-6 rounded-full flex justify-center items-center  border-opacity-50`}
-          onClick={() => setLock(name.toLowerCase())}
+          onClick={() =>
+            setLockData((prevState) => ({
+              ...prevState,
+              type: name.toLowerCase(),
+            }))
+          }
         >
           {selected && <div className="h-3 w-3 rounded-full bg-[#C89211]"></div>}
         </div>

@@ -1,98 +1,179 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
+import { useModal } from 'react-simple-modal-provider'
 import BackArrowSVG from '../../svgs/back_arrow'
 import PreviewDetails from '../Common/PreviewDetails'
 import PreviewHeader from '../Common/PreviewHeader'
 import HeadingTags from './Subcomponents/HeadingTags'
 import Datetime from 'react-datetime'
 import CalendarSVG from '../../svgs/TokenLocker/calendar'
-import AmountModal from './Subcomponents/AmountModal'
 import { ThemeContext } from '../../context/ThemeContext/ThemeProvider'
+import { formatUnits, isAddress } from 'ethers/lib/utils'
+import { getTokenInfo } from '../../utils/tokenInfo'
+import { formatBigToNum } from '../../utils/numberFormat'
+import { useEthers } from '@usedapp/core'
+import { getTokenBalance } from '../../utils/getTokenBalance'
+import { BigNumber } from 'ethers'
+import ErrorTags from './Subcomponents/ErrorTags'
+import { getLpInfo } from 'utils/lpInfo'
 
-const LP_details = [
-  {
-    id: 1,
-    name: 'Quote Pair',
-    value: 'WBNB',
-    icon: '/images/cards/bnb.svg',
-  },
-  {
-    id: 2,
-    name: 'Base Pair',
-    value: 'SXP',
-    icon: '/images/cards/rip.svg',
-  },
-  {
-    id: 3,
-    name: 'Symbol',
-    value: 'WBNB/SXP',
-  },
-  {
-    id: 4,
-    name: 'LP Supply',
-    value: 9014470,
-  },
-  {
-    id: 5,
-    name: 'Dex Listed',
-    value: 'Arborswap',
-    icon: '/images/logo-small.svg',
-  },
-]
-
-const Token_details = [
-  {
-    id: 1,
-    name: 'Name',
-    value: 'Swipe Token',
-  },
-  {
-    id: 2,
-    name: 'Symbol',
-    value: 'SXP',
-  },
-  {
-    id: 3,
-    name: 'Decimals',
-    value: '18',
-  },
-  {
-    id: 4,
-    name: 'Token supply',
-    value: '200,000,000 SXP',
-  },
-]
-
-export default function LockDetails({ setActive, setPage, locker, amount_val, amount, setAmount, date, setDate }) {
-  const [visible, setVisible] = useState(false)
-  const [popup, showPopup] = useState(false)
-  const [address, setAddress] = useState('')
+export default function LockDetails({ setActive, setLockData, lockData, locker, initLockState }) {
+  const [visible, setVisible] = useState(lockData.showDetails)
+  const [formStatus, setFormStatus] = useState({
+    isError: false,
+    message: '',
+  })
+  const [enable, setEnable] = useState(lockData.isValid)
+  const [address, setAddress] = useState(lockData.tokenAddress)
   const { theme } = useContext(ThemeContext)
+  const { account } = useEthers()
 
-  const handleAddress = (e) => {
+  const { open: openAmountModal } = useModal('AmountModal')
+  const { open: openLoadingModal, close: closeLoadingModal } = useModal('LoadingModal')
+
+  const handleAddress = async (e) => {
+    if (lockData.type === 'lptoken') {
+      return handleLpAddress(e)
+    }
+    return handleTokenAddress(e)
+  }
+
+  const handleTokenAddress = async (e) => {
+    setLockData((prevState) => ({
+      ...prevState,
+      ...initLockState,
+    }))
+    setFormStatus((prevState) => ({
+      ...prevState,
+      isError: false,
+      message: '',
+    }))
+
+    setEnable(false)
+    setVisible(false)
     setAddress(e.target.value)
-    if (e.target.value.length > 5) {
-      setVisible(true)
+    if (isAddress(e.target.value)) {
+      openLoadingModal()
+      const tokenInfo = await getTokenInfo(e.target.value)
+      if (tokenInfo.success) {
+        setLockData((prevState) => ({
+          ...prevState,
+          tokenAddress: e.target.value,
+          tokenName: tokenInfo.data.name,
+          tokenSymbol: tokenInfo.data.symbol,
+          tokenDecimals: tokenInfo.data.decimals,
+          tokenSupply: tokenInfo.data.totalSupply,
+          showDetails: true,
+          isValid: true,
+        }))
+        setVisible(true)
+        setEnable(true)
+      } else {
+        setFormStatus((prevState) => ({
+          ...prevState,
+          isError: true,
+          message: 'Not Valid ERC20 Token',
+        }))
+      }
+      closeLoadingModal()
     } else {
-      setVisible(false)
+      setLockData((prevState) => ({
+        ...prevState,
+        showDetails: false,
+        isValid: false,
+      }))
+    }
+  }
+
+  const handleLpAddress = async (e) => {
+    setLockData((prevState) => ({
+      ...prevState,
+      ...initLockState,
+    }))
+    setFormStatus((prevState) => ({
+      ...prevState,
+      isError: false,
+      message: '',
+    }))
+
+    setEnable(false)
+    setVisible(false)
+    setAddress(e.target.value)
+    if (isAddress(e.target.value)) {
+      openLoadingModal()
+      const tokenInfo = await getLpInfo(e.target.value)
+      if (tokenInfo.success) {
+        setLockData((prevState) => ({
+          ...prevState,
+          tokenAddress: e.target.value,
+          tokenName: tokenInfo.data.name,
+          tokenSymbol: tokenInfo.data.symbol,
+          tokenDecimals: tokenInfo.data.decimals,
+          tokenSupply: tokenInfo.data.totalSupply,
+          factory: tokenInfo.data.factory,
+          token0: {
+            address: tokenInfo.data.token0.address,
+            symbol: tokenInfo.data.token0.symbol,
+          },
+          token1: {
+            address: tokenInfo.data.token1.address,
+            symbol: tokenInfo.data.token1.symbol,
+          },
+          showDetails: true,
+          isValid: true,
+        }))
+        setVisible(true)
+        setEnable(true)
+      } else {
+        setFormStatus((prevState) => ({
+          ...prevState,
+          isError: true,
+          message: 'Not Valid LP-Token Token',
+        }))
+      }
+      closeLoadingModal()
+    } else {
+      setLockData((prevState) => ({
+        ...prevState,
+        showDetails: false,
+        isValid: false,
+      }))
     }
   }
 
   const handleChange = (e) => {
-    setDate(e.toString())
+    setLockData((prevState) => ({
+      ...prevState,
+      unlockDate: e.unix(),
+    }))
+  }
+
+  const handleLockAmount = (e) => {
+    setLockData((prevState) => ({
+      ...prevState,
+      lockAmount: e,
+    }))
   }
 
   const valid = (current) => {
     return current.isAfter(new Date())
   }
 
+  useEffect(() => {
+    getTokenBalance(account, lockData.tokenAddress).then((value) => {
+      setLockData((prevState) => ({
+        ...prevState,
+        userBalance: value,
+      }))
+    })
+  }, [account, lockData.tokenAddress, setLockData])
+
+  const tokenSymbol = useMemo(() => {
+    return lockData.type === 'lptoken' ? `${lockData.token0.symbol}/${lockData.token1.symbol}` : lockData.tokenSymbol
+  }, [lockData])
+
   return (
-    <div className={`w-full `}>
-      {popup && (
-        <div className="fixed z-50  top-0 left-0">
-          <AmountModal amount={amount_val} showPopup={showPopup} setAmount={setAmount} />
-        </div>
-      )}
-      <div className={`w-full flex flex-col ${popup ? 'overflow-hidden h-[calc(100vh-210px)]' : ''}`}>
+    <div className={`w-full`}>
+      <div className={`w-full flex flex-col`}>
         {locker ? <HeadingTags name={'Token Address'} required /> : <HeadingTags name={'LP Address'} required />}
 
         <input
@@ -104,80 +185,112 @@ export default function LockDetails({ setActive, setPage, locker, amount_val, am
           }}
           value={address}
         />
-
-        {locker ? <PreviewHeader heading={'Token address Details'} /> : <PreviewHeader heading={'LP Details'} />}
+        {formStatus.isError ? <ErrorTags message={formStatus.message} /> : <></>}
 
         {visible && (
-          <div className="flex flex-col">
-            {locker
-              ? Token_details.map(
-                  (item) =>
-                    item !== Token_details[4] && (
-                      <PreviewDetails key={item.id} name={item.name} value={item.value} icon={item.icon} />
-                    ),
-                )
-              : LP_details.map(
-                  (item) =>
-                    item !== LP_details[5] && (
-                      <PreviewDetails key={item.id} name={item.name} value={item.value} icon={item.icon} />
-                    ),
-                )}
-          </div>
+          <>
+            {locker ? <PreviewHeader heading={'Token address Details'} /> : <PreviewHeader heading={'LP Details'} />}
+
+            <div className="flex flex-col">
+              {locker ? (
+                <>
+                  <PreviewDetails name="Name" value={lockData.tokenName} />
+                  <PreviewDetails name="Symbol" value={lockData.tokenSymbol} />
+                  <PreviewDetails name="Decimals" value={lockData.tokenDecimals} />
+                  <PreviewDetails
+                    name="Total Supply"
+                    value={`${formatBigToNum(lockData.tokenSupply, lockData.tokenDecimals)} ${lockData.tokenSymbol}`}
+                  />
+                </>
+              ) : (
+                <>
+                  <PreviewDetails name="Quote Pair" value={lockData.token0.symbol} />
+                  <PreviewDetails name="Base Pair" value={lockData.token1.symbol} />
+                  <PreviewDetails name="Symbol" value={tokenSymbol} />
+                  <PreviewDetails
+                    name="LP Supply"
+                    value={`${formatBigToNum(lockData.tokenSupply, lockData.tokenDecimals)} ${tokenSymbol}`}
+                  />
+                  <PreviewDetails name="Dex Listed" value={lockData.factory} />
+                </>
+              )}
+            </div>
+          </>
         )}
+        {visible && (
+          <>
+            <PreviewHeader heading={'More Details'} />
 
-        <PreviewHeader heading={'More Details'} />
+            <div className="flex items-center mt-9">
+              <HeadingTags name={'Amount to be locked'} required />
+              <img src="/images/lists/question.svg" alt="info" className="ml-2" />
+            </div>
 
-        <div className="flex items-center mt-9">
-          <HeadingTags name={'Amount to be locked'} required />
-          <img src="/images/lists/question.svg" alt="info" className="ml-2" />
-        </div>
+            <div className="mt-5 flex items-center justify-between gap-5 cursor-pointer">
+              <div className="flex items-center justify-between bg-[#FAF8F5] dark:bg-dark-2 px-5 py-4 rounded-md w-[75%]">
+                <input
+                  type="number"
+                  className="w-[75%] font-bold text-dark-text dark:text-light-text"
+                  value={lockData.lockAmount}
+                  onChange={(e) => handleLockAmount(e.target.value)}
+                />
+                <span className="text-gray dark:text-gray-dark font-bold">{tokenSymbol}</span>
+              </div>
 
-        <div className="mt-5 flex items-center justify-between gap-5 cursor-pointer">
-          <div className="flex items-center justify-between bg-[#FAF8F5] dark:bg-dark-2 px-5 py-4 rounded-md w-[75%]">
-            <span className="font-bold text-dark-text dark:text-light-text">{amount.toLocaleString()}</span>
+              <button
+                className="bg-primary-green bg-opacity-[0.08] font-bold text-primary-green py-4 w-[25%] rounded-md"
+                onClick={() =>
+                  openAmountModal({
+                    amount: `${lockData.lockAmount}`,
+                    balance: `${formatUnits(BigNumber.from(lockData.userBalance), lockData.tokenDecimals) * 1}`,
+                    setAmount: handleLockAmount,
+                  })
+                }
+              >
+                Add
+              </button>
+            </div>
 
-            <span className="text-gray dark:text-gray-dark font-bold">{LP_details[2].value}</span>
-          </div>
+            <div className="flex items-center mt-9">
+              <HeadingTags name={'Unlock Date'} required />
+              <img src="/images/lists/question.svg" alt="info" className="ml-2" />
+            </div>
 
-          <button
-            className="bg-primary-green bg-opacity-[0.08] font-bold text-primary-green py-4 w-[25%] rounded-md"
-            onClick={() => showPopup(true)}
-          >
-            Add
-          </button>
-        </div>
-
-        <div className="flex items-center mt-9">
-          <HeadingTags name={'Unlock Date'} required />
-          <img src="/images/lists/question.svg" alt="info" className="ml-2" />
-        </div>
-
-        <div className="flex items-center mt-5 border-[1.5px] py-4 border-dim-text dark:border-dim-text-dark border-opacity-50 rounded-lg">
-          <CalendarSVG className="ml-5 fill-gray dark:fill-gray-dark" />
-          <Datetime
-            className={`ml-5 font-gilroy font-semibold text-dark-text dark:text-light-text ${
-              theme === 'dark' ? 'dark-calendar' : ''
-            }`}
-            isValidDate={valid}
-            onChange={handleChange}
-            utc={true}
-          />
-        </div>
+            <div className="flex items-center mt-5 border-[1.5px] py-4 border-dim-text dark:border-dim-text-dark border-opacity-50 rounded-lg">
+              <CalendarSVG className="ml-5 fill-gray dark:fill-gray-dark" />
+              <Datetime
+                className={`ml-5 font-gilroy font-semibold text-dark-text dark:text-light-text ${
+                  theme === 'dark' ? 'dark-calendar' : ''
+                }`}
+                value={lockData.unlockDate * 1000}
+                isValidDate={valid}
+                onChange={handleChange}
+                utc={true}
+              />
+            </div>
+          </>
+        )}
 
         <div className="mt-10">
           <div className="flex justify-end items-center mb-10">
             {locker && (
               <button
                 className="bg-white dark:bg-transparent mr-5 flex items-center gap-2 py-[10px] px-5"
-                onClick={() => setPage(1)}
+                onClick={() =>
+                  setLockData((prevState) => ({
+                    ...prevState,
+                    showLanding: true,
+                  }))
+                }
               >
                 <BackArrowSVG className="fill-dark-text dark:fill-light-text" />
                 <span className="font-gilroy font-medium text-sm text-dark-text dark:text-light-text">Go Back</span>
               </button>
             )}
+
             <button
               className="bg-primary-green disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
-              disabled={date === '' || address.length < 5}
+              disabled={!enable}
               onClick={() => setActive('Preview')}
             >
               Next
