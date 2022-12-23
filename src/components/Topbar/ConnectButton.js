@@ -7,20 +7,10 @@ import DisconnectedButton from './Button/DisconnectedButton'
 import Dropdown from './Dropdown'
 
 const ConnectButton = () => {
-  const { account } = useEthers();
-  const [hover, setHover] = useState(false);
-
-  const handleLeave = () => {
-    setTimeout(closeDropdown, 2000);
-  }
-
-  const closeDropdown = () => {
-    setHover(false);
-  }
+  const { account } = useEthers()
   return (
-    <div className='flex flex-col items-end'
-    onMouseLeave={handleLeave}>
-      <div className="flex user-div">
+    <div className="flex flex-col items-end">
+      <div className="flex items-center user-div">
         {account && (
           <div className="hidden w-10 h-10 lg:w-12 lg:h-12 bg-[#F5F6F7] dark:bg-dark-1 rounded-md md:flex items-center justify-center">
             <NotificationSVG className="hidden md:block fill-slate-700 dark:fill-white" />
@@ -31,11 +21,20 @@ const ConnectButton = () => {
             <WalletSVG className="fill-dark-text" />
           </div>
         )}
-        {account ? <ConnectedButton setHover={setHover} /> : <DisconnectedButton />}
+        {account ? (
+          <div className=" group">
+            <div className="h-10 lg:h-12">
+              <ConnectedButton />
+            </div>
+
+            <div className="hidden mt-3 absolute group-hover:flex hover:flex ">
+              <Dropdown />
+            </div>
+          </div>
+        ) : (
+          <DisconnectedButton />
+        )}
       </div>
-      {account && hover && 
-        <Dropdown setHover={setHover} />
-      }
     </div>
   )
 }
