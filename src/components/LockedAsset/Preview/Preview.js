@@ -2,12 +2,11 @@ import React, { useMemo } from 'react'
 import PreviewDetails from '../../Common/PreviewDetails'
 import PreviewHeader from '../../Common/PreviewHeader'
 import Options from './Subcomponents/Options'
-import { formatUnits, parseUnits } from 'ethers/lib/utils'
+import { formatUnits } from 'ethers/lib/utils'
 import moment from 'moment'
 import { formatBigToNum } from 'utils/numberFormat'
 
 export default function Preview({ type, asset, tokenInfo, lpInfo }) {
-  console.log(tokenInfo)
   const title = useMemo(() => {
     if (type === 'token') {
       return tokenInfo?.symbol
@@ -29,8 +28,6 @@ export default function Preview({ type, asset, tokenInfo, lpInfo }) {
   const totalSupply = useMemo(() => {
     return tokenInfo ? formatUnits(tokenInfo?.totalSupply, tokenInfo?.decimals) * 1 : 0
   }, [tokenInfo])
-
-  console.log(`totalSupply`, totalSupply)
 
   // TODO need change
   const amountUSD = 0

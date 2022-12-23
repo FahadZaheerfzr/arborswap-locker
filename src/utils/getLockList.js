@@ -1,12 +1,7 @@
-import { ChainId } from '@usedapp/core'
-import { isAddress } from 'ethers/lib/utils'
 import { FACTORY_ADDRESS, MULTICALL_ADDRESS, RPC_ADDRESS } from '../config/constants/address'
-import ERC20Abi from '../config/abi/ERC20.json'
-import PairAbi from '../config/abi/Pair.json'
 import TokenLockAbi from 'config/abi/TokenLock.json'
-import LiquidityLockerAbi from '../config/abi/LiquidityLocker.json'
 import LockFactoryAbi from '../config/abi/LockFactory.json'
-import { ethers, BigNumber as BN } from 'ethers'
+import { ethers } from 'ethers'
 import { Contract, Provider, setMulticallAddress } from 'ethers-multicall'
 import { DEFAULT_CHAIN, TOTAL_DATA_DISPLAY } from 'config/constants/misc'
 
@@ -44,7 +39,6 @@ export const getTokenLockInfos = async (address) => {
       data: result,
     }
   } catch (error) {
-    console.log(error)
     return {
       success: false,
       data: result,
@@ -84,7 +78,6 @@ export const getLpLockInfos = async (address) => {
       data: result,
     }
   } catch (error) {
-    console.log(error)
     return {
       success: false,
       data: result,
@@ -108,7 +101,6 @@ export const getTokenLockList = async () => {
       }
     }
   } catch (error) {
-    console.log(error)
     return {
       success: false,
       data: {},
@@ -130,7 +122,6 @@ export const getTokenLockList = async () => {
       data: token,
     }
   } catch (error) {
-    console.log(error)
     return {
       success: false,
       data: {},
@@ -177,7 +168,6 @@ export const getLiquidityLockList = async () => {
       data: liquidity,
     }
   } catch (error) {
-    console.log(error)
     return {
       success: false,
       data: {},
@@ -203,7 +193,6 @@ export const getTotalLock = async () => {
       data: { token: token.toNumber(), liquidity: liquidity.toNumber() },
     }
   } catch (error) {
-    console.log(error)
     return {
       success: false,
       data: { token: 0, liquidity: 0 },

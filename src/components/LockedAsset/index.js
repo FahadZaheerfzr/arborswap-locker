@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Amount from './Amount'
 import Preview from './Preview/Preview'
 import { getLpInfo } from 'utils/lpInfo'
@@ -24,7 +24,6 @@ export default function LockedAssetBase({ asset, type }) {
       return
     }
   }, [lpInfo, tokenInfo])
-  console.log(ready)
   return (
     <div className="w-full flex justify-center">
       <div className="w-full px-4 md:px-0 md:flex md:w-10/12 md:gap-7">

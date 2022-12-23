@@ -1,5 +1,5 @@
 import { BigNumber } from 'ethers'
-import { formatUnits, parseUnits } from 'ethers/lib/utils'
+import { formatUnits } from 'ethers/lib/utils'
 import moment from 'moment'
 
 export const datetimeToTimestamp = (data) => {

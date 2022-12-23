@@ -29,13 +29,10 @@ export default function Locker() {
         }
       }
       setReady(true)
-    } catch (error) {
-      console.log(error)
-    }
+    } catch (error) {}
   }
 
   useEffect(() => {
-    console.log(`effect run`)
     handleFetch()
   }, [])
   return (

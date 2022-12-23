@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { getLiquidityLockList, getTokenLockList, getTokenLockInfos, getLpLockInfos } from 'utils/getLockList'
+import { getTokenLockInfos, getLpLockInfos } from 'utils/getLockList'
 
-import { Navigate, redirect, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import BaseLayout from '../../components/BaseLayout/BaseLayout'
 import LockedAssetBase from '../../components/LockedAsset'
-import { Cards } from '../../data/cards'
 
 export default function LockedAsset({ type }) {
   const { id } = useParams()
@@ -48,16 +47,14 @@ export default function LockedAsset({ type }) {
         if (!active) {
           return
         }
-      } catch (error) {
-        console.log(error)
-      }
+      } catch (error) {}
     }
     handleFetch(type, id)
 
     return () => {
       active = false
     }
-  }, [type, id])
+  }, [type, id, navigate])
 
   return ready ? (
     // <BaseLayout title={asset && `${asset.name1}/${asset.name2}`} page_name={'Locked Assets'} subpage>

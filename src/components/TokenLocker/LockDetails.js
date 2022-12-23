@@ -101,7 +101,6 @@ export default function LockDetails({ setActive, setLockData, lockData, locker, 
     if (isAddress(e.target.value)) {
       openLoadingModal()
       const tokenInfo = await getLpInfo(e.target.value)
-      console.log(tokenInfo)
       if (tokenInfo.success) {
         setLockData((prevState) => ({
           ...prevState,

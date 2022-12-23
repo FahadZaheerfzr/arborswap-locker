@@ -6,43 +6,13 @@ import PreviewDetails from '../Common/PreviewDetails'
 import PreviewHeader from '../Common/PreviewHeader'
 import { formatBigToNum } from '../../utils/numberFormat'
 import { FACTORY_ADDRESS } from '../../config/constants/address'
-import { BigNumber, ethers } from 'ethers'
+import { ethers } from 'ethers'
 import { useEthers, useTokenAllowance, useTokenBalance } from '@usedapp/core'
 import { parseUnits } from 'ethers/lib/utils'
 import { Contract } from '@ethersproject/contracts'
 import ERCAbi from 'config/abi/ERC20.json'
 import LockFactoryAbi from 'config/abi/LockFactory.json'
-
-const LP_details = [
-  {
-    id: 1,
-    name: 'Quote Pair',
-    value: 'WBNB',
-    icon: '/images/cards/bnb.svg',
-  },
-  {
-    id: 2,
-    name: 'Base Pair',
-    value: 'SXP',
-    icon: '/images/cards/rip.svg',
-  },
-  {
-    id: 3,
-    name: 'Symbol',
-    value: 'WBNB/SXP',
-  },
-  {
-    id: 4,
-    name: 'LP Supply',
-    value: 9014470,
-  },
-  {
-    id: 5,
-    name: 'Dex Listed',
-    value: 'Arborswap',
-    icon: '/images/logo-small.svg',
-  },
-]
+import useFeeInfo from 'hooks/useFeeInfo'
 
 export default function Preview({ locker, setActive, lockData }) {
   const [date, setDate] = useState()
@@ -51,7 +21,7 @@ export default function Preview({ locker, setActive, lockData }) {
   const { account, library, chainId } = useEthers()
 
   const { open: openLoadingModal, close: closeLoadingModal } = useModal('LoadingModal')
-
+  const feeInfo = useFeeInfo()
   const allowance = useTokenAllowance(lockData.tokenAddress, account, FACTORY_ADDRESS[chainId], {
     refresh: 5,
   })
@@ -107,6 +77,9 @@ export default function Preview({ locker, setActive, lockData }) {
         amountLock,
         lockData.unlockDate,
         '',
+        {
+          value: feeInfo.normalFee,
+        },
       )
       await createLock.wait()
     } catch (error) {
@@ -114,6 +87,7 @@ export default function Preview({ locker, setActive, lockData }) {
     }
     closeLoadingModal()
   }
+
   const handleLockLP = async () => {
     openLoadingModal()
     const contract = new Contract(FACTORY_ADDRESS[chainId], LockFactoryAbi, library.getSigner())
@@ -124,6 +98,9 @@ export default function Preview({ locker, setActive, lockData }) {
         amountLock,
         lockData.unlockDate,
         '',
+        {
+          value: feeInfo.liquidityFee,
+        },
       )
       await createLock.wait()
     } catch (error) {
@@ -193,6 +170,7 @@ export default function Preview({ locker, setActive, lockData }) {
           ) : locker ? (
             <>
               <button
+                disabled={!isValid}
                 className="bg-primary-green disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
                 onClick={handleLockToken}
               >
@@ -202,6 +180,7 @@ export default function Preview({ locker, setActive, lockData }) {
           ) : (
             <>
               <button
+                disabled={!isValid}
                 className="bg-primary-green disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
                 onClick={handleLockLP}
               >

@@ -4,7 +4,7 @@ import Landing from '../../components/TokenLocker/Landing'
 import Lock from '../../components/TokenLocker/Lock'
 import { useDocumentTitle } from '../../hooks/setDocumentTitle'
 import SheildSecuritySVG from '../../svgs/Sidebar/shield_security'
-import { useConfig, useEthers } from '@usedapp/core'
+import { useEthers } from '@usedapp/core'
 
 export default function TokenLocker() {
   useDocumentTitle('Token Locker')
@@ -24,11 +24,10 @@ export default function TokenLocker() {
     userAllowance: '0',
   }
   const [lockData, setLockData] = useState({ ...initLockState, showLanding: true, showDetails: false })
-  const { account, deactivate, activateBrowserWallet, error, chainId } = useEthers()
+  const { account, error } = useEthers()
 
   useEffect(() => {
     if (error && account) {
-      console.log(error.message)
       return
     }
   }, [error, account])

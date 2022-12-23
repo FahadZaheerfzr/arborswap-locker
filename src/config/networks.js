@@ -1,6 +1,6 @@
 // import { BSC, BSCTestnet } from '@usedapp/core'
 import { BSCTestnet } from '@usedapp/core'
-import { RbaChain } from './constants/chain'
+// import { RbaChain } from './constants/chain'
 
 export const networkConfig = {
   readOnlyChainId: BSCTestnet.chainId,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ModalProvider, useModal } from 'react-simple-modal-provider'
+import { ModalProvider } from 'react-simple-modal-provider'
 import LockDetails from './LockDetails'
 import Preview from './Preview'
 import AmountModal from './Subcomponents/AmountModal'

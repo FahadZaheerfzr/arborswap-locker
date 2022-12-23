@@ -1,9 +1,6 @@
-import { ChainId } from '@usedapp/core'
-import { isAddress } from 'ethers/lib/utils'
 import { MULTICALL_ADDRESS, RPC_ADDRESS } from '../config/constants/address'
 import ERC20Abi from '../config/abi/ERC20.json'
-import PairAbi from '../config/abi/Pair.json'
-import { ethers, BigNumber as BN } from 'ethers'
+import { ethers } from 'ethers'
 import { Contract, Provider, setMulticallAddress } from 'ethers-multicall'
 
 const CHAIN_NUMBER = 97

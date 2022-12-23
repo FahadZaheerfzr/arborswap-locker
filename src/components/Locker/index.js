@@ -1,5 +1,4 @@
 import React from 'react'
-import { Cards, Tokens } from '../../data/cards'
 import { useDocumentTitle } from '../../hooks/setDocumentTitle'
 import Card from './CardView/Card'
 import List from './ListView/List'

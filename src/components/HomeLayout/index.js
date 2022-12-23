@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import SearchSVG from '../../svgs/search'
 import Carousel from './Slider/Slider'
-import Button from './SubComponents/Button'
 import ItemSwitch from './Switches/ItemSwitch'
 import Tab from './Switches/Tab'
 import ViewSwitch from './Switches/ViewSwitch'
