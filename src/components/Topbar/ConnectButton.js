@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import NotificationSVG from '../../svgs/notification'
 import { useEthers } from '@usedapp/core'
 import WalletSVG from '../../svgs/Topbar/empty_wallet'

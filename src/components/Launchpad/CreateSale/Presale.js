@@ -187,7 +187,7 @@ export default function Presale({ setActive, saleType, setSaleObject, token }) {
                     <div className="flex items-center gap-5 mt-10">
                         <div className="w-full">
                             <div className='hidden md:block'>
-                                <Input heading={'Amount for Liquidity'} changeState={setAmountLiquidity} />
+                                <Input heading={'Amount for Liquidity'} changeState={setAmountLiquidity} tooltip={"Hello"} />
                             </div>
                             <div className='md:hidden'>
                                 <Input heading={'Liquidity'} changeState={setAmountLiquidity} />

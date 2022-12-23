@@ -32,7 +32,7 @@ export default function ProjectDetails({ setActive }) {
             <div className="mt-10">
                 <div className="flex items-center">
                     <HeadingTags name={'Description'} required />
-                    <img src="/images/lists/question.svg" alt="info" className="ml-2" />
+                    {/* <Tooltip text={} /> */}
                 </div>
                 <div className="mt-5">
                     <textarea
@@ -49,7 +49,7 @@ export default function ProjectDetails({ setActive }) {
             <div className="mt-10">
                 <div className="flex items-center">
                     <HeadingTags name={'Tags'} />
-                    <img src="/images/lists/question.svg" alt="info" className="ml-2" />
+                    {/* <Tooltip text={} /> */}
                 </div>
                 <div className="mt-5">
                     <input

@@ -18,7 +18,7 @@ export default function CalendarField({ heading, setFunction }) {
         <div className='w-full'>
             <div className="flex items-center">
                 <HeadingTags name={heading} required />
-                <img src="/images/lists/question.svg" alt="info" className="ml-2" />
+                {/* <Tooltip text={} /> */}
             </div>
             <div className="flex items-center mt-5 border-[1.5px] py-4 border-dim-text dark:border-dim-text-dark border-opacity-50 rounded-lg">
                 <CalendarSVG className="ml-5 fill-gray dark:fill-gray-dark" />

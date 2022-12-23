@@ -223,7 +223,7 @@ export default function LockDetails({ setActive, setLockData, lockData, locker, 
 
             <div className="flex items-center mt-9">
               <HeadingTags name={'Amount to be locked'} required />
-              <img src="/images/lists/question.svg" alt="info" className="ml-2" />
+              {/*<Tooltip text={} /> */}
             </div>
 
             <div className="mt-5 flex items-center justify-between gap-5 cursor-pointer">
@@ -254,7 +254,7 @@ export default function LockDetails({ setActive, setLockData, lockData, locker, 
               <>
                 <div className="flex items-center mt-9">
                   <HeadingTags name={'Token Logo'} required />
-                  <img src="/images/lists/question.svg" alt="info" className="ml-2" />
+                  <img src="/images/lists/{/*<Tooltip text={} /> */}.svg" alt="info" className="ml-2" />
                 </div>
                 <div className="mt-5 flex items-center justify-between gap-5 cursor-pointer">
                   <div className="flex items-center justify-between bg-[#FAF8F5] dark:bg-dark-2 px-5 py-4 rounded-md w-[100%]">
@@ -279,7 +279,7 @@ export default function LockDetails({ setActive, setLockData, lockData, locker, 
 
             <div className="flex items-center mt-9">
               <HeadingTags name={'Unlock Date'} required />
-              <img src="/images/lists/question.svg" alt="info" className="ml-2" />
+              <img src="/images/lists/{/*<Tooltip text={} /> */}.svg" alt="info" className="ml-2" />
             </div>
 
             <div className="flex items-center mt-5 border-[1.5px] py-4 border-dim-text dark:border-dim-text-dark border-opacity-50 rounded-lg">
