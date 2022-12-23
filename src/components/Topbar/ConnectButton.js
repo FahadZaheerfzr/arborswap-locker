@@ -27,7 +27,7 @@ const ConnectButton = () => {
               <ConnectedButton />
             </div>
 
-            <div className="hidden mt-3 absolute group-hover:flex hover:flex ">
+            <div className="hidden group-hover:flex hover:flex ">
               <Dropdown />
             </div>
           </div>
