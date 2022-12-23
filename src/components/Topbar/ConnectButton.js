@@ -9,8 +9,17 @@ import Dropdown from './Dropdown'
 const ConnectButton = () => {
   const { account } = useEthers();
   const [hover, setHover] = useState(false);
+
+  const handleLeave = () => {
+    setTimeout(closeDropdown, 2000);
+  }
+
+  const closeDropdown = () => {
+    setHover(false);
+  }
   return (
-    <div className='flex flex-col items-end'>
+    <div className='flex flex-col items-end'
+    onMouseLeave={handleLeave}>
       <div className="flex user-div">
         {account && (
           <div className="hidden w-10 h-10 lg:w-12 lg:h-12 bg-[#F5F6F7] dark:bg-dark-1 rounded-md md:flex items-center justify-center">
@@ -24,7 +33,9 @@ const ConnectButton = () => {
         )}
         {account ? <ConnectedButton setHover={setHover} /> : <DisconnectedButton />}
       </div>
-      {account && hover && <Dropdown />}
+      {account && hover && 
+        <Dropdown setHover={setHover} />
+      }
     </div>
   )
 }
