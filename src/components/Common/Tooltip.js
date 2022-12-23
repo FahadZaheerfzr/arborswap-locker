@@ -3,7 +3,7 @@ import React from 'react'
 export default function Tooltip({ text }) {
   return (
     <div className="group flex">
-      <img src="/images/lists/{/*<Tooltip text={} /> */}.svg" alt="info" className="ml-2" />
+      <img src="/images/lists/question.svg" alt="info" className="ml-2" />
 
       <div
         id="tooltip-right"

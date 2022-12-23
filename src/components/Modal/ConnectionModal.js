@@ -36,7 +36,7 @@ export default function ConnectionModal({ children }) {
 
   return (
     <Modal id={'ConnectionModal'} consumer={children} isOpen={isOpen} setOpen={setOpen} allowClickOutside={false}>
-      <div className="p-9 w-[90%] max-w-[520px] bg-white rounded-[10px] mx-auto">
+      <div className="p-9 w-[90%] max-w-[520px] bg-white dark:bg-dark-1 rounded-[10px] mx-auto">
         <div className="flex justify-between items-center  ">
           <span className="text-dark-text dark:text-light-text font-gilroy font-semibold text-lg">Connect Wallet</span>
 
