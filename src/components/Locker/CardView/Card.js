@@ -6,6 +6,7 @@ import CardInfo from './CardInfo'
 import Timer from './Timer'
 import moment from 'moment'
 import { getLpInfo } from 'utils/lpInfo'
+import TokenImage from 'components/Common/TokenImage'
 
 export default function Card({ data, token = false }) {
   const [lpSymbol, setLpSymbol] = useState('')
@@ -39,7 +40,7 @@ export default function Card({ data, token = false }) {
         <div className="flex justify-between items-center border-b border-dim-text dark:border-dim-text-dark border-dashed border-opacity-30 mt-3 py-5">
           <div className="flex items-center">
             <div className="flex items-center">
-              {token && <img className="w-9 h-9" src={data.info.logoImage} alt="BLANK" />}
+              {token && <TokenImage className="w-10 h-10" src={data.info.logoImage} alt="BLANK" />}
             </div>
 
             <div
