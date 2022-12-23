@@ -25,7 +25,8 @@ export default function LockedAsset({ type }) {
             return
           }
           if (info.success) {
-            setAsset(info.data)
+            setAsset(info.data[0])
+            setReady(true)
             return
           } else {
             navigate('/locked-assets')
@@ -37,7 +38,8 @@ export default function LockedAsset({ type }) {
             return
           }
           if (infoLp.success) {
-            setAsset(infoLp.data)
+            setAsset(infoLp.data[0])
+            setReady(true)
             return
           } else {
             navigate('/locked-assets')
@@ -46,7 +48,6 @@ export default function LockedAsset({ type }) {
         if (!active) {
           return
         }
-        setReady(true)
       } catch (error) {
         console.log(error)
       }
@@ -57,8 +58,6 @@ export default function LockedAsset({ type }) {
       active = false
     }
   }, [type, id])
-
-  console.log(`asset`, asset)
 
   return ready ? (
     // <BaseLayout title={asset && `${asset.name1}/${asset.name2}`} page_name={'Locked Assets'} subpage>
