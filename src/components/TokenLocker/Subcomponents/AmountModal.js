@@ -90,7 +90,7 @@ const AmountModalBody = ({ setOpen }) => {
 
       <div className="max-w-[400px] w-full mt-10">
         <button
-          className="w-full bg-primary-green text-white py-5 rounded-md font-gilroy font-bold text-xl"
+          className="w-full bg-primary-green hover:opacity-40 text-white py-5 rounded-md font-gilroy font-bold text-xl"
           onClick={handleSubmit}
         >
           Confirm

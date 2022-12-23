@@ -64,7 +64,7 @@ export default function Panel() {
             </div>
 
             <div className="mt-10 flex justify-end">
-              <button className="bg-primary-green text-white rounded-md px-[42px] py-4 font-bold"
+              <button className="bg-primary-green hover:opacity-40 text-white rounded-md px-[42px] py-4 font-bold"
                 onClick={() => setSaleType(selectedSale)}>
                 Next
               </button>

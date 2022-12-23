@@ -113,7 +113,7 @@ export default function PreviewSale({ token, setActive, saleObject, saleType }) 
 
 
           <button
-            className="bg-primary-green disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
+            className="bg-primary-green hover:opacity-40 disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
             // disabled={address.length < 5}
             onClick={handleSubmit}>
             Create Sale

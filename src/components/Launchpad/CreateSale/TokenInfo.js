@@ -44,7 +44,7 @@ export default function TokenInfo({ setActive, setSaleType }) {
 
 
                     <button
-                        className="bg-primary-green disabled:bg-dim-text disabled:dark:bg-dim-text-dark text-white font-gilroy font-bold px-8 py-3 rounded-md"
+                        className="bg-primary-green hover:opacity-40 disabled:bg-dim-text disabled:dark:bg-dim-text-dark text-white font-gilroy font-bold px-8 py-3 rounded-md"
                         disabled={address.length < 5}
                         onClick={() => setActive('Presale')}>
                         Next

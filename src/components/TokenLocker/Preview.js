@@ -161,7 +161,7 @@ export default function Preview({ locker, setActive, lockData }) {
           {needApprove ? (
             <>
               <button
-                className="bg-primary-green disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
+                className="bg-primary-green hover:opacity-40 disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
                 onClick={handleApprove}
               >
                 Approve Token
@@ -171,7 +171,7 @@ export default function Preview({ locker, setActive, lockData }) {
             <>
               <button
                 disabled={!isValid}
-                className="bg-primary-green disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
+                className="bg-primary-green hover:opacity-40 disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
                 onClick={handleLockToken}
               >
                 Lock Token
@@ -181,7 +181,7 @@ export default function Preview({ locker, setActive, lockData }) {
             <>
               <button
                 disabled={!isValid}
-                className="bg-primary-green disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
+                className="bg-primary-green hover:opacity-40 disabled:bg-light-text text-white font-gilroy font-bold px-8 py-3 rounded-md"
                 onClick={handleLockLP}
               >
                 Lock LP Token
