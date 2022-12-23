@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import ListInfo from './ListInfo'
 import moment from 'moment'
 import { getLpInfo } from 'utils/lpInfo'
+import TokenImage from 'components/Common/TokenImage'
 
 export default function List({ data, token = false }) {
   const [lpSymbol, setLpSymbol] = useState('')
@@ -21,9 +22,18 @@ export default function List({ data, token = false }) {
   }, [tokenInfo])
 
   useEffect(() => {
-    getLpInfo(data.info.token).then((info) => {
-      setLpSymbol(`${info.data.token0.symbol}/${info.data.token1.symbol}`)
+    if (typeof data?.info?.token === 'undefined') {
+      return
+    }
+    let isFetch = true
+    getLpInfo(data?.info?.token).then((info) => {
+      if (isFetch) {
+        setLpSymbol(`${info.data.token0.symbol}/${info.data.token1.symbol}`)
+      }
     })
+    return () => {
+      isFetch = false
+    }
   }, [data])
 
   const unlockDate = useMemo(() => {
@@ -32,7 +42,9 @@ export default function List({ data, token = false }) {
 
   return (
     <div className="w-full flex items-center justify-between bg-white dark:bg-dark-1 rounded-[10px] py-5 px-6">
-      <div className="flex items-center">{token && <img className="w-6 h-6" src={data.info.logoImage} alt="" />}</div>
+      <div className="flex items-center">
+        {token && <TokenImage className="w-10 h-10" src={data.info.logoImage} alt="" />}
+      </div>
 
       <div
         className={`flex flex-col justify-center font-bold font-gilroy text-dark-text dark:text-light-text ${

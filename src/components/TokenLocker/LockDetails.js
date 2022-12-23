@@ -250,6 +250,32 @@ export default function LockDetails({ setActive, setLockData, lockData, locker, 
                 Add
               </button>
             </div>
+            {locker ? (
+              <>
+                <div className="flex items-center mt-9">
+                  <HeadingTags name={'Token Logo'} required />
+                  <img src="/images/lists/question.svg" alt="info" className="ml-2" />
+                </div>
+                <div className="mt-5 flex items-center justify-between gap-5 cursor-pointer">
+                  <div className="flex items-center justify-between bg-[#FAF8F5] dark:bg-dark-2 px-5 py-4 rounded-md w-[100%]">
+                    <input
+                      type="text"
+                      placeholder="Input Valid image url here"
+                      className="w-[100%] font-bold text-dark-text dark:text-light-text"
+                      value={lockData.image}
+                      onChange={(e) =>
+                        setLockData((prevState) => ({
+                          ...prevState,
+                          image: e.target.value,
+                        }))
+                      }
+                    />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
 
             <div className="flex items-center mt-9">
               <HeadingTags name={'Unlock Date'} required />

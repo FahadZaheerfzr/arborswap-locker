@@ -18,7 +18,7 @@ export default function Amount({ type, asset, tokenInfo, lpInfo }) {
       </div>
 
       <div className="flex mt-10">
-        <button className="w-full bg-primary-green bg-opacity-50 rounded-md text-white dark:text-dim-text-dark font-bold py-4">
+        <button className="w-full cursor-pointer bg-primary-green bg-opacity-100 hover:bg-opacity-90 disabled:bg-opacity-60  rounded-md text-white dark:text-dim-text-dark font-bold py-4">
           Claim
         </button>
       </div>

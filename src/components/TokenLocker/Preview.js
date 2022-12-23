@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useModal } from 'react-simple-modal-provider'
+import { useNavigate } from 'react-router-dom'
 
 import BackArrowSVG from '../../svgs/back_arrow'
 import PreviewDetails from '../Common/PreviewDetails'
@@ -15,6 +16,7 @@ import LockFactoryAbi from 'config/abi/LockFactory.json'
 import useFeeInfo from 'hooks/useFeeInfo'
 
 export default function Preview({ locker, setActive, lockData }) {
+  const navigate = useNavigate()
   const [date, setDate] = useState()
   const [days, setDays] = useState(0)
 
@@ -76,16 +78,19 @@ export default function Preview({ locker, setActive, lockData }) {
         lockData.tokenAddress,
         amountLock,
         lockData.unlockDate,
-        '',
+        lockData.image,
         {
           value: feeInfo.normalFee,
         },
       )
       await createLock.wait()
+      closeLoadingModal()
+      navigate(`/locked-assets`)
+      return
     } catch (error) {
+      closeLoadingModal()
       return false
     }
-    closeLoadingModal()
   }
 
   const handleLockLP = async () => {
@@ -103,10 +108,13 @@ export default function Preview({ locker, setActive, lockData }) {
         },
       )
       await createLock.wait()
+      closeLoadingModal()
+      navigate(`/locked-assets`)
+      return
     } catch (error) {
+      closeLoadingModal()
       return false
     }
-    closeLoadingModal()
   }
   const tokenSymbol = useMemo(() => {
     return lockData.type === 'lptoken' ? `${lockData.token0.symbol}/${lockData.token1.symbol}` : lockData.tokenSymbol
