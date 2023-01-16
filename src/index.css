@@ -64,3 +64,7 @@ input:focus {
 .filled {
   background: linear-gradient(270.01deg, #C89C34 8.72%, #FFBB1C 78.42%);
 }
+
+.filled-ended {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), linear-gradient(270.01deg, #C89C34 8.72%, #FFBB1C 78.42%);
+}

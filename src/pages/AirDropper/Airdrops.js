@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import AirdropsBase from '../../components/Airdropper/Airdrops'
 import BaseLayout from '../../components/BaseLayout/BaseLayout'
 import HomeLayout from '../../components/HomeLayout'
 import { useDocumentTitle } from '../../hooks/setDocumentTitle'
@@ -15,7 +16,7 @@ const Tabs = [
     },
     {
         id: 3,
-        tabName: 'Upcoming',
+        tabName: 'Timed',
     },
 ]
 
@@ -29,7 +30,7 @@ export default function Airdrops() {
             page_name={'Airdrops'}
             page_description={'Airdrop to multiple users in few clicks.'}>
             <HomeLayout tabs={Tabs} activeTab={activeTab} setActiveTab={setActiveTab}>
-                
+                <AirdropsBase activeStatus={Tabs[activeTab - 1].tabName} />
             </HomeLayout>
         </BaseLayout>
     )
