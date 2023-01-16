@@ -5,7 +5,7 @@ import PreviewDetails from '../../Common/PreviewDetails'
 import PreviewHeader from '../../Common/PreviewHeader'
 import HeadingTags from '../../TokenLocker/Subcomponents/HeadingTags'
 
-export default function TokenInfo({ setActive, setSaleType }) {
+export default function TokenInfo({ setActive, setSaleType, next }) {
   const [address, setAddress] = React.useState('')
 
   const handleChange = (e) => {
@@ -35,6 +35,7 @@ export default function TokenInfo({ setActive, setSaleType }) {
 
       <div className="mt-10">
         <div className="flex justify-end items-center mb-10">
+        {setSaleType && 
           <button
             className="bg-white dark:bg-transparent mr-5 flex items-center gap-2 py-[10px] px-5"
             onClick={() => setSaleType(null)}
@@ -42,11 +43,12 @@ export default function TokenInfo({ setActive, setSaleType }) {
             <BackArrowSVG className="fill-dark-text dark:fill-light-text" />
             <span className="font-gilroy font-medium text-sm text-dark-text dark:text-light-text">Go Back</span>
           </button>
+        }
 
           <button
             className="bg-primary-green disabled:bg-dim-text disabled:dark:bg-dim-text-dark text-white font-gilroy font-bold px-8 py-3 rounded-md"
             disabled={address.length < 5}
-            onClick={() => setActive('Presale')}
+            onClick={() => setActive(next)}
           >
             Next
           </button>

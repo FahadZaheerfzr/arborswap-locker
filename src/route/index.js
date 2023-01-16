@@ -1,5 +1,7 @@
 import React from 'react'
 import { useRoutes } from 'react-router-dom'
+import Airdrops from '../pages/AirDropper/Airdrops'
+import CreateAirdrop from '../pages/AirDropper/CreateAirdrop'
 import Error from '../pages/Error'
 import CreateSale from '../pages/Launchpad/CreateSale'
 import PoolPage from '../pages/Launchpad/PoolPage'
@@ -18,6 +20,8 @@ export default function WebRouter() {
     { path: '/launchpad/pools', element: <Pools /> },
     { path: '/launchpad/pools/:id', element: <PoolPage /> },
     { path: '/launchpad/create-sale', element: <CreateSale /> },
+    { path: '/airdropper/airdrops', element: <Airdrops />},
+    { path: '/airdropper/create-airdrop', element: <CreateAirdrop />},
     { path: '*', element: <Error /> },
   ])
   return routes

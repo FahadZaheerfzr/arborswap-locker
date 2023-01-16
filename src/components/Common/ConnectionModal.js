@@ -11,7 +11,7 @@ export default function ConnectionModal({ showModal }) {
   }
 
   return (
-    <div className="p-9 w-[90%] max-w-[520px] bg-white rounded-[10px]">
+    <div className="p-9 w-[90%] max-w-[520px] bg-white dark:bg-dark-1 rounded-[10px]">
       <div className="flex justify-between items-center  ">
         <span className="text-dark-text dark:text-light-text font-gilroy font-semibold text-lg">Connect Wallet</span>
 

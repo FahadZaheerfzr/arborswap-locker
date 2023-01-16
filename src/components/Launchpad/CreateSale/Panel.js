@@ -109,7 +109,7 @@ export default function Panel() {
 
             <div className="panel-content bg-white dark:bg-dark-1 rounded-r-[10px] pt-7 md:pt-9 px-4 md:p-9 md:w-2/3">
               {active === 'Token Info' && (
-                <TokenInfo setActive={setActive} saleType={saleType} setSaleType={setSaleType} />
+                <TokenInfo setActive={setActive} saleType={saleType} setSaleType={setSaleType} next={"Presale"} />
               )}
               {active === 'Presale' && (
                 <Presale setActive={setActive} saleType={saleType} setSaleObject={setSaleObject} token={token} />
