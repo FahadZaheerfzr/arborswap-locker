@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import PreviewSale from '../../Launchpad/CreateSale/PreviewSale'
-import ProjectDetails from '../../Launchpad/CreateSale/ProjectDetails'
-import TokenInfo from '../../Launchpad/CreateSale/TokenInfo'
+import Createsale from './Createsale'
+import Detailspage from './Detailspage'
+import Infopage from './Infopage'
 
 const panel_items = [
     {
@@ -38,6 +38,7 @@ const token = {
 
 export default function AirdropPanel() {
     const [active, setActive] = useState('Token Info')
+    const [amount, setAmount] = useState(14766538)
 
     return (
         <div className="w-full flex justify-center">
@@ -62,11 +63,11 @@ export default function AirdropPanel() {
 
                     <div className="panel-content bg-white dark:bg-dark-1 rounded-r-[10px] pt-7 md:pt-9 px-4 md:p-9 md:w-2/3">
                         {active === 'Token Info' && (
-                            <TokenInfo setActive={setActive} next={"Project Details"} />
+                            <Infopage setActive={setActive} next={"Project Details"} amount={amount} setAmount = {setAmount}/>
                         )}
-                        {active === 'Project Details' && <ProjectDetails setActive={setActive} />}
+                        {active === 'Project Details' && <Detailspage setActive={setActive} />}
                         {active === 'Preview' && (
-                            <PreviewSale setActive={setActive} token={token} />
+                            <Createsale setActive={setActive} token={token} amount={amount}/>
                         )}
                     </div>
                 </div>
