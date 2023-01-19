@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ConnectButton from './ConnectButton'
 
 export default function Topbar({
@@ -9,7 +9,15 @@ export default function Topbar({
   subpage,
   page_name,
   page_description,
+  admin,
+  setAdminMode,
 }) {
+  const [tempfixed, setTempFixed] = useState(false)
+
+  const handleTempFixed = () => {
+    setTempFixed(!tempfixed)
+    setAdminMode(!tempfixed)
+  }
   return (
     <div className="h-[110px] flex items-center justify-between pl-[4%] pr-[5%] ">
       <div className="flex items-center">
@@ -18,14 +26,12 @@ export default function Topbar({
           onClick={() => setSideBarMobile(!sideBarMobile)}
         >
           <div
-            className={`${
-              sideBarMobile ? 'hidden' : 'block'
-            } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
+            className={`${sideBarMobile ? 'hidden' : 'block'
+              } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
           />
           <div
-            className={`${
-              sideBarMobile ? 'hidden' : 'block'
-            } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
+            className={`${sideBarMobile ? 'hidden' : 'block'
+              } h-0 w-5 border mb-1 border-dark-text dark:border-light-text`}
           />
           <div
             className={`${sideBarMobile ? 'hidden' : 'block'} h-0 w-5 border border-dark-text dark:border-light-text`}
@@ -60,7 +66,28 @@ export default function Topbar({
           </div>
         )}
       </div>
-      <ConnectButton />
+      <div className='flex items-center'>
+        {
+          admin &&
+          <div className="hidden md:flex mr-7 py-4 px-5 rounded-md bg-white dark:bg-dark-1">
+            <span className="font-gilroy mr-[10px] font-medium text-dark-text dark:text-light-text text-base">
+              Admin Mode
+            </span>
+            <label htmlFor="admin-toggle" className="inline-flex relative items-center cursor-pointer">
+              <input
+                type="checkbox"
+                value=""
+                checked={tempfixed}
+                id="admin-toggle"
+                className="sr-only peer"
+                onChange={handleTempFixed}
+              />
+              <div className="w-9 h-5 bg-dim-text dark:bg-dim-text-dark dark:bg-opacity-20 bg-opacity-20 peer-focus:outline-none peer-focus:ring-0 peer-focus:ring-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px]  after:left-[2px] after:bg-dim-text after:dark:bg-dim-text-dark  after:rounded-full after:h-4 after:w-4 after:transition-all border-[#F5F1EB] peer-checked:after:bg-primary-green dark:peer-checked:after:bg-[#1B8552]" />
+            </label>
+          </div>
+        }
+        <ConnectButton />
+      </div>
     </div>
   )
 }

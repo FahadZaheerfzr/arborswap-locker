@@ -14,6 +14,7 @@ module.exports = {
         "dark-2": "#242322",
         "dark-3": "#2E2C28",
         "primary-green": "#00783F",
+        "primary-yellow" : "#C89211",
         "dark-text": "#464754",
         "light-text": "#EEF1F8",
         "dim-text": "#A69F9F",

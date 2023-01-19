@@ -8,6 +8,9 @@ import LockedAsset from '../pages/Locker/LockedAsset'
 import Locker from '../pages/Locker/Locker'
 import LpLocker from '../pages/Locker/LpLocker'
 import TokenLocker from '../pages/Locker/TokenLocker'
+import Airdrops from '../pages/AirDropper/Airdrops'
+import AirdropsPage from "../pages/AirDropper/AirdropsPage"
+import CreateAirdrop from '../pages/AirDropper/CreateAirdrop'
 
 export default function WebRouter() {
   let routes = useRoutes([
@@ -20,6 +23,9 @@ export default function WebRouter() {
     { path: '/launchpad/pools', element: <Pools /> },
     { path: '/launchpad/pools/:id', element: <PoolPage /> },
     { path: '/launchpad/create-sale', element: <CreateSale /> },
+    { path: '/airdropper/airdrops', element: <Airdrops />},
+    { path: '/airdropper/airdrops/:id', element: <AirdropsPage />},
+    { path: '/airdropper/create-airdrop', element: <CreateAirdrop />},
     { path: '*', element: <Error /> },
   ])
   return routes

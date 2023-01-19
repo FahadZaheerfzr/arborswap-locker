@@ -16,12 +16,15 @@ export default function BaseLayout({
   title_img,
   page_name,
   page_description,
+  admin,
+  setAdminMode,
 }) {
   const { showSidebar, setShowSidebar } = useContext(SidebarContext)
   const { theme, setTheme } = useContext(ThemeContext)
   const [sideBarMobile, setSideBarMobile] = useState(false)
   const [tempfixed, setTempFixed] = useState(true)
   const [activeItem] = useActiveItem()
+  const [modal, showModal] = useState(false)
 
   const handleTempFixed = () => {
     setTheme(!tempfixed ? 'light' : 'dark')
@@ -42,6 +45,7 @@ export default function BaseLayout({
 
   return (
     <div className="w-full dark:bg-dark">
+
       <div className={`flex w-full ${noTopbar ? '' : ''}`}>
         {noSidebar ? null : (
           <div className="fixed top-0 z-20">
@@ -103,6 +107,9 @@ export default function BaseLayout({
                 title_img={title_img}
                 subpage={subpage}
                 page_name={page_name}
+                showModal={showModal}
+                admin={admin}
+                setAdminMode={setAdminMode}
               />
             </div>
           )}

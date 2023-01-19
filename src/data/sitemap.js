@@ -44,7 +44,7 @@ export const sitemap = [
       {
         id: 1,
         name: 'Locked Assets',
-        link: '/locked-assets',
+        link: '/',
       },
       {
         id: 2,
@@ -57,7 +57,7 @@ export const sitemap = [
         link: '/locker/lp-locker',
       },
     ],
-    sublinks: ['/locked-assets', '/locker/token-locker', '/locker/lp-locker'],
+    sublinks: ['/', '/locker/token-locker', '/locker/lp-locker'],
   },
   {
     id: 4,
@@ -68,21 +68,16 @@ export const sitemap = [
     subitems: [
       {
         id: 1,
-        name: 'Locked Assets',
-        link: '/launchpad',
+        name: 'Airdrops',
+        link: '/airdropper/airdrops',
       },
       {
         id: 2,
-        name: 'Token Locker',
-        link: '/launchpad/token-locker',
-      },
-      {
-        id: 3,
-        name: 'LP Locker',
-        link: '/launchpad/lp-locker',
+        name: 'Create Airdrop',
+        link: '/airdropper/create-airdrop',
       },
     ],
-    sublinks: ['', '/launchpad/token-locker', '/launchpad/lp-locker'],
+    sublinks: ['/airdropper/airdrops', '/airdropper/create-airdrop'],
   },
   {
     id: 5,
@@ -93,18 +88,13 @@ export const sitemap = [
     subitems: [
       {
         id: 1,
-        name: 'Locked Assets',
-        link: '/launchpad',
+        name: 'Airdrops',
+        link: '/airdrops',
       },
       {
         id: 2,
-        name: 'Token Locker',
-        link: '/launchpad/token-locker',
-      },
-      {
-        id: 3,
-        name: 'LP Locker',
-        link: '/launchpad/lp-locker',
+        name: 'Create Airdrop',
+        link: '/create-airdrop',
       },
     ],
     sublinks: ['', '/launchpad/token-locker', '/launchpad/lp-locker'],
