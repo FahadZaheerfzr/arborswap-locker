@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import LockOptions from '../../TokenLocker/Subcomponents/LockOptions';
 import Presale from './Presale';
 import ProjectDetails from './ProjectDetails';
 import TokenInfo from './TokenInfo'
 import PreviewSale from './PreviewSale';
+import LockOptions from 'components/Airdropper/CreateAirdrop/Subcomponents/LockOptions';
 
 const panel_items = [
   {

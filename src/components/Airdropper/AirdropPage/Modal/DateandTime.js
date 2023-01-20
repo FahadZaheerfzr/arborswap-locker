@@ -25,13 +25,13 @@ export default function DateandTime({ showModal, modal }) {
                 <CalendarField heading={modal === 3 ? "Starts On (UTC)": "Ends On (UTC)"} setFunction={setDate}  />
             </div>
             {modal === 2 ?             
-            <div class="flex items-center mt-10">
-                <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 accent-primary-green bg-gray-100 border-gray-300 rounded dark:border-gray-600 focus:outline-none" />
-                <label for="default-checkbox" class="ml-3 text-sm font-medium text-dark-text dark:text-gray-300">End Now Instead</label>
+            <div className="flex items-center mt-10">
+                <input id="default-checkbox" type="checkbox" value="" className="w-4 h-4 accent-primary-green bg-gray-100 border-gray-300 rounded dark:border-gray-600 focus:outline-none" />
+                <label for="default-checkbox" className="ml-3 text-sm font-medium text-dark-text dark:text-gray-300">End Now Instead</label>
             </div> : 
-            <div class="flex items-center mt-10">
-                <input disabled checked id="disabled-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                <label for="disabled-checkbox" class="ml-3 text-sm font-medium text-[#807373] dark:text-gray-500">Start Now Instead</label>
+            <div className="flex items-center mt-10">
+                <input disabled checked id="disabled-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                <label for="disabled-checkbox" className="ml-3 text-sm font-medium text-[#807373] dark:text-gray-500">Start Now Instead</label>
             </div>}
 
         </div>
