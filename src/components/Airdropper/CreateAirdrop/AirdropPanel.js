@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PreviewSale from '../../Launchpad/CreateSale/PreviewSale'
 import Createsale from './Createsale'
 import Detailspage from './Detailspage'
 import Infopage from './Infopage'

@@ -3,12 +3,13 @@ import { useParams } from 'react-router-dom'
 import BaseLayout from '../../components/BaseLayout/BaseLayout'
 import AirdropPageBase from '../../components/Airdropper/AirdropPage'
 import {Airdrops} from "../../data/airdrops"
-import Modal from '../../components/Airdropper/AirdropPage/Modal';
+import AddAllocations from 'components/Airdropper/AirdropPage/Modal/AddAllocations'
+import DateandTime from '../../components/Airdropper/AirdropPage/Modal/DateandTime'
 
 export default function PoolPage() {
   const { id } = useParams()
   const [airdrop, setAirdrop] = useState(null)
-  const [modal, showModal] = useState(false);
+  const [modal, showModal] = useState(0);
   const [admin] = useState(true);
   const [adminMode, setAdminMode] = useState(false);
 
@@ -21,9 +22,9 @@ export default function PoolPage() {
   return (
     airdrop &&
     <div className='w-full'>
-      {modal &&
+      {modal !== 0 &&
         <div className="fixed z-50  top-0 left-0">
-          <Modal showModal={showModal} status = {airdrop.status}/>
+          {modal === 1 ? <AddAllocations showModal={showModal}/> : <DateandTime showModal={showModal} modal={modal}/>}
         </div>
       }
       <BaseLayout page_name={'Airdrops'} title={airdrop.name} subpage admin={admin} setAdminMode={setAdminMode}>
