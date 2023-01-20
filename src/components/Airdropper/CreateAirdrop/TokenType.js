@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import LockOptions from '../../TokenLocker/Subcomponents/LockOptions'
+import LockOptions from './Subcomponents/LockOptions'
 
 export default function Landing({setPrivate, setPage}) {
     const [lock, setLock] = useState("public")
