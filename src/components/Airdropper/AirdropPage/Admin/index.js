@@ -1,5 +1,8 @@
-import PreviewDetails from '../../../Common/PreviewDetails'
 import React from 'react'
+import StartedNotLive from './StartedNotLive'
+import StartedLive from './StartedLive'
+import NotStartedPublic from './NotStartedPublic'
+import NotStartedPrivate from './NotStartedPrivate'
 
 const AdminPanel = ({
     status,
@@ -8,7 +11,9 @@ const AdminPanel = ({
     amount,
     allocated,
     showModal,
-    upcoming
+    upcoming,
+    Private,
+    started
 }) => {
     return (
         <div className="hidden md:block px-9 pb-9 bg-white dark:bg-dark-1 rounded-[20px]">
@@ -20,38 +25,15 @@ const AdminPanel = ({
                 </div>
             </div>
              <div className='mt-5'>
-                    {upcoming && status !== "Ended" && status !== "Live"? 
-                    <div className='flex flex-col'>
-                        <PreviewDetails name={"Address Whitelisted"} value={whitelist_address}/>
-                        <div className='mt-10'>
-                            <button className={`w-full bg-light dark:bg-dark text-dark-text dark:text-light-text rounded-md font-bold py-4 mb-7`}>
-                                Add Address
-                            </button>
-                            <button className={`w-full bg-primary-green bg-opacity-10 rounded-md text-primary-green font-bold py-4`}
-                                onClick={() => {showModal(true)}}>
-                                Start Airdrop
-                            </button>
-                        </div>
-
-                    </div> 
+                {started ? 
+                upcoming && status !== "Ended" && status !== "Live" ? <StartedNotLive whitelist_address={whitelist_address} showModal={showModal}/>
+                :<StartedLive whitelist_address={whitelist_address} amount={amount} allocated={allocated} participants={participants} status={status} showModal={showModal}/>
+                    :
+                    Private ? 
+                    <NotStartedPrivate whitelist_address={whitelist_address} showModal={showModal}/> 
                     : 
-                    <div className='flex flex-col'>
-                        <PreviewDetails name={"Address Whitelisted"} value={whitelist_address}/>
-                        <PreviewDetails name={"Participants"} value={participants}/>
-                        <PreviewDetails name={"Tokens Remianing"} value={(amount * (1- allocated/100)).toLocaleString()}/>
-                        <div className='mt-10'>
-                            {status === "Ended" ? 
-                            <button className={`w-full bg-light dark:bg-dark text-dark-text dark:text-light-text rounded-md font-bold py-4 mb-7`}>
-                                Ended
-                            </button> :
-                            <button className={`w-full bg-primary-yellow bg-opacity-10 rounded-md text-primary-yellow font-bold py-4`}
-                                onClick={() => {showModal(true)}}>
-                                End Airdrop
-                            </button>
-                            }
-
-                        </div>
-                    </div>}
+                    <NotStartedPublic showModal={showModal}/>
+                    }
                 </div>
         </div>
     )

@@ -1,9 +1,9 @@
 import React from 'react'
+import Info from './Info'
 import PreviewDetails from '../../Common/PreviewDetails'
 import TwitterSVG from '../../../svgs/Socials/twitter';
 import DribbleSVG from '../../../svgs/Socials/dribble';
 import PreviewHeader from '../../Common/PreviewHeader';
-import Info from 'components/Launchpad/Preview/Subcomponents/Info';
 
 const TokkenDetails = {
     TokenName: "Swipe Coin",
@@ -22,11 +22,12 @@ export default function Preview({
     address,
     starts_on,
     ends_on,
+    admin
 }) {
 
     return (
         <div className="px-9 py-9 my-4">
-            <Info name={name} icon={icon} is_private={is_private} tags={tags} />
+            <Info name={name} icon={icon} is_private={is_private} tags={tags} admin={admin}/>
 
             <div className='mt-6 flex md:hidden gap-5 ml-[70px]'>
                 <TwitterSVG className="fill-dark-text dark:fill-light-text " />

@@ -21,13 +21,14 @@ export default function AirdropPageBase({ airdrop, showModal, admin }) {
               address={airdrop.address}
               starts_on={airdrop.presale_starts}
               ends_on={airdrop.presale_ends}
+              admin={admin}
             />
           </div>
 
           <div className="mt-14 md:mt-0 md:w-[35%] ">
         
             {
-                admin ? <AdminPanel status={airdrop.status} whitelist_address={105} participants={airdrop.participants} amount={airdrop.amount} allocated={airdrop.filled_percent} showModal={showModal} upcoming={upcoming}/> : 
+                admin ? <AdminPanel status={airdrop.status} whitelist_address={105} participants={airdrop.participants} amount={airdrop.amount} allocated={airdrop.filled_percent} showModal={showModal} upcoming={upcoming} Private={airdrop.private} started = {airdrop.started}/> : 
                 <UserPanel amount={airdrop.amount} icon={airdrop.icon}
                 min_allocation={airdrop.min_allocation} status={airdrop.status}
                 filled_percent={airdrop.filled_percent} ends_on={airdrop.presale_ends}  

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PreviewSale from '../../Launchpad/CreateSale/PreviewSale'
 import Createsale from './Createsale'
 import Detailspage from './Detailspage'
 import Infopage from './Infopage'
@@ -36,7 +37,7 @@ const token = {
     total_supply: 2000000000,
 }
 
-export default function AirdropPanel() {
+export default function AirdropPanel({setPage, Private}) {
     const [active, setActive] = useState('Token Info')
     const [amount, setAmount] = useState(14766538)
 
@@ -63,7 +64,7 @@ export default function AirdropPanel() {
 
                     <div className="panel-content bg-white dark:bg-dark-1 rounded-r-[10px] pt-7 md:pt-9 px-4 md:p-9 md:w-2/3">
                         {active === 'Token Info' && (
-                            <Infopage setActive={setActive} next={"Project Details"} amount={amount} setAmount = {setAmount}/>
+                            <Infopage setActive={setActive} setPage={setPage} next={"Project Details"} amount={amount} setAmount = {setAmount} Private={Private}/>
                         )}
                         {active === 'Project Details' && <Detailspage setActive={setActive} />}
                         {active === 'Preview' && (

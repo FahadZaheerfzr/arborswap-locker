@@ -1,14 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Token_details } from '../../../data/sale'
 import BackArrowSVG from '../../../svgs/back_arrow'
 import PreviewDetails from '../../Common/PreviewDetails'
 import PreviewHeader from '../../Common/PreviewHeader'
 import HeadingTags from '../../TokenLocker/Subcomponents/HeadingTags'
-import AmountModal from '../../TokenLocker/Subcomponents/AmountModal'
+import AmountModal from 'components/TokenLocker/Subcomponents/AmountModal'
+import InputField from './InputField'
 
-export default function Infopage({ setActive, setSaleType, next, amount, setAmount }) {
+export default function Infopage({ setActive, next, amount, setAmount, setPage, Private }) {
   const [address, setAddress] = React.useState('')
   const [popup, showPopup] = React.useState(false)
+  const [numberofclaims, setNumberofclaims] = useState("")
+  const [sizeofclaims, setSizeofclaims] = useState("")
   
 
   const handleChange = (e) => {
@@ -44,7 +47,28 @@ export default function Infopage({ setActive, setSaleType, next, amount, setAmou
         
       )}
 
-      {address.length > 4 && (
+      {(!Private && address.length > 4) && (
+     <div className='w-full flex flex-col lg:flex-row'>
+                        <div className='mt-10 w-full'>
+                            <InputField 
+                                heading={"Number of Claims"}
+                                value={numberofclaims}
+                                changeState={setNumberofclaims}
+                                placeholder={""}
+                            />
+                        </div>
+                        <div className='mt-10 w-full flex justify-end'>
+                            <InputField 
+                                heading={"Size of Claims"}
+                                value={sizeofclaims}
+                                changeState={setSizeofclaims}
+                                placeholder={""}
+                            />
+                        </div>
+                    </div>
+      )}
+
+      {/*address.length > 4 && (
         <div className="mt-10">
         <div className="">
           <div className='flex items-center'>
@@ -67,19 +91,17 @@ export default function Infopage({ setActive, setSaleType, next, amount, setAmou
           </div>
         </div>
       </div>
-      )}
+      )*/}
 
       <div className="mt-10">
         <div className="flex justify-end items-center mb-10">
-        {setSaleType && 
           <button
             className="bg-white dark:bg-transparent mr-5 flex items-center gap-2 py-[10px] px-5"
-            onClick={() => setSaleType(null)}
+            onClick={() => setPage(1)}
           >
             <BackArrowSVG className="fill-dark-text dark:fill-light-text" />
             <span className="font-gilroy font-medium text-sm text-dark-text dark:text-light-text">Go Back</span>
           </button>
-        }
 
           <button
             className="bg-primary-green disabled:bg-dim-text disabled:dark:bg-dim-text-dark text-white font-gilroy font-bold px-8 py-3 rounded-md"

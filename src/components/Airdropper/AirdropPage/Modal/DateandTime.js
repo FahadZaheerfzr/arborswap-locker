@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import CalendarField from '../../../Launchpad/CreateSale/Subcomponents/CalendarField'
 
-export default function Modal({ showModal, status }) {
+export default function DateandTime({ showModal, modal }) {
   const [date, setDate] = useState()
   const handleSubmit = () => {
-    showModal(false)
+    showModal(0)
   }
 
   return (
@@ -12,7 +12,7 @@ export default function Modal({ showModal, status }) {
       <div className="w-[90%] max-w-[420px] rounded-[10px] px-9 py-7 bg-white dark:bg-dark-1">
         <div className="flex justify-between items-center  ">
           <span className="text-dark-text dark:text-light-text font-gilroy font-semibold text-lg">Set Time</span>
-          <div className="flex items-center cursor-pointer" onClick={() => showModal(false)}>
+          <div className="flex items-center cursor-pointer" onClick={() => showModal(0)}>
             <span className="text-sm font-gilroy font-semibold text-dark-text dark:text-light-text mr-2">Close</span>
             <div className="flex justify-center items-center bg-[#E56060] text-[#E56060] bg-opacity-10 rounded-full w-[15px] h-[15px]">
               &#10005;
@@ -22,9 +22,9 @@ export default function Modal({ showModal, status }) {
 
         <div className='mt-10'>
             <div className="w-full">
-                <CalendarField heading={status === "Ended" ? "Starts On (UTC)": "Ends On (UTC)"} setFunction={setDate}  />
+                <CalendarField heading={modal === 3 ? "Starts On (UTC)": "Ends On (UTC)"} setFunction={setDate}  />
             </div>
-            {status === "Live" || status === "Timed" ?             
+            {modal === 2 ?             
             <div class="flex items-center mt-10">
                 <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 accent-primary-green bg-gray-100 border-gray-300 rounded dark:border-gray-600 focus:outline-none" />
                 <label for="default-checkbox" class="ml-3 text-sm font-medium text-dark-text dark:text-gray-300">End Now Instead</label>
